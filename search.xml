@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Blog is open now!</title>
+    <url>/2022/01/24/Blog-is-open-now/</url>
+    <content><![CDATA[<h2 id="博客迁移已完成之后的东西大概都在这里写了">博客迁移已完成，之后的东西大概都在这里写了</h2>
+<p>由于多重原因，洛谷博客据说要没了，昨晚考虑把博客迁移到这里来，经过一中午和一下午的努力，博客迁移工作终于完成了，之后的东西就都在这里写吧。</p>
+<p><a href="https://imgtu.com/i/7TSqln"><img src="https://s4.ax1x.com/2022/01/24/7TSqln.png" alt="截图" /></a></p>
+]]></content>
+      <tags>
+        <tag>Life</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NOIP2021 Journal</title>
+    <url>/2021/11/20/NOIP2021-Journal/</url>
+    <content><![CDATA[<p>人生中第一场NOIP，就这样落幕了</p>
+<h1 id="day--1">Day -1</h1>
+<p>随便打了几个板子，发现没有什么需要复习的，因为所学实在太少，心态也十分放松，大概是知道自己状态不好，在短时间内也无法挽救，不会的知识实在太多，而能熟练运用的又太少，感觉再做什么也无济于事了。</p>
+<p><del>于是看了Person Of Interest Season 4，突然很想写一个能和我对话、保护我、洞悉世事的程序</del></p>
+<p>是的，考试的前一天就这样平凡地过去了</p>
+<span id="more"></span>
+<h1 id="day-1">Day 1</h1>
+<p>大概7：50就进了考场，找到自己的座位，却发现电脑没开。于是自行打开，却发现有两个Windows10？等了一会，老师说用第二个，于是不那么顺利地进入了系统。</p>
+<p>先把缺省源打了，之后打了个对拍器，发现没关同步，于是加了两行代码到缺省源里，设置了编译选项，准备工作完成。</p>
+<p>大概在打完后不就，发现试卷的密码在大屏幕上，好像是IronHeart之类的（<del>钢铁雄心？？？</del>），难道出题人是Paradox玩家？但是没时间想那么多了，解压完成后就立刻打开了试题。</p>
+<p>照例先开第一题，发现题目说的东西很奇怪，而且数据范围也并非线性：<span class="math inline">\(1e7\)</span>，这<span class="math inline">\(O(nlogn)\)</span>都有点悬，不会要<span class="math inline">\(O(n)\)</span>吧，但是这样也小了个七八倍，反正就很奇怪。</p>
+<p>之后仔细看了下题，发现只要把每一个符合条件的数的倍数都标记一遍就行了？（好像这便是著名的<span class="math inline">\(O(nlogn)\)</span>算法）</p>
+<p>但是我觉得题目肯定不会这么简单，这样写肯定是要被卡的，于是研究了很久的性质，发现只要标记一个符合条件的数的质数倍就行了，因为合数肯定可以表示为若干个质数的乘积。</p>
+<p>但是即使这样写，也可能有TLE的风险，因为这样筛并不是绝对线性的，例如<strong>宇宙所有问题的终极答案<span class="math inline">\(42\)</span></strong>，它既可以表示成<span class="math inline">\(14\times3 = 7\times2\times3\)</span>，也可以表示成<span class="math inline">\(21\times2 = 7\times3\times2\)</span>，这样数<span class="math inline">\(42\)</span>就被标记了两次，显然还有更多这样的数，所以这样做就不是线性的</p>
+<p>如何让每个数只被标记一次呢？其实也很显然：只要一个数的倍数被分解为的质因数中最小的数小于等于要乘的质数，就行了，因为满足倍数被分解为若干个不降的质数的情况只有一种。很好，这样就是完全线性的了！</p>
+<p>但是我没想到的是，由于还要用一遍<span class="math inline">\(Euler\)</span>筛筛出所有的质数，所以复杂度是两个<span class="math inline">\(O(n)\)</span>的，实测跑的比广为流传的<span class="math inline">\(O(nlogn)\)</span>算法还要慢。。。</p>
+<p>由于各种意想不到的<span class="math inline">\(bug\)</span>，过了<span class="math inline">\(1.5h\)</span>才打完T1且开拍了</p>
+<p>算了，反正T1写完了，按理说要看T2了，于是我就看了。</p>
+<p>第一眼是一个以<span class="math inline">\(m+1\)</span>为指数的暴力，开心地在<span class="math inline">\(30min\)</span>左右写完了，发现样例2要跑<span class="math inline">\(11s\)</span>？感觉再优化也没什么希望了，就暂时放下了，开T3</p>
+<p>T3一看，就想到了ZROI上的一道题，然而看了好久，发现其本质不是一个东西，拿前缀和推也没啥性质，而且这个序列可能可以无限操作下去，很难有重复的情况，推了一堆没有用的东西，发现只剩下<span class="math inline">\(1.5h\)</span>左右了，以我的水平顶多打几个暴力走人，于是看了眼T4，发现没啥希望，跟斗地主一样恶心，就回去看T2了</p>
+<p>突然发现这样搜索搜到了很多重复的情况，很明显是不优的，如果改成枚举每一位选了多少个，就可以用排列乘出所有的情况，复杂度有了小小的改善，于是开写</p>
+<p>写完之后，发现乘那个权值时__int128爆了，于是开始写高精，发现不会<span class="math inline">\(log\)</span>的取模，于是把写了<span class="math inline">\(45min\)</span>的高精代码删了，又改成__int128，感觉没啥希望了，于是写T3的暴力</p>
+<p>T3由于不知道要操作多少次，就找了一个有可能过<span class="math inline">\(n&lt;=10\)</span>的点且不超时的<span class="math inline">\(9\)</span>次放进去了，发现第二个样例都过不了，此时离考试结束只有<span class="math inline">\(30min\)</span>不到了，于是把考生须知填了，之后开始打坐。</p>
+<p>所有程序的文件名检查完之后，又看了一眼题面，试图找到一点思路，突然发现T2说的是小于等于<span class="math inline">\(k\)</span>，草！</p>
+<p>于是疯狂改，再边乘边取模，最后竟然过了样例2？很满意</p>
+<p>打铃，收卷，结束。</p>
+<p>是的，我的第一场NOIP就这样结束了，内心毫无波澜的提交了文件夹，看见人均200+，虽有失望，可是并没有为此懊恼，因为有那么多没学的，有那么多不会的<span class="math inline">\(trick\)</span>，这也很公平。</p>
+<p>停课结束后，又要投入到紧张的<span class="math inline">\(whk\)</span>学习中，虽然有那么多不会的，那又如何呢，总是要补的。</p>
+<p>其实，生活中许多不如意，是你欠你自己的，付出与回报不会成正比，但是要回报，必须付出些什么，而最不必的便是为这些付出懊恼，你欠的，总是要还回来的嘛。</p>
+<blockquote>
+<p>This is my final fit</p>
+<p>My final bellyache with</p>
+<p>No alarms and no surprises</p>
+<p>No alarms and no surprises please</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Life</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>卡特兰数</title>
     <url>/2021/08/04/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/</url>
     <content><![CDATA[<h2 id="更新记录">更新记录</h2>
@@ -68,49 +122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>NOIP2021 Journal</title>
-    <url>/2021/11/20/NOIP2021-Journal/</url>
-    <content><![CDATA[<p>人生中第一场NOIP，就这样落幕了</p>
-<h1 id="day--1">Day -1</h1>
-<p>随便打了几个板子，发现没有什么需要复习的，因为所学实在太少，心态也十分放松，大概是知道自己状态不好，在短时间内也无法挽救，不会的知识实在太多，而能熟练运用的又太少，感觉再做什么也无济于事了。</p>
-<p><del>于是看了Person Of Interest Season 4，突然很想写一个能和我对话、保护我、洞悉世事的程序</del></p>
-<p>是的，考试的前一天就这样平凡地过去了</p>
-<span id="more"></span>
-<h1 id="day-1">Day 1</h1>
-<p>大概7：50就进了考场，找到自己的座位，却发现电脑没开。于是自行打开，却发现有两个Windows10？等了一会，老师说用第二个，于是不那么顺利地进入了系统。</p>
-<p>先把缺省源打了，之后打了个对拍器，发现没关同步，于是加了两行代码到缺省源里，设置了编译选项，准备工作完成。</p>
-<p>大概在打完后不就，发现试卷的密码在大屏幕上，好像是IronHeart之类的（<del>钢铁雄心？？？</del>），难道出题人是Paradox玩家？但是没时间想那么多了，解压完成后就立刻打开了试题。</p>
-<p>照例先开第一题，发现题目说的东西很奇怪，而且数据范围也并非线性：<span class="math inline">\(1e7\)</span>，这<span class="math inline">\(O(nlogn)\)</span>都有点悬，不会要<span class="math inline">\(O(n)\)</span>吧，但是这样也小了个七八倍，反正就很奇怪。</p>
-<p>之后仔细看了下题，发现只要把每一个符合条件的数的倍数都标记一遍就行了？（好像这便是著名的<span class="math inline">\(O(nlogn)\)</span>算法）</p>
-<p>但是我觉得题目肯定不会这么简单，这样写肯定是要被卡的，于是研究了很久的性质，发现只要标记一个符合条件的数的质数倍就行了，因为合数肯定可以表示为若干个质数的乘积。</p>
-<p>但是即使这样写，也可能有TLE的风险，因为这样筛并不是绝对线性的，例如<strong>宇宙所有问题的终极答案<span class="math inline">\(42\)</span></strong>，它既可以表示成<span class="math inline">\(14\times3 = 7\times2\times3\)</span>，也可以表示成<span class="math inline">\(21\times2 = 7\times3\times2\)</span>，这样数<span class="math inline">\(42\)</span>就被标记了两次，显然还有更多这样的数，所以这样做就不是线性的</p>
-<p>如何让每个数只被标记一次呢？其实也很显然：只要一个数的倍数被分解为的质因数中最小的数小于等于要乘的质数，就行了，因为满足倍数被分解为若干个不降的质数的情况只有一种。很好，这样就是完全线性的了！</p>
-<p>但是我没想到的是，由于还要用一遍<span class="math inline">\(Euler\)</span>筛筛出所有的质数，所以复杂度是两个<span class="math inline">\(O(n)\)</span>的，实测跑的比广为流传的<span class="math inline">\(O(nlogn)\)</span>算法还要慢。。。</p>
-<p>由于各种意想不到的<span class="math inline">\(bug\)</span>，过了<span class="math inline">\(1.5h\)</span>才打完T1且开拍了</p>
-<p>算了，反正T1写完了，按理说要看T2了，于是我就看了。</p>
-<p>第一眼是一个以<span class="math inline">\(m+1\)</span>为指数的暴力，开心地在<span class="math inline">\(30min\)</span>左右写完了，发现样例2要跑<span class="math inline">\(11s\)</span>？感觉再优化也没什么希望了，就暂时放下了，开T3</p>
-<p>T3一看，就想到了ZROI上的一道题，然而看了好久，发现其本质不是一个东西，拿前缀和推也没啥性质，而且这个序列可能可以无限操作下去，很难有重复的情况，推了一堆没有用的东西，发现只剩下<span class="math inline">\(1.5h\)</span>左右了，以我的水平顶多打几个暴力走人，于是看了眼T4，发现没啥希望，跟斗地主一样恶心，就回去看T2了</p>
-<p>突然发现这样搜索搜到了很多重复的情况，很明显是不优的，如果改成枚举每一位选了多少个，就可以用排列乘出所有的情况，复杂度有了小小的改善，于是开写</p>
-<p>写完之后，发现乘那个权值时__int128爆了，于是开始写高精，发现不会<span class="math inline">\(log\)</span>的取模，于是把写了<span class="math inline">\(45min\)</span>的高精代码删了，又改成__int128，感觉没啥希望了，于是写T3的暴力</p>
-<p>T3由于不知道要操作多少次，就找了一个有可能过<span class="math inline">\(n&lt;=10\)</span>的点且不超时的<span class="math inline">\(9\)</span>次放进去了，发现第二个样例都过不了，此时离考试结束只有<span class="math inline">\(30min\)</span>不到了，于是把考生须知填了，之后开始打坐。</p>
-<p>所有程序的文件名检查完之后，又看了一眼题面，试图找到一点思路，突然发现T2说的是小于等于<span class="math inline">\(k\)</span>，草！</p>
-<p>于是疯狂改，再边乘边取模，最后竟然过了样例2？很满意</p>
-<p>打铃，收卷，结束。</p>
-<p>是的，我的第一场NOIP就这样结束了，内心毫无波澜的提交了文件夹，看见人均200+，虽有失望，可是并没有为此懊恼，因为有那么多没学的，有那么多不会的<span class="math inline">\(trick\)</span>，这也很公平。</p>
-<p>停课结束后，又要投入到紧张的<span class="math inline">\(whk\)</span>学习中，虽然有那么多不会的，那又如何呢，总是要补的。</p>
-<p>其实，生活中许多不如意，是你欠你自己的，付出与回报不会成正比，但是要回报，必须付出些什么，而最不必的便是为这些付出懊恼，你欠的，总是要还回来的嘛。</p>
-<blockquote>
-<p>This is my final fit</p>
-<p>My final bellyache with</p>
-<p>No alarms and no surprises</p>
-<p>No alarms and no surprises please</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>Life</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自建题目目录与解答</title>
     <url>/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/</url>
     <content><![CDATA[<h2 id="tri"><a href="https://www.luogu.com.cn/problem/U198025">Tri</a></h2>
@@ -138,17 +149,6 @@
 ]]></content>
       <tags>
         <tag>Knowledge</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Blog is open now!</title>
-    <url>/2022/01/24/Blog-is-open-now/</url>
-    <content><![CDATA[<h2 id="博客迁移已完成之后的东西大概都在这里写了">博客迁移已完成，之后的东西大概都在这里写了</h2>
-<p>由于多重原因，洛谷博客据说要没了，昨晚考虑把博客迁移到这里来，经过一中午和一下午的努力，博客迁移工作终于完成了，之后的东西就都在这里写吧。</p>
-<p><a href="https://imgtu.com/i/7TSqln"><img src="https://s4.ax1x.com/2022/01/24/7TSqln.png" alt="截图" /></a></p>
-]]></content>
-      <tags>
-        <tag>Life</tag>
       </tags>
   </entry>
 </search>
