@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>NOIP2021 Journal | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '0.4.2',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'null'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/css/main.min.css">
+  
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/js/jquery.jside.menu.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+<div class="single">
+
+<div id="page">
+<div class="header">
+  <div id="lx-aside" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/images/post_cover.min.jpeg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/images/avatar.min.jpeg" alt="John Doe"></a></div>
+        <span>2021-11-20</span>
+        <h2>NOIP2021 Jou...</h2>
+        <div class="tags"><i class="fa fa-tag"></i><a class="tag-none-link" href="/tags/Life/" rel="tag">Life</a></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>人生中第一场NOIP，就这样落幕了</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>随便打了几个板子，发现没有什么需要复习的，因为所学实在太少，心态也十分放松，大概是知道自己状态不好，在短时间内也无法挽救，不会的知识实在太多，而能熟练运用的又太少，感觉再做什么也无济于事了。</p>
+<p><del>于是看了Person Of Interest Season 4，突然很想写一个能和我对话、保护我、洞悉世事的程序</del></p>
+<p>是的，考试的前一天就这样平凡地过去了</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>大概7：50就进了考场，找到自己的座位，却发现电脑没开。于是自行打开，却发现有两个Windows10？等了一会，老师说用第二个，于是不那么顺利地进入了系统。</p>
+<p>先把缺省源打了，之后打了个对拍器，发现没关同步，于是加了两行代码到缺省源里，设置了编译选项，准备工作完成。</p>
+<p>大概在打完后不就，发现试卷的密码在大屏幕上，好像是IronHeart之类的（<del>钢铁雄心？？？</del>），难道出题人是Paradox玩家？但是没时间想那么多了，解压完成后就立刻打开了试题。</p>
+<p>照例先开第一题，发现题目说的东西很奇怪，而且数据范围也并非线性：$1e7$，这$O(nlogn)$都有点悬，不会要$O(n)$吧，但是这样也小了个七八倍，反正就很奇怪。</p>
+<p>之后仔细看了下题，发现只要把每一个符合条件的数的倍数都标记一遍就行了？（好像这便是著名的$O(nlogn)$算法）</p>
+<p>但是我觉得题目肯定不会这么简单，这样写肯定是要被卡的，于是研究了很久的性质，发现只要标记一个符合条件的数的质数倍就行了，因为合数肯定可以表示为若干个质数的乘积。</p>
+<p>但是即使这样写，也可能有TLE的风险，因为这样筛并不是绝对线性的，例如**宇宙所有问题的终极答案$42$**，它既可以表示成$14\times3 = 7\times2\times3$，也可以表示成$21\times2 = 7\times3\times2$，这样数$42$就被标记了两次，显然还有更多这样的数，所以这样做就不是线性的</p>
+<p>如何让每个数只被标记一次呢？其实也很显然：只要一个数的倍数被分解为的质因数中最小的数小于等于要乘的质数，就行了，因为满足倍数被分解为若干个不降的质数的情况只有一种。很好，这样就是完全线性的了！</p>
+<p>但是我没想到的是，由于还要用一遍$Euler$筛筛出所有的质数，所以复杂度是两个$O(n)$的，实测跑的比广为流传的$O(nlogn)$算法还要慢。。。</p>
+<p>由于各种意想不到的$bug$，过了$1.5h$才打完T1且开拍了</p>
+<p>算了，反正T1写完了，按理说要看T2了，于是我就看了。</p>
+<p>第一眼是一个以$m+1$为指数的暴力，开心地在$30min$左右写完了，发现样例2要跑$11s$？感觉再优化也没什么希望了，就暂时放下了，开T3</p>
+<p>T3一看，就想到了ZROI上的一道题，然而看了好久，发现其本质不是一个东西，拿前缀和推也没啥性质，而且这个序列可能可以无限操作下去，很难有重复的情况，推了一堆没有用的东西，发现只剩下$1.5h$左右了，以我的水平顶多打几个暴力走人，于是看了眼T4，发现没啥希望，跟斗地主一样恶心，就回去看T2了</p>
+<p>突然发现这样搜索搜到了很多重复的情况，很明显是不优的，如果改成枚举每一位选了多少个，就可以用排列乘出所有的情况，复杂度有了小小的改善，于是开写</p>
+<p>写完之后，发现乘那个权值时__int128爆了，于是开始写高精，发现不会$log$的取模，于是把写了$45min$的高精代码删了，又改成__int128，感觉没啥希望了，于是写T3的暴力</p>
+<p>T3由于不知道要操作多少次，就找了一个有可能过$n&lt;=10$的点且不超时的$9$次放进去了，发现第二个样例都过不了，此时离考试结束只有$30min$不到了，于是把考生须知填了，之后开始打坐。</p>
+<p>所有程序的文件名检查完之后，又看了一眼题面，试图找到一点思路，突然发现T2说的是小于等于$k$，草！</p>
+<p>于是疯狂改，再边乘边取模，最后竟然过了样例2？很满意</p>
+<p>打铃，收卷，结束。</p>
+<p>是的，我的第一场NOIP就这样结束了，内心毫无波澜的提交了文件夹，看见人均200+，虽有失望，可是并没有为此懊恼，因为有那么多没学的，有那么多不会的$trick$，这也很公平。</p>
+<p>停课结束后，又要投入到紧张的$whk$学习中，虽然有那么多不会的，那又如何呢，总是要补的。</p>
+<p>其实，生活中许多不如意，是你欠你自己的，付出与回报不会成正比，但是要回报，必须付出些什么，而最不必的便是为这些付出懊恼，你欠的，总是要还回来的嘛。</p>
+<blockquote>
+<p>This is my final fit</p>
+<p>My final bellyache with</p>
+<p>No alarms and no surprises</p>
+<p>No alarms and no surprises please</p>
+</blockquote>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/images/footer-l.min.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>自建题目目录与解答</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/images/footer-r.min.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2021/10/12/%E6%B5%85%E8%B0%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90%E4%B8%8E%E5%AF%B9%E6%8B%8D/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>浅谈随机数据生...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2022.<a href="/">Hexo</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button>
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/images/avatar.min.jpeg" alt="John Doe"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>John Doe</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/guestbook/">Guestbook</a></li>
+        <li><a href="/about/">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.2/source/dist/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+
+
+</body>
+</html>
