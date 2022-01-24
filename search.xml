@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>卡特兰数</title>
+    <url>/2021/08/04/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="更新记录">更新记录</h3>
+<p>2021.9.22 将部分内容替换成了<span class="math inline">\(LaTeX\)</span>符号</p>
+<h2 id="前置知识">前置知识</h2>
+<h3 id="排列数">排列数</h3>
+<p><span class="math inline">\(A_n^m\)</span> $ = $ <span class="math inline">\(\frac{n!}{(n-m)!}\)</span> （从<span class="math inline">\(n\)</span>个数中选<span class="math inline">\(m\)</span>个来排列）<br />
+理解为第一位可以有<span class="math inline">\(n\)</span>种选择，第二位有<span class="math inline">\(n-1\)</span>种，最后一位（即第<span class="math inline">\(m\)</span>位）有<span class="math inline">\(n-m+1\)</span>种选择 故为<span class="math inline">\(n\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\((n-1)\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\((n-2)\)</span> <span class="math inline">\(\times\)</span> … <span class="math inline">\(\times\)</span> $(n-m+1) = $ <span class="math inline">\(\frac{n!}{(n-m)!}\)</span> 全排列为<span class="math inline">\(n!\)</span></p>
+<h3 id="组合数">组合数</h3>
+<p><span class="math inline">\(C_n^m\)</span> <span class="math inline">\(=\)</span> <span class="math inline">\(\frac{n!}{(n-m)!*m!}\)</span><br />
+理解为将<span class="math inline">\(A_n^m\)</span>的所有组合方式表示出来，也就是<span class="math inline">\(m\)</span>的全排列，为<span class="math inline">\(m!\)</span>，常将<span class="math inline">\(n\)</span>与<span class="math inline">\(m\)</span>写在一个括号里: <span class="math inline">\(\binom{m}{n}\)</span><br />
+特别说明：<span class="math inline">\(A_n^m\)</span> <span class="math inline">\(= 0\)</span>, <span class="math inline">\(C_n^m\)</span> <span class="math inline">\(= 0\)</span></p>
+<p><del>（写了这么多主要是因为看不懂将C写成括号后的表达方式）</del></p>
+<h2 id="卡特兰数的证明">卡特兰数的证明</h2>
+<p>首先想一个<strong>简单一点</strong>的问题：<br />
+你有一个栈，<span class="math inline">\(n\)</span>个数，它们每一个都要进行一次入栈和出栈操作，请问共有多少种方式<br />
+可以将每次入栈操作看作 <span class="math inline">\(+1\)</span>，出栈看作 <span class="math inline">\(-1\)</span>，容易想到，合法的方案必须满足所有时刻的<strong>前缀和<span class="math inline">\(&gt;=0\)</span></strong><br />
+更形象地，将其转移到坐标系上，每次入栈将横坐标 <span class="math inline">\(+1\)</span>，每次出栈将纵坐标 <span class="math inline">\(+1\)</span>，则所有的合法情况满足<strong>横坐标值<span class="math inline">\(&gt;=\)</span>纵坐标值</strong>，所有的不合法情况满足<strong>纵坐标-横坐标<span class="math inline">\(&gt;=1\)</span></strong>，则所有不合法情况和函数<span class="math inline">\(y=x+1\)</span>必有大于等于1个交点，考虑将其转化为如下形式：</p>
+<p><img src="https://z3.ax1x.com/2021/09/05/hWt7gx.png" /></p>
+<p>图中实线为不合法操作路径，将其与<span class="math inline">\(y=x+1\)</span>相交后的线段关于<span class="math inline">\(y=x+1\)</span>对称，得到的最终点是<span class="math inline">\((n-1,n+1)\)</span>，由于所有不合法路径必然经过<span class="math inline">\(y=x+1\)</span>，所以不合法的路径的情况转化为了从<span class="math inline">\(0\)</span>到<span class="math inline">\((n-1,n+1)\)</span>的路径总数之和，即<span class="math inline">\(\binom{n-1}{2n}\)</span>或<span class="math inline">\(\binom{n+1}{2n}\)</span>。<br />
+合法路径总数即为全部路径<span class="math inline">\(-\)</span>不合法路径，即<span class="math inline">\(\binom{n}{2n}\)</span>-<span class="math inline">\(\binom{n-1}{2n}\)</span>或<span class="math inline">\(\binom{n}{2n}\)</span>-<span class="math inline">\(\binom{n+1}{2n}\)</span></p>
+<figure>
+<img src="https://z3.ax1x.com/2021/09/05/hWtHv6.md.png" alt="代码示例" /><figcaption aria-hidden="true">代码示例</figcaption>
+</figure>
+]]></content>
+      <tags>
+        <tag>Knowledge</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Useless Thoughts(遐想)</title>
     <url>/2021/08/02/Useless-Thoughts-%E9%81%90%E6%83%B3/</url>
     <content><![CDATA[<p><strong>War, war never changes.</strong></p>
@@ -14,6 +44,21 @@
 ]]></content>
       <tags>
         <tag>Life</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈随机数据生成与对拍</title>
+    <url>/2021/10/12/%E6%B5%85%E8%B0%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90%E4%B8%8E%E5%AF%B9%E6%8B%8D/</url>
+    <content><![CDATA[<h2 id="背景">背景</h2>
+<p>最近写了一个对拍器，自认为对于对拍有一定见解，但今天<span class="math inline">\(cjf\)</span>说如果用<span class="math inline">\(srand(time(0))\)</span>，在卑微的Windows系统下一秒钟实际上只对了一组数据，因为<span class="math inline">\(time(0)\)</span>在一秒钟内不会变化，写了个程序试了一下，确实如此 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;test.in&quot;</span>,<span class="string">&quot;w&quot;</span>,stdout);</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>,las = <span class="number">0</span>,cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (a==las)&#123;</span><br><span class="line">		<span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="number">0</span>));</span><br><span class="line">		a = <span class="built_in">rand</span>();</span><br><span class="line">		<span class="keyword">if</span> (!las) las = a;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> cnt统计的是和最先一次rand出来的数相同的数的个数</p>
+<p>cnt大概有1e7-2e7，可见数据生成器生成数据的不随机性（除非你的程序用时太久，不能在1s内跑完生成的数据）</p>
+<p><strong>显然，这会对对拍的效率产生严重影响，那么应该如何生成完全随机的数据呢？</strong> ## 方法 先用<span class="math inline">\(srand\)</span>生成10个左右的随机数，然后就可以得到10个随机种子，再用它们生成随机数，同时运行程序，就可以得到真正的随机数了。</p>
+<p>但这样有一个问题：生成的随机数都是5位数，所以在对拍几万个数据后，种子就是重复的了，那样就没有意义了，所以考虑生成更大的种子。</p>
+<p>在这里给出一种方法：用两个<span class="math inline">\(for\)</span>把种子乘起来当作种子，这样种子大概率就不同了。</p>
+<p>具体传种子的方法读者可以自己实现，在这里给出一种方式：<span class="math inline">\(freopen\)</span> <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> sed;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;seed.in&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">    cin&gt;&gt;sed;</span><br><span class="line">    <span class="built_in">srand</span>((<span class="keyword">unsigned</span>)sed);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    your code here</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 具体生成随机数的方法： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> rs[<span class="number">15</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">    	<span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="number">0</span>));</span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++)&#123;</span><br><span class="line">             rs[i] = <span class="built_in">rand</span>();</span><br><span class="line">       	&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=<span class="number">10</span>;j++)&#123;</span><br><span class="line">				<span class="function">ofstream <span class="title">output</span><span class="params">(<span class="string">&quot;seed.in&quot;</span>)</span></span>;</span><br><span class="line">				output&lt;&lt;rs[i]*rs[j]&lt;&lt;endl;</span><br><span class="line">				<span class="built_in">system</span>(<span class="string">&quot;1.exe&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 其实一般只随机10个数也可以，重复周期较长 ## 附录 貌似不生成数据，单独使用<span class="math inline">\(fc\)</span>比较文件很慢？（请读者自行测试100000行以上数据，本机测得<span class="math inline">\(fc\)</span>比字符比较慢很多） <img src="https://z3.ax1x.com/2021/10/12/5nzKv8.md.png" alt="实测结果" /></p>
+]]></content>
+      <tags>
+        <tag>Knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -57,36 +102,6 @@
       </tags>
   </entry>
   <entry>
-    <title>卡特兰数</title>
-    <url>/2021/08/04/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="更新记录">更新记录</h3>
-<p>2021.9.22 将部分内容替换成了<span class="math inline">\(LaTeX\)</span>符号</p>
-<h2 id="前置知识">前置知识</h2>
-<h3 id="排列数">排列数</h3>
-<p><span class="math inline">\(A_n^m\)</span> $ = $ <span class="math inline">\(\frac{n!}{(n-m)!}\)</span> （从<span class="math inline">\(n\)</span>个数中选<span class="math inline">\(m\)</span>个来排列）<br />
-理解为第一位可以有<span class="math inline">\(n\)</span>种选择，第二位有<span class="math inline">\(n-1\)</span>种，最后一位（即第<span class="math inline">\(m\)</span>位）有<span class="math inline">\(n-m+1\)</span>种选择 故为<span class="math inline">\(n\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\((n-1)\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\((n-2)\)</span> <span class="math inline">\(\times\)</span> … <span class="math inline">\(\times\)</span> $(n-m+1) = $ <span class="math inline">\(\frac{n!}{(n-m)!}\)</span> 全排列为<span class="math inline">\(n!\)</span></p>
-<h3 id="组合数">组合数</h3>
-<p><span class="math inline">\(C_n^m\)</span> <span class="math inline">\(=\)</span> <span class="math inline">\(\frac{n!}{(n-m)!*m!}\)</span><br />
-理解为将<span class="math inline">\(A_n^m\)</span>的所有组合方式表示出来，也就是<span class="math inline">\(m\)</span>的全排列，为<span class="math inline">\(m!\)</span>，常将<span class="math inline">\(n\)</span>与<span class="math inline">\(m\)</span>写在一个括号里: <span class="math inline">\(\binom{m}{n}\)</span><br />
-特别说明：<span class="math inline">\(A_n^m\)</span> <span class="math inline">\(= 0\)</span>, <span class="math inline">\(C_n^m\)</span> <span class="math inline">\(= 0\)</span></p>
-<p><del>（写了这么多主要是因为看不懂将C写成括号后的表达方式）</del></p>
-<h2 id="卡特兰数的证明">卡特兰数的证明</h2>
-<p>首先想一个<strong>简单一点</strong>的问题：<br />
-你有一个栈，<span class="math inline">\(n\)</span>个数，它们每一个都要进行一次入栈和出栈操作，请问共有多少种方式<br />
-可以将每次入栈操作看作 <span class="math inline">\(+1\)</span>，出栈看作 <span class="math inline">\(-1\)</span>，容易想到，合法的方案必须满足所有时刻的<strong>前缀和<span class="math inline">\(&gt;=0\)</span></strong><br />
-更形象地，将其转移到坐标系上，每次入栈将横坐标 <span class="math inline">\(+1\)</span>，每次出栈将纵坐标 <span class="math inline">\(+1\)</span>，则所有的合法情况满足<strong>横坐标值<span class="math inline">\(&gt;=\)</span>纵坐标值</strong>，所有的不合法情况满足<strong>纵坐标-横坐标<span class="math inline">\(&gt;=1\)</span></strong>，则所有不合法情况和函数<span class="math inline">\(y=x+1\)</span>必有大于等于1个交点，考虑将其转化为如下形式：</p>
-<p><img src="https://z3.ax1x.com/2021/09/05/hWt7gx.png" /></p>
-<p>图中实线为不合法操作路径，将其与<span class="math inline">\(y=x+1\)</span>相交后的线段关于<span class="math inline">\(y=x+1\)</span>对称，得到的最终点是<span class="math inline">\((n-1,n+1)\)</span>，由于所有不合法路径必然经过<span class="math inline">\(y=x+1\)</span>，所以不合法的路径的情况转化为了从<span class="math inline">\(0\)</span>到<span class="math inline">\((n-1,n+1)\)</span>的路径总数之和，即<span class="math inline">\(\binom{n-1}{2n}\)</span>或<span class="math inline">\(\binom{n+1}{2n}\)</span>。<br />
-合法路径总数即为全部路径<span class="math inline">\(-\)</span>不合法路径，即<span class="math inline">\(\binom{n}{2n}\)</span>-<span class="math inline">\(\binom{n-1}{2n}\)</span>或<span class="math inline">\(\binom{n}{2n}\)</span>-<span class="math inline">\(\binom{n+1}{2n}\)</span></p>
-<figure>
-<img src="https://z3.ax1x.com/2021/09/05/hWtHv6.md.png" alt="代码示例" /><figcaption aria-hidden="true">代码示例</figcaption>
-</figure>
-]]></content>
-      <tags>
-        <tag>Knowledge</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自建题目目录与解答</title>
     <url>/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/</url>
     <content><![CDATA[<h2 id="tri"><a href="https://www.luogu.com.cn/problem/U198025">Tri</a></h2>
@@ -110,21 +125,6 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2.8e6</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">2.5e6</span>,k,v[N*<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;k;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&lt;=N;j+=i) v[j]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (i&amp;<span class="number">1</span>) ans = v[i]*v[(i+<span class="number">1</span>)/<span class="number">2</span>];</span><br><span class="line">		<span class="keyword">else</span> ans = v[i/<span class="number">2</span>]*v[i+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (ans&gt;k)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="number">1ll</span>*i*(i+<span class="number">1</span>)/<span class="number">2</span>&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;Set n to a bigger value&quot;</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>于是，这个简短的代码就是这道题目前的最优解了，题解愉快的结束了！</p>
 <p>为了防止不必要的卡常，已把本题时限开到<span class="math inline">\(2s\)</span>，默认开启<span class="math inline">\(O2\)</span>优化，即使你的<span class="math inline">\(N\)</span>设置的不是那么微妙，也是可以轻松通过的</p>
-]]></content>
-      <tags>
-        <tag>Knowledge</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈随机数据生成与对拍</title>
-    <url>/2021/10/12/%E6%B5%85%E8%B0%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90%E4%B8%8E%E5%AF%B9%E6%8B%8D/</url>
-    <content><![CDATA[<h2 id="背景">背景</h2>
-<p>最近写了一个对拍器，自认为对于对拍有一定见解，但今天<span class="math inline">\(cjf\)</span>说如果用<span class="math inline">\(srand(time(0))\)</span>，在卑微的Windows系统下一秒钟实际上只对了一组数据，因为<span class="math inline">\(time(0)\)</span>在一秒钟内不会变化，写了个程序试了一下，确实如此 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;test.in&quot;</span>,<span class="string">&quot;w&quot;</span>,stdout);</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>,las = <span class="number">0</span>,cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (a==las)&#123;</span><br><span class="line">		<span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="number">0</span>));</span><br><span class="line">		a = <span class="built_in">rand</span>();</span><br><span class="line">		<span class="keyword">if</span> (!las) las = a;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> cnt统计的是和最先一次rand出来的数相同的数的个数</p>
-<p>cnt大概有1e7-2e7，可见数据生成器生成数据的不随机性（除非你的程序用时太久，不能在1s内跑完生成的数据）</p>
-<p><strong>显然，这会对对拍的效率产生严重影响，那么应该如何生成完全随机的数据呢？</strong> ## 方法 先用<span class="math inline">\(srand\)</span>生成10个左右的随机数，然后就可以得到10个随机种子，再用它们生成随机数，同时运行程序，就可以得到真正的随机数了。</p>
-<p>但这样有一个问题：生成的随机数都是5位数，所以在对拍几万个数据后，种子就是重复的了，那样就没有意义了，所以考虑生成更大的种子。</p>
-<p>在这里给出一种方法：用两个<span class="math inline">\(for\)</span>把种子乘起来当作种子，这样种子大概率就不同了。</p>
-<p>具体传种子的方法读者可以自己实现，在这里给出一种方式：<span class="math inline">\(freopen\)</span> <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> sed;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">freopen</span>(<span class="string">&quot;seed.in&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">    cin&gt;&gt;sed;</span><br><span class="line">    <span class="built_in">srand</span>((<span class="keyword">unsigned</span>)sed);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    your code here</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 具体生成随机数的方法： <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> rs[<span class="number">15</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">    	<span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="number">0</span>));</span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++)&#123;</span><br><span class="line">             rs[i] = <span class="built_in">rand</span>();</span><br><span class="line">       	&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=<span class="number">10</span>;j++)&#123;</span><br><span class="line">				<span class="function">ofstream <span class="title">output</span><span class="params">(<span class="string">&quot;seed.in&quot;</span>)</span></span>;</span><br><span class="line">				output&lt;&lt;rs[i]*rs[j]&lt;&lt;endl;</span><br><span class="line">				<span class="built_in">system</span>(<span class="string">&quot;1.exe&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 其实一般只随机10个数也可以，重复周期较长 ## 附录 貌似不生成数据，单独使用<span class="math inline">\(fc\)</span>比较文件很慢？（请读者自行测试100000行以上数据，本机测得<span class="math inline">\(fc\)</span>比字符比较慢很多） <img src="https://z3.ax1x.com/2021/10/12/5nzKv8.md.png" alt="实测结果" /></p>
 ]]></content>
       <tags>
         <tag>Knowledge</tag>
