@@ -574,7 +574,7 @@ class="math inline">\(whk\)</span>学习中，虽然有那么多不会的，那�
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail';
+    var guest = 'nick';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
