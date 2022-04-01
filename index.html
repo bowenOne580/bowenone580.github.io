@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-04-01 15:30:54 / 修改时间：15:31:26" itemprop="dateCreated datePublished" datetime="2022-04-01T15:30:54+08:00">2022-04-01</time>
+              <time title="创建时间：2022-04-01 15:30:54 / 修改时间：15:58:18" itemprop="dateCreated datePublished" datetime="2022-04-01T15:30:54+08:00">2022-04-01</time>
             </span>
 
           
@@ -246,57 +246,15 @@
 <li>每次取出所有小于它的不是1的数，判断是否为它的因数，如果全都不是，那么这个数就是质数。</li>
 <li>时间复杂度<span class="math inline">\(O(n)\)</span>。</li>
 </ul></li>
-<li>优化过的暴力筛法
-<ul>
-<li>每次取出所有小于等于根号它的数，判断是否为它的因数，如果全都不是，那么这个数就是质数。</li>
-<li>正确性：每个合数必然有一个小于等于根号它的因数，可以用反证法证明。</li>
-<li>时间复杂度<span class="math inline">\(O(\sqrt{n})\)</span></li>
-</ul></li>
-<li>埃氏筛
-<ul>
-<li>每一个是质数的数都标记它的倍数为合数，所有没有被标记的就是质数。</li>
-<li>正确性：每个合数必然有至少一个质因子，而每个质数的质因子只有它本身。</li>
-<li>时间复杂度<span class="math inline">\(O(n\log \log
-n)\)</span>。（反正接近线性，应该也没人会特意卡这个）</li>
-</ul></li>
-<li>欧式筛
-<ul>
-<li>我们模拟一下，可以发现埃氏筛中，有些数会被筛很多次，如12即被2筛过，也被3筛过，这样会浪费大量时间，如果我们规定每个数只能被它的最小质因子筛，那就不会重复筛一个数了。</li>
-<li>正确性：一个数的质因子之间有大小关系，我们只要让这个数被最小的质因子筛，顺序就是唯一的。</li>
-<li>时间复杂度<span
-class="math inline">\(O(n)\)</span>。比较推荐使用这种筛法，因为它还可以筛一些积性函数。</li>
-</ul></li>
 </ul>
-<p>题目：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3383">P3383</a></p>
-<p><span class="math inline">\(Code\)</span>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e8</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,vis[N],pri[N],tot,lim;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">euler</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=lim;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!vis[i])&#123; <span class="comment">//是质数 </span></span><br><span class="line">			vis[i] = i;</span><br><span class="line">			pri[++tot] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (pri[j]&gt;vis[i] || <span class="number">1ll</span>*pri[j]*i&gt;lim) <span class="keyword">break</span>; <span class="comment">//只能由最小的因数筛掉 </span></span><br><span class="line">			vis[pri[j]*i] = pri[j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;lim&gt;&gt;n;</span><br><span class="line">	<span class="built_in">euler</span>();</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		cout&lt;&lt;pri[x]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="质因数分解">质因数分解</h2>
-<p>从2~<span
-class="math inline">\(\sqrt{n}\)</span>里面枚举因数，一直除，直到这个数不含有此因数为止。</p>
-<p>有没有可能除了一个合数呢？不可能。</p>
-<p>因为每个合数必然由比它小的质数组成，而我们把所有组成它的质数都除掉了，所以不可能出现合数。</p>
-<p>时间复杂度为<span
-class="math inline">\(O(\sqrt{n})\)</span>，你大可无视里面不断除的过程，这个过程在long
-long范围内也不会超过64次。</p>
-<p>题目：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2043">P2043</a></p>
-<p><span class="math inline">\(Code\)</span>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e4</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k = <span class="built_in">sqrt</span>(x);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span> (x%i == <span class="number">0</span>)&#123;</span><br><span class="line">			x/=i;</span><br><span class="line">			cnt[i]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (x&gt;<span class="number">1</span>) cnt[x]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++) <span class="built_in">work</span>(i);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span> (cnt[i]) cout&lt;&lt;i&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;cnt[i]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当<span
-class="math inline">\(n\)</span>更大时，可以配合埃氏筛，先把所有质数筛出来，1~<span
-class="math inline">\(n\)</span>中是质数和质数的任意次方的倍数的数都对质因子有贡献。时间复杂度为<span
-class="math inline">\(O(n\log n)\)</span>。（虽然埃氏筛要带两<span
-class="math inline">\(\log\)</span>，但是这里就忽略不计了，你也可以用线性筛实现）</p>
-<p><span class="math inline">\(Code\)</span>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt[N],vis[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">			<span class="keyword">int</span> las = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n/i;j++)&#123;</span><br><span class="line">				vis[i*j] = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span> (j/las == <span class="number">1</span>)&#123;</span><br><span class="line">					cnt[i]+=<span class="number">1ll</span>*n/j/i;</span><br><span class="line">					las*=i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span> (cnt[i]) cout&lt;&lt;i&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;cnt[i]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="fun-facts">Fun Facts</h2>
-<p>1~1000中有168个质数</p>
-<p>1~10000中有1229个质数</p>
-<p>1~100000中有9592个质数</p>
-<p>1~1000000中有78498个质数</p>
-<p>1~<span class="math inline">\(2^{32}\)</span>中有203280221个质数</p>
-<p>在<span
-class="math inline">\(10^{18}\)</span>内的最大质数间隙不超过1500</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/01/%E8%B4%A8%E6%95%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
