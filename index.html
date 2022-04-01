@@ -183,6 +183,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/01/%E8%B4%A8%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/01/%E8%B4%A8%E6%95%B0/" class="post-title-link" itemprop="url">质数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-01 15:30:54 / 修改时间：15:31:26" itemprop="dateCreated datePublished" datetime="2022-04-01T15:30:54+08:00">2022-04-01</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/04/01/%E8%B4%A8%E6%95%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/04/01/%E8%B4%A8%E6%95%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="质数">质数</h1>
+<h2 id="定义">定义</h2>
+<p>每个所有因数只有自己和1的数叫做<strong>质数</strong>，而其他不符合这个条件的数叫做<strong>合数</strong>。</p>
+<h2 id="筛出质数">筛出质数</h2>
+<ul>
+<li>暴力筛法
+<ul>
+<li>每次取出所有小于它的不是1的数，判断是否为它的因数，如果全都不是，那么这个数就是质数。</li>
+<li>时间复杂度<span class="math inline">\(O(n)\)</span>。</li>
+</ul></li>
+<li>优化过的暴力筛法
+<ul>
+<li>每次取出所有小于等于根号它的数，判断是否为它的因数，如果全都不是，那么这个数就是质数。</li>
+<li>正确性：每个合数必然有一个小于等于根号它的因数，可以用反证法证明。</li>
+<li>时间复杂度<span class="math inline">\(O(\sqrt{n})\)</span></li>
+</ul></li>
+<li>埃氏筛
+<ul>
+<li>每一个是质数的数都标记它的倍数为合数，所有没有被标记的就是质数。</li>
+<li>正确性：每个合数必然有至少一个质因子，而每个质数的质因子只有它本身。</li>
+<li>时间复杂度<span class="math inline">\(O(n\log \log
+n)\)</span>。（反正接近线性，应该也没人会特意卡这个）</li>
+</ul></li>
+<li>欧式筛
+<ul>
+<li>我们模拟一下，可以发现埃氏筛中，有些数会被筛很多次，如12即被2筛过，也被3筛过，这样会浪费大量时间，如果我们规定每个数只能被它的最小质因子筛，那就不会重复筛一个数了。</li>
+<li>正确性：一个数的质因子之间有大小关系，我们只要让这个数被最小的质因子筛，顺序就是唯一的。</li>
+<li>时间复杂度<span
+class="math inline">\(O(n)\)</span>。比较推荐使用这种筛法，因为它还可以筛一些积性函数。</li>
+</ul></li>
+</ul>
+<p>题目：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3383">P3383</a></p>
+<p><span class="math inline">\(Code\)</span>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e8</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,vis[N],pri[N],tot,lim;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">euler</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=lim;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!vis[i])&#123; <span class="comment">//是质数 </span></span><br><span class="line">			vis[i] = i;</span><br><span class="line">			pri[++tot] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (pri[j]&gt;vis[i] || <span class="number">1ll</span>*pri[j]*i&gt;lim) <span class="keyword">break</span>; <span class="comment">//只能由最小的因数筛掉 </span></span><br><span class="line">			vis[pri[j]*i] = pri[j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;lim&gt;&gt;n;</span><br><span class="line">	<span class="built_in">euler</span>();</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		cout&lt;&lt;pri[x]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="质因数分解">质因数分解</h2>
+<p>从2~<span
+class="math inline">\(\sqrt{n}\)</span>里面枚举因数，一直除，直到这个数不含有此因数为止。</p>
+<p>有没有可能除了一个合数呢？不可能。</p>
+<p>因为每个合数必然由比它小的质数组成，而我们把所有组成它的质数都除掉了，所以不可能出现合数。</p>
+<p>时间复杂度为<span
+class="math inline">\(O(\sqrt{n})\)</span>，你大可无视里面不断除的过程，这个过程在long
+long范围内也不会超过64次。</p>
+<p>题目：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2043">P2043</a></p>
+<p><span class="math inline">\(Code\)</span>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e4</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k = <span class="built_in">sqrt</span>(x);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span> (x%i == <span class="number">0</span>)&#123;</span><br><span class="line">			x/=i;</span><br><span class="line">			cnt[i]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (x&gt;<span class="number">1</span>) cnt[x]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++) <span class="built_in">work</span>(i);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span> (cnt[i]) cout&lt;&lt;i&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;cnt[i]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当<span
+class="math inline">\(n\)</span>更大时，可以配合埃氏筛，先把所有质数筛出来，1~<span
+class="math inline">\(n\)</span>中是质数和质数的任意次方的倍数的数都对质因子有贡献。时间复杂度为<span
+class="math inline">\(O(n\log n)\)</span>。（虽然埃氏筛要带两<span
+class="math inline">\(\log\)</span>，但是这里就忽略不计了，你也可以用线性筛实现）</p>
+<p><span class="math inline">\(Code\)</span>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e6</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt[N],vis[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">			<span class="keyword">int</span> las = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n/i;j++)&#123;</span><br><span class="line">				vis[i*j] = <span class="number">1</span>;</span><br><span class="line">				<span class="keyword">if</span> (j/las == <span class="number">1</span>)&#123;</span><br><span class="line">					cnt[i]+=<span class="number">1ll</span>*n/j/i;</span><br><span class="line">					las*=i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span> (cnt[i]) cout&lt;&lt;i&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;cnt[i]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="fun-facts">Fun Facts</h2>
+<p>1~1000中有168个质数</p>
+<p>1~10000中有1229个质数</p>
+<p>1~100000中有9592个质数</p>
+<p>1~1000000中有78498个质数</p>
+<p>1~<span class="math inline">\(2^{32}\)</span>中有203280221个质数</p>
+<p>在<span
+class="math inline">\(10^{18}\)</span>内的最大质数间隙不超过1500</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/28/P3959-%E5%AE%9D%E8%97%8F-%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -962,105 +1094,6 @@ src="https://s4.ax1x.com/2022/01/24/7TSqln.png" alt="截图" /></a></p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wbwone1">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wbwone1's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/" class="post-title-link" itemprop="url">自建题目目录与解答</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-15 22:48:56" itemprop="dateCreated datePublished" datetime="2022-01-15T22:48:56+08:00">2022-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-09 15:54:17" itemprop="dateModified" datetime="2022-02-09T15:54:17+08:00">2022-02-09</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="tri"><a
-target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U198025">Tri</a></h2>
-<p>首先考虑最暴力的做法，只用把所有的三角形数都枚举一遍，再看看因数数量即可，但是，假设判断了<span
-class="math inline">\(q\)</span>个三角形数，其中每个数为<span
-class="math inline">\(m\)</span>，如果<span class="math inline">\(\sqrt
-m\)</span>判断因数是否符合条件，会让总复杂度达到<span
-class="math inline">\(q \sqrt m\)</span>级别的，这显然是无法接受的</p>
-<p>于是想到一个定理：</p>
-<p>如果一个数<span class="math inline">\(p\)</span>能够被表示为<span
-class="math inline">\(p =
-{a_1}^{k1}+{a_2}^{k2}+...+{a_n}^{k_n}\)</span>，那么<span
-class="math inline">\(p\)</span>的因数个数即为<span
-class="math inline">\((k_1+1)*(k_2+1)*...*(k_n+1)\)</span>，这代表我们只需要知道一个数的所有质因数，就可以知道它的约数个数，于是总时间复杂度就被降低到了<span
-class="math inline">\(O(q\log m)\)</span>级别的，有了很可观的改善</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/15/%E8%87%AA%E5%BB%BA%E9%A2%98%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%A7%A3%E7%AD%94/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1132,14 +1165,14 @@ class="math inline">\(O(q\log m)\)</span>级别的，有了很可观的改善</p
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
