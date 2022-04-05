@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="同余 定义 如果两个整数\(a,b\)除以\(m\)的余数相等，则称\(a,b\)模\(m\)同余，记作\(a\equiv b(\mod m)\)。 一个在\([0,m-1]\)里面的数\(a\)，它所属的集合\(\{a+km\}\)里面的所有数和\(m\)同余，则称这个集合为一个模\(m\)的同余类。 \(1\)~\(m\)中和\(m\)互质的数代表的同余类共有\(\varphi(m)\">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同余">
+<meta property="og:url" content="http://example.com/2022/04/05/%E5%90%8C%E4%BD%99/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="同余 定义 如果两个整数\(a,b\)除以\(m\)的余数相等，则称\(a,b\)模\(m\)同余，记作\(a\equiv b(\mod m)\)。 一个在\([0,m-1]\)里面的数\(a\)，它所属的集合\(\{a+km\}\)里面的所有数和\(m\)同余，则称这个集合为一个模\(m\)的同余类。 \(1\)~\(m\)中和\(m\)互质的数代表的同余类共有\(\varphi(m)\">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-05T13:28:55.000Z">
+<meta property="article:modified_time" content="2022-04-05T13:29:44.601Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/05/%E5%90%8C%E4%BD%99/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>同余 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/05/%E5%90%8C%E4%BD%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          同余
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-05 21:28:55 / 修改时间：21:29:44" itemprop="dateCreated datePublished" datetime="2022-04-05T21:28:55+08:00">2022-04-05</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/04/05/%E5%90%8C%E4%BD%99/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/04/05/%E5%90%8C%E4%BD%99/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="同余">同余</h1>
+<h2 id="定义">定义</h2>
+<p>如果两个整数<span class="math inline">\(a,b\)</span>除以<span
+class="math inline">\(m\)</span>的余数相等，则称<span
+class="math inline">\(a,b\)</span>模<span
+class="math inline">\(m\)</span>同余，记作<span
+class="math inline">\(a\equiv b(\mod m)\)</span>。</p>
+<p>一个在<span class="math inline">\([0,m-1]\)</span>里面的数<span
+class="math inline">\(a\)</span>，它所属的集合<span
+class="math inline">\(\{a+km\}\)</span>里面的所有数和<span
+class="math inline">\(m\)</span>同余，则称这个集合为一个模<span
+class="math inline">\(m\)</span>的同余类。</p>
+<p><span class="math inline">\(1\)</span>~<span
+class="math inline">\(m\)</span>中和<span
+class="math inline">\(m\)</span>互质的数代表的同余类共有<span
+class="math inline">\(\varphi(m)\)</span>个，它们构成<span
+class="math inline">\(m\)</span>的简化剩余系。</p>
+<span id="more"></span>
+<p>结论1：如果<span class="math inline">\(a,b\)</span>都属于<span
+class="math inline">\(m\)</span>的简化剩余系，则<span
+class="math inline">\(a\cdot b \mod m\)</span>也属于<span
+class="math inline">\(m\)</span>的简化剩余系。</p>
+<p>证明：显然，<span class="math inline">\(a,b\)</span>都和<span
+class="math inline">\(m\)</span>互质，则<span
+class="math inline">\(a\cdot b \mod m\)</span>一定和<span
+class="math inline">\(m\)</span>互质，必然属于<span
+class="math inline">\(m\)</span>的简化剩余系。</p>
+<h2 id="运算">运算</h2>
+<p>模<span class="math inline">\(n\)</span>意义下的运算</p>
+<ul>
+<li>加法
+<ul>
+<li><span class="math inline">\(a+b = (a\mod n+b\mod n)\mod
+n\)</span></li>
+<li><span class="math inline">\(a\equiv -b(\mod n) \iff a+b \equiv
+0(\mod
+n)\)</span>（等式两边同时加上一个整数，模意义下等式仍然成立）</li>
+</ul></li>
+<li>减法
+<ul>
+<li><span class="math inline">\(a-b = (a\mod n-b\mod n) \mod
+n\)</span></li>
+<li><span class="math inline">\(a\equiv b(\mod n) \iff a-b\equiv 0(\mod
+n)\)</span>（等式两边同时减去一个整数，模意义下等式仍然成立）</li>
+</ul></li>
+<li>乘法
+<ul>
+<li><span class="math inline">\(a\cdot b = (a \mod n\cdot b\mod n)\mod
+n\)</span></li>
+<li><span class="math inline">\(a\equiv b(\mod n) \iff a\cdot k\equiv
+b\cdot k(\mod
+n)\)</span>（等式两边同时乘上一个整数，模意义下等式仍然成立）</li>
+</ul></li>
+<li>除法
+<ul>
+<li>这个后面再说</li>
+<li><span class="math inline">\(a\cdot k\equiv b\cdot k(\mod n) \iff
+(a-b)\cdot k\equiv 0(\mod n)\)</span>
+<ol type="1">
+<li><span class="math inline">\(k\mid n\)</span>，不能推出<span
+class="math inline">\(a\)</span>和<span
+class="math inline">\(b\)</span>的任何关系</li>
+<li><span class="math inline">\(k\nmid n\)</span>，<span
+class="math inline">\((a-b)\equiv 0(\mod n) \iff a\equiv b(\mod
+n)\)</span></li>
+</ol></li>
+</ul></li>
+<li>乘方
+<ul>
+<li><span class="math inline">\(a\equiv b \iff a^k\equiv b^k(\mod
+n)\)</span></li>
+<li>证明：设<span class="math inline">\(a = k_1n+r,b =
+k_2n+r\)</span>，则<span class="math inline">\(a^k = k_1\cdot X+r^k,b^k
+= k_2\cdot Y+r^k\)</span>，所以原式等价于<span
+class="math inline">\(r^k\equiv r^k\)</span>，显然成立。</li>
+</ul></li>
+</ul>
+<h2 id="定理">定理</h2>
+<p><strong>费马小定理：若<span
+class="math inline">\(p\)</span>是质数，则对于任意正整数<span
+class="math inline">\(a\)</span>，有<span
+class="math inline">\(a^p\equiv a(\mod p)\)</span>。</strong></p>
+<p><strong>欧拉定理：若正整数<span
+class="math inline">\(a,n\)</span>互质，则<span
+class="math inline">\(a^{\varphi(n)}\equiv 1(\mod
+n)\)</span>。</strong></p>
+<p>证明：对于<span
+class="math inline">\(n\)</span>的所有互质的数，我们将其从小到达排列为<span
+class="math inline">\(a_1,a_2,\cdots,a_{\varphi(n)}\)</span>。</p>
+<p>之后，我们把所有这些数都乘上<span
+class="math inline">\(a\)</span>，得到<span
+class="math inline">\(aa_1,aa_2,\cdots,aa_{\varphi(n)}\)</span>，又因为<span
+class="math inline">\(a,n\)</span>互质，所以得到的数都和<span
+class="math inline">\(n\)</span>互质。</p>
+<p>我们再证明这些数组成的集合正好是<span
+class="math inline">\(n\)</span>的简化剩余系：</p>
+<p>如果对于两个不同的<span
+class="math inline">\(a_i,a_j\)</span>来说，<span
+class="math inline">\(aa_i\equiv aa_j(\mod
+n)\)</span>，那么根据上面的运算性质，要么<span
+class="math inline">\(a\mid n\)</span>，要么<span
+class="math inline">\(a_i\equiv a_j(\mod n)\)</span>，然而根据<span
+class="math inline">\(a,n\)</span>互质，第一个不成立，根据我们假设的<span
+class="math inline">\(a_i\neq
+a_j\)</span>，第二个也不成立，所以这个集合正好构成<span
+class="math inline">\(n\)</span>的简化剩余系。</p>
+<p>由此，<span class="math inline">\(aa_1\cdot aa_2\cdots
+aa_{\varphi(n)}\equiv a_1\cdot a_2 \cdots a_{\varphi(n)}(\mod
+n)\)</span>，所以<span class="math inline">\(a^{\varphi(n)}\equiv 1(\mod
+n)\)</span>。</p>
+<p>当<span class="math inline">\(n\)</span>为质数时，<span
+class="math inline">\(a^{\varphi(n)}\equiv1(\mod n) = a^{n-1}\equiv
+1(\mod n) = a^n\equiv a(\mod n)\)</span>。</p>
+<p>由此，费马小定理成立。</p>
+<h2 id="欧拉定理的推论">欧拉定理的推论</h2>
+<ol type="1">
+<li><p><strong>若<span
+class="math inline">\(a,n\)</span>互质，则对于任意正整数<span
+class="math inline">\(b\)</span>，有<span
+class="math inline">\(a^b\equiv a^{b\mod \varphi(n)}(\mod
+n)\)</span></strong>。</p>
+<p>证明：</p>
+<p>设<span class="math inline">\(b=k\cdot \varphi(n)+r\)</span>，则<span
+class="math inline">\(a^b = a^{k\cdot \varphi(n)+r} =
+a^{\varphi(n)^k}\cdot a^r\equiv 1^k\cdot a^r\equiv
+a^r\)</span>，所以原式仍旧成立。</p></li>
+<li><p><strong>若<span
+class="math inline">\(a,n\)</span>不互质，且对于正整数<span
+class="math inline">\(b&lt;\varphi(n)\)</span>，有<span
+class="math inline">\(a^b\equiv a^b(\mod n)\)</span></strong>。</p>
+<p>证明：</p>
+<p>显然成立。</p></li>
+<li><p><strong>若<span
+class="math inline">\(a,n\)</span>不互质，且对于正整数<span
+class="math inline">\(b\geq \varphi(n)\)</span>，有<span
+class="math inline">\(a^b\equiv a^{b\mod \varphi(n)+\varphi(n)}(\mod
+n)\)</span></strong>。</p>
+<p>证明：</p>
+<ol type="1">
+<li><p><span class="math inline">\(a\)</span>为质数，且<span
+class="math inline">\(a\mid n\)</span>。</p>
+<p>设<span class="math inline">\(n=n&#39;a^r\)</span>，则<span
+class="math inline">\(a,n&#39;\)</span>一定互质，根据欧拉定理，可得<span
+class="math inline">\(a^{\varphi(n&#39;)}\equiv 1(\mod
+n&#39;)\)</span>。</p>
+<p>又因为<span class="math inline">\(a^r,n&#39;\)</span>互质，所以<span
+class="math inline">\(\varphi(n) =\varphi(n&#39;)\cdot (a-1)\cdot
+a^{r-1}\)</span>，即<span class="math inline">\(\varphi(n&#39;)\mid
+\varphi(n)\)</span>。</p>
+<p>所以根据<span class="math inline">\(a^{\varphi(n&#39;)}\equiv 1(\mod
+n&#39;)\)</span>，可以得到<span
+class="math inline">\(a^{\varphi(n)}\equiv 1(\mod n&#39;)\)</span>。</p>
+<p>变换形式，可得<span class="math inline">\(a^{\varphi(n)} =
+n&#39;k+1\)</span>，即<span class="math inline">\(a^{\varphi(n)+r} =
+nk+a^r\)</span>。</p>
+<p>所以，<span class="math inline">\(a^{\varphi(n)+r}\equiv a^r(\mod
+n)\)</span>，即<span class="math inline">\(a^{k\cdot\varphi(n)+r}\equiv
+a^r(\mod n)\)</span>。</p>
+<p>设<span class="math inline">\(b =
+r+k\cdot\varphi(n)+t\)</span>，则<span class="math inline">\(a^b =
+a^{r+k\cdot\varphi(n)+t} = a^{r+t}\)</span>。</p>
+<p>又因为<span class="math inline">\(t = b-r-k\cdot\varphi(n) =
+(b-r)\mod \varphi(n)\)</span>，所以<span class="math inline">\(a^b =
+a^{r+(b-r)\mod \varphi(n)}(\mod n)\)</span>。</p></li>
+<li><p><span class="math inline">\(a\)</span>为质数的幂。</p>
+<p>剩下的看不懂了，有兴趣的直接看<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/synapse7/article/details/19610361">三个重要的同余式——威尔逊定理、费马小定理、欧拉定理
++ 求幂大法的证明_synapse7的博客</a>。</p></li>
+</ol></li>
+</ol>
+<p>总之，这个式子可以降低幂次，使我们能用快速幂之类的东西简化计算。</p>
+<h2 id="扩展欧几里得">扩展欧几里得</h2>
+<p>对于任意整数<span
+class="math inline">\(a,b\)</span>，存在一对整数<span
+class="math inline">\(x,y\)</span>，满足<span
+class="math inline">\(ax+by = gcd(a,b)\)</span>。</p>
+<p>在欧几里得算法的最后一步中，<span
+class="math inline">\(b=0\)</span>，我们可以得到一组解：<span
+class="math inline">\(a\cdot1+0\cdot0 = gcd(a,0)\)</span>。</p>
+<p>我们往回导一下，在<span
+class="math inline">\(b&gt;0\)</span>时，<span
+class="math inline">\(gcd(a,b) = gcd(b,a\mod
+b)\)</span>，假设存在一对整数<span
+class="math inline">\(x,y\)</span>满足<span
+class="math inline">\(bx+(a\mod b)y=gcd(b,a \mod b)\)</span>，则<span
+class="math inline">\(bx+(a-b\cdot\lfloor a/b\rfloor)y=ay+ b(x-\lfloor
+a/b\rfloor y)\)</span>，我们只要令<span
+class="math inline">\(x&#39;=y,y&#39;=x-\lfloor a/b\rfloor
+y\)</span>，就可以求出另一组解，由于当<span
+class="math inline">\(b=0\)</span>时是有解的，所以我们归纳一下，可以得到任意时刻都有解。于是对于任意整数<span
+class="math inline">\(a,b\)</span>，都存在一组整数<span
+class="math inline">\(x,y\)</span>，满足<span
+class="math inline">\(ax+by = gcd(a,b)\)</span>。</p>
+<p>当然，这里求出的仅是一组特解，并不能代表所有的解。</p>
+<p>更一般的，对于<span class="math inline">\(ax+by =
+c\)</span>，方程有解当且仅当<span class="math inline">\(gcd(a,b)\mid
+c\)</span>，且通解可表示为<span
+class="math inline">\(x=\frac{c}{gcd(a,b)}x_0+\frac{kb}{gcd(a,b)},y =
+\frac{c}{gcd(a,b)}y_0-\frac{ka}{gcd(a,b)}\)</span>。其中<span
+class="math inline">\(x_0,y_0\)</span>为<span
+class="math inline">\(ax+by = gcd(a,b)\)</span>的一组特解。</p>
+<p>证明：咕了。</p>
+<h2 id="乘法逆元">乘法逆元</h2>
+<p>我们回到之前对于运算的处理，我们对加减乘和乘方运算都有较好的处理方式，但是除法中很可能会有小数，这时候再模就不知道是什么东西了，为了将结果限制在整数范围内，我们需要一种特殊的处理方式：乘法逆元。</p>
+<p>若整数<span class="math inline">\(b,m\)</span>互质，且<span
+class="math inline">\(b\mid a\)</span>，则存在一个整数<span
+class="math inline">\(x\)</span>，使得<span
+class="math inline">\(a/b\equiv ax(\mod m)\)</span>，称<span
+class="math inline">\(x\)</span>为<span
+class="math inline">\(b\)</span>的模<span
+class="math inline">\(m\)</span>乘法逆元，记为<span
+class="math inline">\(b^{-1}(\mod m)\)</span>。</p>
+<p>因为<span class="math inline">\(a/b\equiv a\cdot b^{-1}\equiv
+a/b\cdot b\cdot b^{-1}(\mod
+m)\)</span>，所以根据上面的运算规律，我们可以得到<span
+class="math inline">\(b\cdot b^{-1}\equiv 1(\mod m)\)</span>。</p>
+<p>那么，我们就是要找到<span
+class="math inline">\(b^{-1}\)</span>取啥比较合适。</p>
+<p>如果<span
+class="math inline">\(m\)</span>是质数，根据费马小定理，<span
+class="math inline">\(b^m\equiv b(\mod m) \iff b^{m-1}\equiv 1(\mod m)
+\iff b\cdot b^{m-2}\equiv 1(\mod m)\)</span>，所以<span
+class="math inline">\(b^{-1} = b^{m-2}\)</span>是<span
+class="math inline">\(b\)</span>的乘法逆元。</p>
+<p>如果只保证<span
+class="math inline">\(b,m\)</span>互质，我们需要求解同余方程<span
+class="math inline">\(bx\equiv 1(\mod m)\)</span>。</p>
+<p>接下来，我们将讨论如何解决这个问题。</p>
+<h2 id="线性同余方程">线性同余方程</h2>
+<p>形如<span class="math inline">\(ax\equiv b(\mod
+m)\)</span>的方程叫做线性同余方程，因为其未知数<span
+class="math inline">\(x\)</span>的指数为1。</p>
+<p>我们将其变形，得<span class="math inline">\(ax-b\equiv 0(\mod
+m)\)</span>，即<span class="math inline">\(ax-b=-ym\)</span>。</p>
+<p>移项，得<span
+class="math inline">\(ax+ym=b\)</span>，这个东西可以用扩展欧几里得解决。</p>
+<p>我们先求出<span class="math inline">\(ax+ym =
+gcd(a,m)\)</span>的一组解<span
+class="math inline">\(x,y\)</span>，之后乘<span
+class="math inline">\(b/gcd(a,m)\)</span>，就可以求出这个方程的一个特解<span
+class="math inline">\(x_0\)</span>。</p>
+<p>通解是所有模<span class="math inline">\(m/gcd(a,m)\)</span>和<span
+class="math inline">\(x_0\)</span>同余的数，形象一点的说，通解是<span
+class="math inline">\(x_0\frac{b}{gcd(a,m)}+\frac{tm}{gcd(a,m)}\)</span>，这里的<span
+class="math inline">\(t\)</span>取遍整个整数集合。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/02/%E7%BA%A6%E6%95%B0/" rel="prev" title="约数">
+      <i class="fa fa-chevron-left"></i> 约数
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E4%BD%99"><span class="nav-number">1.</span> <span class="nav-text">同余</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E7%9A%84%E6%8E%A8%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">欧拉定理的推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97"><span class="nav-number">1.5.</span> <span class="nav-text">扩展欧几里得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83"><span class="nav-number">1.6.</span> <span class="nav-text">乘法逆元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">线性同余方程</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
