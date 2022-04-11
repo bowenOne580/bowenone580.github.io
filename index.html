@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-04-11 15:17:17 / 修改时间：15:17:47" itemprop="dateCreated datePublished" datetime="2022-04-11T15:17:17+08:00">2022-04-11</time>
+              <time title="创建时间：2022-04-11 15:17:17 / 修改时间：17:42:12" itemprop="dateCreated datePublished" datetime="2022-04-11T15:17:17+08:00">2022-04-11</time>
             </span>
 
           
@@ -244,109 +244,14 @@ class="math inline">\(p_j=i\)</span>的<span
 class="math inline">\(j\)</span>连一条边，那么我们的目标就是使这个图中存在<span
 class="math inline">\(n\)</span>个自环。</p>
 <h3 id="观察题目得到猜想">观察题目，得到猜想</h3>
-<p><strong>结论1：这个图必然由若干个环构成。</strong></p>
-<p>由于点<span class="math inline">\(i\)</span>连向<span
-class="math inline">\(p_j=i\)</span>的<span
-class="math inline">\(j\)</span>和<span
-class="math inline">\(p_i\)</span>，所以每个点必然连接着两条边。如果图中有不是环的东西，那么必然存在一个点，其只有一条出边，这与每个点都连接两条边矛盾，所以原命题成立。</p>
-<p><strong>思考1：交换<span class="math inline">\(p_i\)</span>和<span
-class="math inline">\(p_j\)</span>会对原图产生什么影响？</strong></p>
-<p>之前连向<span class="math inline">\(p_i\)</span>的是<span
-class="math inline">\(p_q=i\)</span>的<span
-class="math inline">\(q\)</span>和编号为<span
-class="math inline">\(p_i\)</span>的点。</p>
-<p>显然，根据连边的规则，从编号为<span
-class="math inline">\(p_i\)</span>的点连向<span
-class="math inline">\(j\)</span>的边不会改变，但是另一条边变成了从<span
-class="math inline">\(p_{q&#39;}=j\)</span>连向<span
-class="math inline">\(p_i\)</span>的边。</p>
-<p>另一个点连接的两个点分别是编号为<span
-class="math inline">\(p_j\)</span>和<span
-class="math inline">\(p_{q&#39;&#39;}=i\)</span>。</p>
-<p>其实手动模拟一下可能会更清晰。</p>
-<p>这样，这两个点就交换了各自的一条边，形成了两个环。</p>
-<p>形式化的说，如果原来的环是<span class="math inline">\(v_1\rightarrow
-v_2\cdots v_n\to v_1\)</span>，交换<span
-class="math inline">\(i,j\)</span>（令<span
-class="math inline">\(i&lt;j\)</span>）之后的环就变成了<span
-class="math inline">\(v_i\to v_{i+1}\cdots v_j\to v_i\)</span>和<span
-class="math inline">\(v_1\to v_2\cdots v_i\to v_{j+1}\cdots v_n\to
-v_1\)</span>。</p>
-<p>得到结论：在一个长度为<span
-class="math inline">\(n\)</span>的环内交换<span
-class="math inline">\(i,j\)</span>，会变成两个长度为<span
-class="math inline">\(j-i\)</span>和<span
-class="math inline">\(n-j+i\)</span>的环。</p>
-<p><strong>结论2：将一个包含<span
-class="math inline">\(m\)</span>个点的环拆成<span
-class="math inline">\(m\)</span>个自环，最少需要<span
-class="math inline">\(m-1\)</span>次操作。</strong></p>
-<p>用数学归纳法证明。</p>
-<p>在<span
-class="math inline">\(m=1\)</span>时，自己本身就是自环了，不用拆，需要<span
-class="math inline">\(1-1 = 0\)</span>次操作。</p>
-<p>假设对于任意<span class="math inline">\(i\in
-[1,m-1]\)</span>，都只需要<span
-class="math inline">\(m-1\)</span>次操作，那么对于一个长度为<span
-class="math inline">\(m\)</span>的环，我们可以</p>
-<p>任取两个点<span
-class="math inline">\(i,j\)</span>，交换它们，根据思考1，环将变成<span
-class="math inline">\(j-i\)</span>和<span
-class="math inline">\(m-j+i\)</span>两个环。</p>
-<p>而将这两个环拆成自环需要<span class="math inline">\(j-i-1+m-j+i-1 =
-m-2\)</span>次操作，加上交换<span
-class="math inline">\(i,j\)</span>这一次操作，总共需要<span
-class="math inline">\(m-1\)</span>次操作。</p>
-<p>于是，原命题成立。</p>
-<h3 id="进一步思考">进一步思考</h3>
-<p>现在，我们已经知道了最小的次数是<span
-class="math inline">\(n-\)</span>环的个数，要求总共有多少种交换的方法能够达到这个次数。</p>
-<p>设<span
-class="math inline">\(F_n\)</span>表示用最少的次数将一个长度为<span
-class="math inline">\(n\)</span>的环变为<span
-class="math inline">\(n\)</span>个自环的方案数，根据思考1和结论2，我们可以把这个环拆成大小为<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>的两个环，设<span
-class="math inline">\(T_(x,y)\)</span>表示有多少种方法拆成大小为<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>的两个环：</p>
-<p>当<span class="math inline">\(x=y\)</span>时，<span
-class="math inline">\(T(x,y) = n/2\)</span>，从<span
-class="math inline">\(i\)</span>和<span
-class="math inline">\(i+x\)</span>切没有区别。</p>
-<p>当<span class="math inline">\(x\neq y\)</span>时，<span
-class="math inline">\(T(x,y) = n\)</span>，在任意一个点<span
-class="math inline">\(i\)</span>切都是不同的方案。</p>
-<p>于是，<span class="math inline">\(F_n = \sum T(x,y)\cdot F_x\cdot
-F_y\cdot \frac{(n-2)!}{(x-1)!\cdot (y-1)!}\)</span>。</p>
-<p>最后乘的那个东西可以看作有<span
-class="math inline">\(x\)</span>个0和<span
-class="math inline">\(y\)</span>个1的排列数，直接用多重集的排列数计算即可。</p>
-<p>至于为啥<span
-class="math inline">\(x\)</span>个0都是相同的，因为区分操作的情况在计算<span
-class="math inline">\(F_x\)</span>的时候就已经计算过了，所以这里可以把它们当成相同的。</p>
-<p>因为每个自环计算方案是独立的，所以我们要把所有的方案数乘起来，再像上面一样乘一个多重集的排列数：</p>
-<p><span class="math inline">\(ans = F_{l_1}\cdot F_{l_2}\cdots
-F_{l_k}\cdot \frac{(n-k)!}{(l_1-1)!\cdot (l_2-1)! \cdots
-(l_k-1)!}\)</span>。</p>
-<p>这样，我们可以<span
-class="math inline">\(O(n^2)\)</span>推出所有我们需要的<span
-class="math inline">\(F_i\)</span>值，之后乘起来，加个乘法逆元，总复杂度为<span
-class="math inline">\(O(n^2\log n)\)</span>。</p>
-<p>之后好像就没法优化了，除非你把<span
-class="math inline">\(F_i\)</span>的前几项放到OEIS上去。。。</p>
-<p>于是，我们借助网络得到<span
-class="math inline">\(F_i\)</span>的通向公式：<span
-class="math inline">\(F_i = i^{i-2}\)</span>，这样复杂度就变成了<span
-class="math inline">\(O(n\log n)\)</span>。</p>
-<h2 id="总结">总结</h2>
-<p>总之，这是一道非常不错（毒瘤）的组合入门题（至少<a
-target="_blank" rel="noopener" href="https://www.luogu.com.cn/discuss/53018">小粉兔是这么说的</a>），考察了对加法原理和乘法原理的理解、数学归纳法的使用、多重集的排列数的了解，需要一定的猜测和证明能力，组合数学的基础才能完全理解。</p>
-<h2 id="code"><span class="math inline">\(Code\)</span></h2>
-<p>要在处理所有询问之前把<span
-class="math inline">\(F_i\)</span>和阶乘预处理出来，这样复杂度才是对的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>,p = <span class="number">1e9</span>+<span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> t,n,a[N],head[N],tot,l[N],cnt,vis[N],jie[N],f[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">e</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> next,to;</span><br><span class="line">&#125; edge[N*<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	edge[++tot].to = y;</span><br><span class="line">	edge[tot].next = head[x];</span><br><span class="line">	head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ksm</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>,bas = x;</span><br><span class="line">	<span class="keyword">while</span> (y)&#123;</span><br><span class="line">		<span class="keyword">if</span> (y&amp;<span class="number">1</span>) ans = ans*bas%p;</span><br><span class="line">		bas = bas*bas%p;</span><br><span class="line">		y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span><span class="params">()</span></span>&#123;</span><br><span class="line">	f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">100000</span>;i++) f[i] = <span class="built_in">ksm</span>(i,i<span class="number">-2</span>,p);</span><br><span class="line">	jie[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">100000</span>;i++) jie[i] = jie[i<span class="number">-1</span>]*i%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	vis[x] = <span class="number">1</span>;</span><br><span class="line">	l[cnt]++;</span><br><span class="line">	<span class="keyword">int</span> v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=head[x];i;i = edge[i].next)&#123;</span><br><span class="line">		v = edge[i].to;</span><br><span class="line">		<span class="keyword">if</span> (!vis[v]) <span class="built_in">dfs</span>(v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">pre</span>();</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span> (t--)&#123;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="built_in">memset</span>(head,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">long</span> <span class="keyword">long</span>)*(n+<span class="number">100</span>));</span><br><span class="line">		<span class="built_in">memset</span>(l,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">long</span> <span class="keyword">long</span>)*(n+<span class="number">100</span>));</span><br><span class="line">		<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">long</span> <span class="keyword">long</span>)*(n+<span class="number">100</span>));</span><br><span class="line">		tot = <span class="number">0</span>;</span><br><span class="line">		cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			cin&gt;&gt;a[i];</span><br><span class="line">			<span class="built_in">add</span>(a[i],i);</span><br><span class="line">			<span class="built_in">add</span>(i,a[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">				cnt++;</span><br><span class="line">				<span class="built_in">dfs</span>(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> ans = <span class="number">1</span>,num = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)&#123;</span><br><span class="line">			ans*=f[l[i]];</span><br><span class="line">			ans%=p;</span><br><span class="line">			num*=jie[l[i]<span class="number">-1</span>];</span><br><span class="line">			num%=p;</span><br><span class="line">		&#125;</span><br><span class="line">		ans*=jie[n-cnt]*<span class="built_in">ksm</span>(num,p<span class="number">-2</span>,p)%p;</span><br><span class="line">		ans%=p;</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/11/Counting-Swaps-%E9%A2%98%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
