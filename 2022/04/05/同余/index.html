@@ -28,7 +28,7 @@
 <meta property="og:description" content="同余 定义 如果两个整数\(a,b\)除以\(m\)的余数相等，则称\(a,b\)模\(m\)同余，记作\(a\equiv b(\mod m)\)。 一个在\([0,m-1]\)里面的数\(a\)，它所属的集合\(\{a+km\}\)里面的所有数和\(m\)同余，则称这个集合为一个模\(m\)的同余类。 \(1\)~\(m\)中和\(m\)互质的数代表的同余类共有\(\varphi(m)\">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-05T13:28:55.000Z">
-<meta property="article:modified_time" content="2022-04-05T13:29:44.601Z">
+<meta property="article:modified_time" content="2022-04-12T12:48:16.947Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="数学">
@@ -212,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-04-05 21:28:55 / 修改时间：21:29:44" itemprop="dateCreated datePublished" datetime="2022-04-05T21:28:55+08:00">2022-04-05</time>
+              <time title="创建时间：2022-04-05 21:28:55" itemprop="dateCreated datePublished" datetime="2022-04-05T21:28:55+08:00">2022-04-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-12 20:48:16" itemprop="dateModified" datetime="2022-04-12T20:48:16+08:00">2022-04-12</time>
+              </span>
 
           
   
@@ -272,7 +278,7 @@ class="math inline">\(m\)</span>的简化剩余系。</p>
 <h2 id="运算">运算</h2>
 <p>模<span class="math inline">\(n\)</span>意义下的运算</p>
 <ul>
-<li>加法
+<li><p>加法</p>
 <ul>
 <li><span class="math inline">\(a+b = (a\mod n+b\mod n)\mod
 n\)</span></li>
@@ -280,14 +286,14 @@ n\)</span></li>
 0(\mod
 n)\)</span>（等式两边同时加上一个整数，模意义下等式仍然成立）</li>
 </ul></li>
-<li>减法
+<li><p>减法</p>
 <ul>
 <li><span class="math inline">\(a-b = (a\mod n-b\mod n) \mod
 n\)</span></li>
 <li><span class="math inline">\(a\equiv b(\mod n) \iff a-b\equiv 0(\mod
 n)\)</span>（等式两边同时减去一个整数，模意义下等式仍然成立）</li>
 </ul></li>
-<li>乘法
+<li><p>乘法</p>
 <ul>
 <li><span class="math inline">\(a\cdot b = (a \mod n\cdot b\mod n)\mod
 n\)</span></li>
@@ -295,21 +301,25 @@ n\)</span></li>
 b\cdot k(\mod
 n)\)</span>（等式两边同时乘上一个整数，模意义下等式仍然成立）</li>
 </ul></li>
-<li>除法
+<li><p>除法</p>
 <ul>
-<li>这个后面再说</li>
-<li><span class="math inline">\(a\cdot k\equiv b\cdot k(\mod n) \iff
-(a-b)\cdot k\equiv 0(\mod n)\)</span>
-<ol type="1">
-<li><span class="math inline">\(k\mid n\)</span>，不能推出<span
-class="math inline">\(a\)</span>和<span
-class="math inline">\(b\)</span>的任何关系</li>
-<li><span class="math inline">\(k\nmid n\)</span>，<span
-class="math inline">\((a-b)\equiv 0(\mod n) \iff a\equiv b(\mod
-n)\)</span></li>
-</ol></li>
+<li><p>这个后面再说</p></li>
+<li><p><span class="math inline">\(a\cdot k\equiv b\cdot k(\mod n) \iff
+a\equiv b(\mod \frac{n}{gcd(n,k)})\)</span></p>
+<ul>
+<li><p>证明：<span class="math inline">\(a\cdot k\equiv b\cdot k(\mod n)
+\iff (a-b)\cdot k\equiv 0(\mod n)\)</span>。</p>
+<p>感性理解一下，<span
+class="math inline">\(k\)</span>尽全力只能帮助<span
+class="math inline">\(a-b\)</span>拿下<span
+class="math inline">\(gcd(n,k)\)</span>，剩下的<span
+class="math inline">\(\frac{n}{gcd(n,k)}\)</span>是<span
+class="math inline">\(a-b\)</span>必须要有的，所以<span
+class="math inline">\(a-b\equiv 0(\mod
+\frac{n}{gcd(n,k)})\)</span>。</p></li>
 </ul></li>
-<li>乘方
+</ul></li>
+<li><p>乘方</p>
 <ul>
 <li><span class="math inline">\(a\equiv b \iff a^k\equiv b^k(\mod
 n)\)</span></li>
@@ -460,12 +470,46 @@ m)\)</span>，所以根据上面的运算规律，我们可以得到<span
 class="math inline">\(b\cdot b^{-1}\equiv 1(\mod m)\)</span>。</p>
 <p>那么，我们就是要找到<span
 class="math inline">\(b^{-1}\)</span>取啥比较合适。</p>
+<h3 id="模质数">模质数</h3>
 <p>如果<span
 class="math inline">\(m\)</span>是质数，根据费马小定理，<span
 class="math inline">\(b^m\equiv b(\mod m) \iff b^{m-1}\equiv 1(\mod m)
 \iff b\cdot b^{m-2}\equiv 1(\mod m)\)</span>，所以<span
 class="math inline">\(b^{-1} = b^{m-2}\)</span>是<span
 class="math inline">\(b\)</span>的乘法逆元。</p>
+<h3 id="线性求1n中所有数的逆元">线性求1~n中所有数的逆元</h3>
+<p>还要说明一点，如果要求<span class="math inline">\(1\)</span>~<span
+class="math inline">\(n\)</span>中所有数模质数<span
+class="math inline">\(p\)</span>的逆元，是可以线性求出的。</p>
+<p>具体来说，我们设<span class="math inline">\(p=k\cdot
+i+r\)</span>，其中<span class="math inline">\(0\leq
+r&lt;i\)</span>。</p>
+<p>于是，<span class="math inline">\(k\cdot i+r\equiv 0(\mod
+p)\)</span>。</p>
+<p>两边同乘<span class="math inline">\(i^{-1}\)</span>和<span
+class="math inline">\(r^{-1}\)</span>，得到<span
+class="math inline">\(k\cdot r^{-1}+i^{-1}\equiv 0(\mod
+p)\)</span>。</p>
+<p>移项，得<span class="math inline">\(i^{-1}\equiv -k\cdot r^{-1}(\mod
+p)\)</span>，也就是说，<span class="math inline">\(i^{-1}\equiv -\lfloor
+p/i\rfloor\cdot(p\mod i)^{-1}(\mod
+p)\)</span>，我们用的都是之前已经求出的逆元，可以线性求出所有的逆元。</p>
+<h3 id="线性求任意n个数的逆元">线性求任意n个数的逆元</h3>
+<p>我们首先求出<span
+class="math inline">\(n\)</span>个数的前缀积，记为<span
+class="math inline">\(s_i\)</span>，之后求出<span
+class="math inline">\(s_n\)</span>的逆元<span
+class="math inline">\(sv_n\)</span>。</p>
+<p><span class="math inline">\(s_n=\Pi_{i=1}^na_i\)</span>，于是<span
+class="math inline">\(sv_n=\Pi_{i=1}^na_i^{-1}\)</span>。</p>
+<p>我们从后往前，每次乘上<span
+class="math inline">\(a_i\)</span>，于是得到<span
+class="math inline">\(s&#39;_i=\Pi_{j=1}^ia_j^{-1}\)</span>，那么<span
+class="math inline">\(a_i^{-1} = s&#39;_i\cdot s_{i-1}\)</span>。</p>
+<p>这样，我们就用<span class="math inline">\(n+\log
+m\)</span>的时间求出了任意<span
+class="math inline">\(n\)</span>个数的逆元。</p>
+<h3 id="bm互质">b,m互质</h3>
 <p>如果只保证<span
 class="math inline">\(b,m\)</span>互质，我们需要求解同余方程<span
 class="math inline">\(bx\equiv 1(\mod m)\)</span>。</p>
@@ -487,6 +531,126 @@ class="math inline">\(x_0\)</span>。</p>
 class="math inline">\(x_0\)</span>同余的数，形象一点的说，通解是<span
 class="math inline">\(x_0\frac{b}{gcd(a,m)}+\frac{tm}{gcd(a,m)}\)</span>，这里的<span
 class="math inline">\(t\)</span>取遍整个整数集合。</p>
+<h2 id="中国剩余定理">中国剩余定理</h2>
+<p>设<span class="math inline">\(m_1,m_2,\cdots,m_n\)</span>是<span
+class="math inline">\(n\)</span>个两两互质的整数，<span
+class="math inline">\(m=\Pi_{i=1}^nm_i\)</span>，<span
+class="math inline">\(M_i = m/m_i\)</span>，<span
+class="math inline">\(t_i\)</span>是线性同余方程<span
+class="math inline">\(M_it_i\equiv 1(\mod
+m_i)\)</span>的一个解，则对于任意<span
+class="math inline">\(n\)</span>个整数<span
+class="math inline">\(a_1,a_2\cdots a_n\)</span>，方程组</p>
+<p><span class="math inline">\(\left\{\begin{aligned}x\equiv a_1(\mod
+m_1)\\x\equiv a_2(\mod m_2)\\\cdots\\x\equiv a_n(\mod
+m_n)\end{aligned}\right.\)</span></p>
+<p>有整数解，解为<span
+class="math inline">\(x=\sum_{i=1}^na_iM_it_i\)</span>。</p>
+<p>证明：</p>
+<p>对于<span class="math inline">\(M_i\neq m/m_i\)</span>，有<span
+class="math inline">\(m_i\mid M_i\)</span>，所以<span
+class="math inline">\(a_iM_it_i\equiv 0(\mod m_i)\)</span>。</p>
+<p>对于<span class="math inline">\(M_i=m/m_i\)</span>，有<span
+class="math inline">\(M_it_i\equiv 1(\mod m_i)\)</span>，所以<span
+class="math inline">\(a_iM_it_i\equiv a_i(\mod m_i)\)</span>。</p>
+<p>所以这是原方程组的一个特解。</p>
+<p>通解就是<span class="math inline">\(x+km\)</span>。</p>
+<p>证明：又咕了。</p>
+<h2 id="扩展中国剩余定理">扩展中国剩余定理</h2>
+<p>虽然刚才的解确实非常妙，但是只有在<span
+class="math inline">\(m_1,m_2\cdots,m_n\)</span>中所有数两两互质才能使用，这在题目中是非常罕见的限制条件，更多的是随便取一些数，让你解这个方程组，这时候我们应该怎么做呢？</p>
+<p>我们考虑用数学归纳法解决。</p>
+<p>显然，只有<span class="math inline">\(x\equiv a_1(\mod
+m_1)\)</span>时，我们可以通过线性同余方程求出一个解，或判断其无解。</p>
+<p>假设现在已经求出了前<span
+class="math inline">\(k-1\)</span>个方程的解<span
+class="math inline">\(x\)</span>，设<span class="math inline">\(m =
+lcm(m_1,m_2\cdots m_{k-1})\)</span>，则<span
+class="math inline">\(x+im\)</span>是前<span
+class="math inline">\(k-1\)</span>个方程的一个通解，现在要求出一个整数<span
+class="math inline">\(t\)</span>，满足<span
+class="math inline">\(x+tm\equiv a_k(\mod m_k)\)</span>，即<span
+class="math inline">\(tm\equiv a_k-x(\mod
+m_k)\)</span>，这可以通过找出这个线性同余方程的一个解得到，或判断其无解。</p>
+<h2 id="高次同余方程">高次同余方程</h2>
+<h3 id="bsgs算法">BSGS算法</h3>
+<p>在<span class="math inline">\(a,p\)</span>互质时，对于形如<span
+class="math inline">\(a^x\equiv b(\mod
+p)\)</span>之类的问题，我们可以使用BSGS求解。</p>
+<p>这个<span class="math inline">\(x\)</span>可以看成<span
+class="math inline">\(it-j\)</span>，其中<span class="math inline">\(t =
+\lceil \sqrt{p}\rceil\)</span>，这里的<span class="math inline">\(i\in
+[1,t],j\in[1,t]\)</span>，这样可以取到<span
+class="math inline">\([0,p-1]\)</span>中的任何一个值。</p>
+<p>为什么不需要取更大的值呢？因为<span
+class="math inline">\(a,p\)</span>互质，所以我们可以使用欧拉定理，<span
+class="math inline">\(a^{x+\varphi(p)}\equiv a^x\cdot
+a^{\varphi(p)}\equiv a^x\cdot 1\equiv a^x(\mod p)\)</span>。</p>
+<p>所以，<span class="math inline">\(x\)</span>只要在<span
+class="math inline">\([0,p-1]\)</span>的范围内就行了。</p>
+<p>对这个式子进行变形，<span class="math inline">\(a^{it-j}\equiv b \iff
+a^{it}\equiv b\cdot a^j(\mod p)\)</span>。</p>
+<p>我们从小到大枚举<span class="math inline">\(j\)</span>，算出<span
+class="math inline">\(b\cdot
+a^j\)</span>的所有取值，当取值相等时，我们用较大的<span
+class="math inline">\(j\)</span>更新，这样可以保证我们得到的是最小非负整数解。</p>
+<p>之后，再从小到大枚举<span
+class="math inline">\(i\)</span>，直接求出<span
+class="math inline">\(a^{it}\)</span>的值，查找是否有对应的<span
+class="math inline">\(j\)</span>，使同余后结果相同，有就直接输出答案。</p>
+<p>这个答案为什么最小？我们考虑极端一点的情况，<span
+class="math inline">\(it-1&lt;(i+1)t-t\)</span>，所以就没啥问题了。</p>
+<p>查找相等的取值好像可以用hash做到<span
+class="math inline">\(O(1)\)</span>，但是我只会用<span
+class="math inline">\(O(\log n)\)</span>的map。也许以后会再更一下。</p>
+<p>这个方程也有可能无解，就是在枚举完所有的可能之后都没有找出解来。</p>
+<p>这个算法的复杂度优化主要在用map将所有<span
+class="math inline">\(b\cdot
+a^j\)</span>的值都存起来，这样我们对于每个<span
+class="math inline">\(i\)</span>，就只用花费<span
+class="math inline">\(O(\log
+n)\)</span>的时间进行查找了，于是总复杂度就是<span
+class="math inline">\(O(\sqrt{p}\cdot \log p)\)</span>。这种分割<span
+class="math inline">\(x\)</span>的思想是非常具有启发性的。</p>
+<h3 id="扩展bsgs">扩展BSGS</h3>
+<p>如果只有<span class="math inline">\(a^x\equiv b(\mod
+p)\)</span>，不保证<span
+class="math inline">\(b,p\)</span>互质，该如何做呢？</p>
+<p>我们取<span class="math inline">\(d =
+gcd(a,p)\)</span>，将整个方程同时除以<span
+class="math inline">\(d\)</span>，得到<span
+class="math inline">\(\frac{a}{d}\cdot a^{x-1}\equiv \frac{b}{d}(\mod
+\frac{p}{d})\)</span>。</p>
+<p>为什么可以这样除呢？我们假设原来的方程为<span
+class="math inline">\(a^x+kp=b\)</span>，则整体除<span
+class="math inline">\(d\)</span>，得<span
+class="math inline">\(\frac{a}{d}\cdot
+a^{x-1}+k\cdot\frac{p}{d}=\frac{b}{d}\)</span>，这就相当于把模数也一起除<span
+class="math inline">\(d\)</span>。</p>
+<p>现在，<span class="math inline">\(\frac{a}{d}\)</span>和<span
+class="math inline">\(\frac{p}{d}\)</span>显然是互质的，于是我们可以用乘法逆元把<span
+class="math inline">\(\frac{a}{d}\)</span>除过去，得到<span
+class="math inline">\(a^{x-1}\equiv \frac{b}{d}\cdot
+(\frac{a}{d})^{-1}(\mod \frac{p}{d})\)</span>。</p>
+<p>我们一直这样除下去，设<span class="math inline">\(D =
+\Pi_{i=1}^kd_i\)</span>，直到左边的<span
+class="math inline">\(a^{x-k}\)</span>和<span
+class="math inline">\(\frac{p}{D}\)</span>互质，这样我们就可以应用上面的BSGS来解决这个问题了。</p>
+<p>BSGS的时间复杂度为<span class="math inline">\(O(\sqrt{p}\cdot\log
+p)\)</span>，每次求gcd的时间复杂度为<span class="math inline">\(O(\log
+p)\)</span>，总的复杂度大概就是<span
+class="math inline">\(O(\sqrt{p}\cdot \log p)\)</span>。</p>
+<h2 id="阶">阶</h2>
+<p>对于两个互质的数<span class="math inline">\(a,m\)</span>而言，<span
+class="math inline">\(a^x\equiv 1(\mod m)\)</span>，这个<span
+class="math inline">\(n\)</span>取最小时称作<span
+class="math inline">\(a\)</span>模<span
+class="math inline">\(m\)</span>的阶，记作<span
+class="math inline">\(\delta_m(a)\)</span>。</p>
+<p>由欧拉定理可得，<span class="math inline">\(a^{\varphi(m)}\equiv
+1(\mod m)\)</span>，所以在<span
+class="math inline">\(a,m\)</span>互质时，<span
+class="math inline">\(n\)</span>一定存在。</p>
 
     </div>
 
@@ -572,7 +736,7 @@ class="math inline">\(t\)</span>取遍整个整数集合。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E4%BD%99"><span class="nav-number">1.</span> <span class="nav-text">同余</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E7%9A%84%E6%8E%A8%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">欧拉定理的推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97"><span class="nav-number">1.5.</span> <span class="nav-text">扩展欧几里得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83"><span class="nav-number">1.6.</span> <span class="nav-text">乘法逆元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">线性同余方程</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E4%BD%99"><span class="nav-number">1.</span> <span class="nav-text">同余</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86%E7%9A%84%E6%8E%A8%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">欧拉定理的推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97"><span class="nav-number">1.5.</span> <span class="nav-text">扩展欧几里得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83"><span class="nav-number">1.6.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E8%B4%A8%E6%95%B0"><span class="nav-number">1.6.1.</span> <span class="nav-text">模质数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%821n%E4%B8%AD%E6%89%80%E6%9C%89%E6%95%B0%E7%9A%84%E9%80%86%E5%85%83"><span class="nav-number">1.6.2.</span> <span class="nav-text">线性求1~n中所有数的逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E4%BB%BB%E6%84%8Fn%E4%B8%AA%E6%95%B0%E7%9A%84%E9%80%86%E5%85%83"><span class="nav-number">1.6.3.</span> <span class="nav-text">线性求任意n个数的逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bm%E4%BA%92%E8%B4%A8"><span class="nav-number">1.6.4.</span> <span class="nav-text">b,m互质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">线性同余方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86"><span class="nav-number">1.8.</span> <span class="nav-text">中国剩余定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86"><span class="nav-number">1.9.</span> <span class="nav-text">扩展中国剩余定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E6%AC%A1%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B"><span class="nav-number">1.10.</span> <span class="nav-text">高次同余方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bsgs%E7%AE%97%E6%B3%95"><span class="nav-number">1.10.1.</span> <span class="nav-text">BSGS算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95bsgs"><span class="nav-number">1.10.2.</span> <span class="nav-text">扩展BSGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B6"><span class="nav-number">1.11.</span> <span class="nav-text">阶</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -588,14 +752,14 @@ class="math inline">\(t\)</span>取遍整个整数集合。</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
