@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="约数 算数基本定理的推论 一个正整数\(n\)被唯一分解为\(n &#x3D; p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}\)，其中\(c_i\)都是正整数，\(p_i\)都是质数，且满足\(p_1&lt;p_2&lt;\cdot \cdot \cdot p_m\)。 则\(n\)的正约数个数为\((c_1+1)(c_2+1)\cdot\cdot\cd">
+  <meta name="description" content="约数算数基本定理的推论一个正整数$n$被唯一分解为$n &#x3D; p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}$，其中$c_i$都是正整数，$p_i$都是质数，且满足$p_1&lt;p_2&lt;\cdot \cdot \cdot p_m$。 则$n$的正约数个数为$(c_1+1)(c_2+1)\cdot\cdot\cdot (c_m+1)$，可以看作每个质">
 <meta property="og:type" content="article">
 <meta property="og:title" content="约数">
 <meta property="og:url" content="http://example.com/2022/04/02/%E7%BA%A6%E6%95%B0/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="约数 算数基本定理的推论 一个正整数\(n\)被唯一分解为\(n &#x3D; p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}\)，其中\(c_i\)都是正整数，\(p_i\)都是质数，且满足\(p_1&lt;p_2&lt;\cdot \cdot \cdot p_m\)。 则\(n\)的正约数个数为\((c_1+1)(c_2+1)\cdot\cdot\cd">
+<meta property="og:description" content="约数算数基本定理的推论一个正整数$n$被唯一分解为$n &#x3D; p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}$，其中$c_i$都是正整数，$p_i$都是质数，且满足$p_1&lt;p_2&lt;\cdot \cdot \cdot p_m$。 则$n$的正约数个数为$(c_1+1)(c_2+1)\cdot\cdot\cdot (c_m+1)$，可以看作每个质">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-02T10:18:20.000Z">
 <meta property="article:modified_time" content="2022-04-02T10:19:05.710Z">
@@ -78,7 +78,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -242,134 +246,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="约数">约数</h1>
-<h2 id="算数基本定理的推论">算数基本定理的推论</h2>
-<p>一个正整数<span class="math inline">\(n\)</span>被唯一分解为<span
-class="math inline">\(n = p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot
-p_m^{c_m}\)</span>，其中<span
-class="math inline">\(c_i\)</span>都是正整数，<span
-class="math inline">\(p_i\)</span>都是质数，且满足<span
-class="math inline">\(p_1&lt;p_2&lt;\cdot \cdot \cdot p_m\)</span>。</p>
-<p>则<span class="math inline">\(n\)</span>的正约数个数为<span
-class="math inline">\((c_1+1)(c_2+1)\cdot\cdot\cdot
-(c_m+1)\)</span>，可以看作每个质因子上面的幂都有<span
-class="math inline">\(c_i+1\)</span>种选择。</p>
-<p><span class="math inline">\(n\)</span>的约数和为<span
-class="math inline">\((1+p_1+p_1^2+\cdot\cdot\cdot+p_1^{c_1})\cdot\cdot\cdot(1+p_m+p_m^2+\cdot\cdot\cdot+p_m^{c_m})\)</span>，这可以看作每一个质因子不同幂次的不同结果相加，再乘起来就涵盖了每一种可能，也就是约数和。</p>
+        <h1 id="约数"><a href="#约数" class="headerlink" title="约数"></a>约数</h1><h2 id="算数基本定理的推论"><a href="#算数基本定理的推论" class="headerlink" title="算数基本定理的推论"></a>算数基本定理的推论</h2><p>一个正整数$n$被唯一分解为$n = p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}$，其中$c_i$都是正整数，$p_i$都是质数，且满足$p_1&lt;p_2&lt;\cdot \cdot \cdot p_m$。</p>
+<p>则$n$的正约数个数为$(c_1+1)(c_2+1)\cdot\cdot\cdot (c_m+1)$，可以看作每个质因子上面的幂都有$c_i+1$种选择。</p>
+<p>$n$的约数和为$(1+p_1+p_1^2+\cdot\cdot\cdot+p_1^{c_1})\cdot\cdot\cdot(1+p_m+p_m^2+\cdot\cdot\cdot+p_m^{c_m})$，这可以看作每一个质因子不同幂次的不同结果相加，再乘起来就涵盖了每一种可能，也就是约数和。</p>
 <span id="more"></span>
 <p>如果学了等比数列的可以快速计算这个式子：</p>
-<p><span class="math inline">\(1+p_i+p_i^2+\cdot\cdot\cdot+p_i^{c_i} =
-\frac{p_i^{c_i+1}-1}{p_i-1}\)</span></p>
-<p>这样只需要<span class="math inline">\(O(\log
-n)\)</span>的时间就能计算约数和。</p>
-<h2 id="求一个数的约数集合">求一个数的约数集合</h2>
-<p>我们采用试除法，如前面所说，<span
-class="math inline">\(n\)</span>如果能表示为<span
-class="math inline">\(n = a*b\)</span>，那么<span
-class="math inline">\(a\)</span>和<span
-class="math inline">\(b\)</span>中必然有一个数小于等于<span
-class="math inline">\(\sqrt{n}\)</span>。</p>
-<p>所以我们只用找到所有小于等于<span
-class="math inline">\(\sqrt{n}\)</span>的约数，就能得到<span
-class="math inline">\(n\)</span>所有的约数。</p>
-<p><span class="math inline">\(Code\)</span>：</p>
+<p>$1+p_i+p_i^2+\cdot\cdot\cdot+p_i^{c_i} = \frac{p_i^{c_i+1}-1}{p_i-1}$</p>
+<p>这样只需要$O(\log n)$的时间就能计算约数和。</p>
+<h2 id="求一个数的约数集合"><a href="#求一个数的约数集合" class="headerlink" title="求一个数的约数集合"></a>求一个数的约数集合</h2><p>我们采用试除法，如前面所说，$n$如果能表示为$n = a*b$，那么$a$和$b$中必然有一个数小于等于$\sqrt{n}$。</p>
+<p>所以我们只用找到所有小于等于$\sqrt{n}$的约数，就能得到$n$所有的约数。</p>
+<p>$Code$：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; a;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="type">int</span> k = <span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (n%i == <span class="number">0</span>)&#123;</span><br><span class="line">			a.<span class="built_in">push_back</span>(i);</span><br><span class="line">			<span class="keyword">if</span> (n/i!=i) a.<span class="built_in">push_back</span>(n/i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>());</span><br><span class="line">	<span class="type">int</span> sz = a.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;sz;i++) cout&lt;&lt;a[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此算法的时间复杂度为<span
-class="math inline">\(O(\sqrt{n})\)</span></p>
-<h2 id="求1n中所有数的约数集合">求1~n中所有数的约数集合</h2>
-<p>这时，如果使用简单的试除法，就太慢了，时间复杂度为<span
-class="math inline">\(O(n\sqrt{n})\)</span>。</p>
-<p>我们发现，对于一个数<span
-class="math inline">\(d\)</span>，它的所有倍数都一定有<span
-class="math inline">\(d\)</span>这一个约数，所以我们只要枚举约数，标记这个约数的所有倍数就可以在<span
-class="math inline">\(O(n\log n)\)</span>的时间内完成。</p>
-<p>推论：1~n中每个数约数的总和为<span class="math inline">\(O(n\log
-n)\)</span>个，每个数平均有<span class="math inline">\(\log
-n\)</span>个约数。</p>
-<p><span class="math inline">\(Code\)</span>：</p>
+<p>此算法的时间复杂度为$O(\sqrt{n})$</p>
+<h2 id="求1-n中所有数的约数集合"><a href="#求1-n中所有数的约数集合" class="headerlink" title="求1~n中所有数的约数集合"></a>求1~n中所有数的约数集合</h2><p>这时，如果使用简单的试除法，就太慢了，时间复杂度为$O(n\sqrt{n})$。</p>
+<p>我们发现，对于一个数$d$，它的所有倍数都一定有$d$这一个约数，所以我们只要枚举约数，标记这个约数的所有倍数就可以在$O(n\log n)$的时间内完成。</p>
+<p>推论：1~n中每个数约数的总和为$O(n\log n)$个，每个数平均有$\log n$个约数。</p>
+<p>$Code$：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; a[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n/i;j++)&#123;</span><br><span class="line">			a[i*j].<span class="built_in">push_back</span>(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">sort</span>(a[i].<span class="built_in">begin</span>(),a[i].<span class="built_in">end</span>());</span><br><span class="line">		<span class="type">int</span> sz = a[i].<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>;j&lt;sz;j++) cout&lt;&lt;a[i][j]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>练习：</p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U198025">U198025</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1463">P1463</a></p>
-<h2 id="最大公约数">最大公约数</h2>
-<p>两个数的约数中，最大的公共的约数叫做最大公约数。</p>
-<p>结论1：<span class="math inline">\(gcd(a,b)\cdot lcm(a,b) = a\cdot
-b\)</span>。</p>
-<p>证明：<span class="math inline">\(lcm(a,b)\)</span>中，<span
-class="math inline">\(a,b\)</span>不共同拥有的质因数一定存在，<span
-class="math inline">\(a,b\)</span>共同拥有的质因数只要达到最大的一个即可，所以除掉公共的因数，就是<span
-class="math inline">\(lcm(a,b)\)</span>。</p>
-<h3 id="求最大公约数">求最大公约数</h3>
-<p><span class="math inline">\(gcd(a,b) = gcd(b,a\ mod \
-b)\)</span>。</p>
+<h2 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h2><p>两个数的约数中，最大的公共的约数叫做最大公约数。</p>
+<p>结论1：$gcd(a,b)\cdot lcm(a,b) = a\cdot b$。</p>
+<p>证明：$lcm(a,b)$中，$a,b$不共同拥有的质因数一定存在，$a,b$共同拥有的质因数只要达到最大的一个即可，所以除掉公共的因数，就是$lcm(a,b)$。</p>
+<h3 id="求最大公约数"><a href="#求最大公约数" class="headerlink" title="求最大公约数"></a>求最大公约数</h3><p>$gcd(a,b) = gcd(b,a\ mod \ b)$。</p>
 <p>证明：</p>
-<ol type="1">
-<li><span class="math inline">\(a\leq b\)</span>，<span
-class="math inline">\(gcd(a,b) = gcd(b,a \ mod \ b) =
-gcd(b,a)\)</span>。</li>
-<li><span class="math inline">\(a&gt;b\)</span>，<span
-class="math inline">\(gcd(a,b) = gcd(b,a \ mod \ b) = gcd(b,a-k\cdot
-b)\)</span>，如果最大公约数<span
-class="math inline">\(d|a\)</span>，<span
-class="math inline">\(d|b\)</span>，那么<span
-class="math inline">\(d|k\cdot b\)</span>，则<span
-class="math inline">\(d|a-k\cdot b\)</span>。</li>
+<ol>
+<li>$a\leq b$，$gcd(a,b) = gcd(b,a \ mod \ b) = gcd(b,a)$。</li>
+<li>$a&gt;b$，$gcd(a,b) = gcd(b,a \ mod \ b) = gcd(b,a-k\cdot b)$，如果最大公约数$d|a$，$d|b$，那么$d|k\cdot b$，则$d|a-k\cdot b$。</li>
 </ol>
-<h2 id="互质">互质</h2>
-<p>如果<span class="math inline">\(gcd(a,b) = 1\)</span>，那么<span
-class="math inline">\(a\)</span>和<span
-class="math inline">\(b\)</span>就互质。</p>
-<p>对于3个数或更多数的情况，我们把<span class="math inline">\(gcd(a,b,c)
-= 1\)</span>称为<span class="math inline">\(a\)</span>、<span
-class="math inline">\(b\)</span>和<span
-class="math inline">\(c\)</span>这3个数互质。</p>
-<h2 id="欧拉函数">欧拉函数</h2>
-<p>1~n中和n互质的数的个数叫做欧拉函数，记为<span
-class="math inline">\(\varphi(n)\)</span></p>
+<h2 id="互质"><a href="#互质" class="headerlink" title="互质"></a>互质</h2><p>如果$gcd(a,b) = 1$，那么$a$和$b$就互质。</p>
+<p>对于3个数或更多数的情况，我们把$gcd(a,b,c) = 1$称为$a$、$b$和$c$这3个数互质。</p>
+<h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><p>1~n中和n互质的数的个数叫做欧拉函数，记为$\varphi(n)$</p>
 <p>怎么计算这个东西呢？</p>
 <p>我们考虑哪些数和n互质，所有n的质因子的倍数都和n互质，而且仅有这些数和n互质，所以我们需要把这些数都找出来。</p>
-<p>对于n的一个质因子p，有<span
-class="math inline">\(n/p\)</span>个p的倍数，对于n的另一个质因子q，有<span
-class="math inline">\(n/q\)</span>个q的倍数，把这些都减掉之后，还要加上既是p的倍数，又是q的倍数的数，于是要加上<span
-class="math inline">\(n/pq\)</span>，这样，对于只含有两个质因子p、q的n来说，<span
-class="math inline">\(\varphi(n) = n-n/p-n/q+n/pq =(n-n/p)-1/q(n-n/p) =
-n(1-1/q)(1-1/p)\)</span>。</p>
-<p>把这个性质推广到<span class="math inline">\(n =
-p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}\)</span>，可以得到：</p>
-<p>性质1：<span class="math inline">\(\varphi(n) =
-n(1-\frac{1}{p_1})\cdot\cdot\cdot (1-\frac{1}{p_m})\)</span>。</p>
-<p>性质2：当<span
-class="math inline">\(n&gt;1\)</span>时，与n互质的数的和为<span
-class="math inline">\(n/2\cdot\varphi(n)\)</span>。</p>
-<p>证明：若c是n的约数，那么n-c也是n的约数，所以与n不互质的数成对出现，和都为n，那么平均值就是<span
-class="math inline">\(n/2\)</span>，所以和n互质的数的平均值也是<span
-class="math inline">\(n/2\)</span>，于是与n互质的数的和就是<span
-class="math inline">\(n/2\cdot\varphi(n)\)</span>。</p>
-<p>性质3：若<span class="math inline">\(a,b\)</span>互质，那么<span
-class="math inline">\(\varphi(ab) =
-\varphi(a)\cdot\varphi(b)\)</span>。</p>
+<p>对于n的一个质因子p，有$n/p$个p的倍数，对于n的另一个质因子q，有$n/q$个q的倍数，把这些都减掉之后，还要加上既是p的倍数，又是q的倍数的数，于是要加上$n/pq$，这样，对于只含有两个质因子p、q的n来说，$\varphi(n) = n-n/p-n/q+n/pq =(n-n/p)-1/q(n-n/p) = n(1-1/q)(1-1/p)$。</p>
+<p>把这个性质推广到$n = p_1^{c_1}p_2^{c_2}\cdot \cdot \cdot p_m^{c_m}$，可以得到：</p>
+<p>性质1：$\varphi(n) = n(1-\frac{1}{p_1})\cdot\cdot\cdot (1-\frac{1}{p_m})$。</p>
+<p>性质2：当$n&gt;1$时，与n互质的数的和为$n/2\cdot\varphi(n)$。</p>
+<p>证明：若c是n的约数，那么n-c也是n的约数，所以与n不互质的数成对出现，和都为n，那么平均值就是$n/2$，所以和n互质的数的平均值也是$n/2$，于是与n互质的数的和就是$n/2\cdot\varphi(n)$。</p>
+<p>性质3：若$a,b$互质，那么$\varphi(ab) = \varphi(a)\cdot\varphi(b)$。</p>
 <p>证明：直接按定义式计算即可。</p>
 <p>虽然这个性质看上去比较显然，但是由此我们可以引出一个重要的东西：积性函数。</p>
-<p>如果当a和b互质时，有<span class="math inline">\(f(ab) = f(a)\cdot
-f(b)\)</span>，那么称函数<span
-class="math inline">\(f(x)\)</span>为积性函数。</p>
-<p>性质4：对于所有积性函数<span
-class="math inline">\(f(x)\)</span>，<span class="math inline">\(f(n) =
-\Pi_{i=1}^mf(p_i^{c_i})\)</span>，此处<span
-class="math inline">\(p_i\)</span>和<span
-class="math inline">\(c_i\)</span>是n按照算数基本定理分解出来的质因数和对应的幂。</p>
-<p>证明：因为对于任意两个不相同的<span
-class="math inline">\(p_i\)</span>来说，它们肯定互质，所以可以按照积性函数的性质乘起来，之后就得到了n。</p>
-<p>性质5：若<span class="math inline">\(p|n\)</span>且<span
-class="math inline">\(p^2|n\)</span>，则<span
-class="math inline">\(\varphi(n) = \varphi(n/p)\cdot
-p\)</span>，这个可以由定义得到。</p>
-<p>性质6：若<span class="math inline">\(p|n\)</span>且<span
-class="math inline">\(p^2\nmid n\)</span>，则<span
-class="math inline">\(\varphi(n) = \varphi(n/p)\cdot p\cdot
-\frac{p-1}{p} = \varphi(n)\cdot(p-1)\)</span>。</p>
-<p>性质7：<span class="math inline">\(\sum_{d\mid n}\varphi(d) =
-n\)</span>。</p>
+<p>如果当a和b互质时，有$f(ab) = f(a)\cdot f(b)$，那么称函数$f(x)$为积性函数。</p>
+<p>性质4：对于所有积性函数$f(x)$，$f(n) = \Pi_{i=1}^mf(p_i^{c_i})$，此处$p_i$和$c_i$是n按照算数基本定理分解出来的质因数和对应的幂。</p>
+<p>证明：因为对于任意两个不相同的$p_i$来说，它们肯定互质，所以可以按照积性函数的性质乘起来，之后就得到了n。</p>
+<p>性质5：若$p|n$且$p^2|n$，则$\varphi(n) = \varphi(n/p)\cdot p$，这个可以由定义得到。</p>
+<p>性质6：若$p|n$且$p^2\nmid n$，则$\varphi(n) = \varphi(n/p)\cdot p\cdot \frac{p-1}{p} = \varphi(n)\cdot(p-1)$。</p>
+<p>性质7：$\sum_{d\mid n}\varphi(d) = n$。</p>
 <p>证明：好像还不会证。。。</p>
 
     </div>
@@ -456,7 +380,7 @@ n\)</span>。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A6%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">约数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E6%8E%A8%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">算数基本定理的推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E4%B8%80%E4%B8%AA%E6%95%B0%E7%9A%84%E7%BA%A6%E6%95%B0%E9%9B%86%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text">求一个数的约数集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%821n%E4%B8%AD%E6%89%80%E6%9C%89%E6%95%B0%E7%9A%84%E7%BA%A6%E6%95%B0%E9%9B%86%E5%90%88"><span class="nav-number">1.3.</span> <span class="nav-text">求1~n中所有数的约数集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">最大公约数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="nav-number">1.4.1.</span> <span class="nav-text">求最大公约数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E8%B4%A8"><span class="nav-number">1.5.</span> <span class="nav-text">互质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">欧拉函数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A6%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">约数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E7%9A%84%E6%8E%A8%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">算数基本定理的推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E4%B8%80%E4%B8%AA%E6%95%B0%E7%9A%84%E7%BA%A6%E6%95%B0%E9%9B%86%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text">求一个数的约数集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%821-n%E4%B8%AD%E6%89%80%E6%9C%89%E6%95%B0%E7%9A%84%E7%BA%A6%E6%95%B0%E9%9B%86%E5%90%88"><span class="nav-number">1.3.</span> <span class="nav-text">求1~n中所有数的约数集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">最大公约数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="nav-number">1.4.1.</span> <span class="nav-text">求最大公约数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E8%B4%A8"><span class="nav-number">1.5.</span> <span class="nav-text">互质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">欧拉函数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

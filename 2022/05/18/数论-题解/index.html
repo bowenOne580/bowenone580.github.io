@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="数论 题解 题目大意 求\(\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^p \varphi(i^j) \mod 10^9+7\)。">
+  <meta name="description" content="数论 题解题目大意求$\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^p \varphi(i^j) \mod 10^9+7$。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数论 题解">
 <meta property="og:url" content="http://example.com/2022/05/18/%E6%95%B0%E8%AE%BA-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="数论 题解 题目大意 求\(\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^p \varphi(i^j) \mod 10^9+7\)。">
+<meta property="og:description" content="数论 题解题目大意求$\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^p \varphi(i^j) \mod 10^9+7$。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-18T07:38:47.000Z">
-<meta property="article:modified_time" content="2022-05-18T07:40:11.125Z">
+<meta property="article:modified_time" content="2022-05-20T08:14:33.766Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="数学">
@@ -78,7 +78,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -212,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-05-18 15:38:47 / 修改时间：15:40:11" itemprop="dateCreated datePublished" datetime="2022-05-18T15:38:47+08:00">2022-05-18</time>
+              <time title="创建时间：2022-05-18 15:38:47" itemprop="dateCreated datePublished" datetime="2022-05-18T15:38:47+08:00">2022-05-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-20 16:14:33" itemprop="dateModified" datetime="2022-05-20T16:14:33+08:00">2022-05-20</time>
+              </span>
 
           
   
@@ -242,46 +252,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="数论-题解">数论 题解</h1>
-<h2 id="题目大意">题目大意</h2>
-<p>求<span class="math inline">\(\sum_{i=1}^n\sum_{j=1}^p \varphi(i^j)
-\mod 10^9+7\)</span>。</p>
+        <h1 id="数论-题解"><a href="#数论-题解" class="headerlink" title="数论 题解"></a>数论 题解</h1><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>求$\sum_{i=1}^n\sum_{j=1}^p \varphi(i^j) \mod 10^9+7$。</p>
 <span id="more"></span>
-<h2 id="解题思路">解题思路</h2>
-<p>对于这种两个求和套在一起的式子，我们一般要先固定一行，看是否能化简里面的式子。</p>
-<p>发现这道题是要对于一个给定的<span
-class="math inline">\(i\)</span>，计算所有<span
-class="math inline">\(\varphi(i^j)\)</span>，根据欧拉函数的定义式，可以发现每次乘上一个<span
-class="math inline">\(i\)</span>，其所包含的质因数是不变的，只是结果多乘了一个<span
-class="math inline">\(i\)</span>。</p>
-<p>于是有<span class="math inline">\(\varphi(i^j) = \varphi(i)\cdot
-i^{j-1}\)</span>（这个可以当作结论记下来）。</p>
-<p>把<span class="math inline">\(\varphi(i)\)</span>提出来，得到<span
-class="math inline">\(\sum_{j=1}^p = \varphi(i)\cdot (1+i+i^2+ \cdots
-+i^{p-1})\)</span>，这个东西显然可以用等比数列简化： <span
-class="math inline">\(\sum_{j=1}^p = \varphi(i)\cdot
-\frac{i^p-1}{i-1}\)</span>。</p>
-<p>于是，我们就在<span class="math inline">\(O(\log
-p)\)</span>的时间内求出了<span class="math inline">\(\sum_{j=1}^p
-\varphi(i^j)\)</span>的值，现在只需要求出外层求和的结果就行了。</p>
-<p>显然，<span class="math inline">\(\varphi(i)\)</span>可以用<span
-class="math inline">\(O(n)\)</span>的时间线性筛出来，于是我们就解决了外层循环。</p>
-<p>但是，这样做的复杂度是<span class="math inline">\(O(n\cdot \log p
-\log 10^9+7)\)</span>的，在这个数据范围下无法通过。</p>
-<p>时间瓶颈在哪里呢？发现，我们在求<span
-class="math inline">\(\frac{i^p-1}{i-1}\)</span>时，求<span
-class="math inline">\(i-1\)</span>的逆元花费了大量的时间，并且这里的<span
-class="math inline">\(i\)</span>都是连续的，所以我们可以使用线性求逆元优化这个过程。（其实有通用的线性求逆元的方法）。</p>
-<p>还有，在实现时需要注意下<span
-class="math inline">\(\varphi(1)\)</span>和<span
-class="math inline">\(inv[1]\)</span>之类的细节，而且求<span
-class="math inline">\(i^p\)</span>也要用线性筛当场处理，否则无法通过</p>
-<h2 id="code"><span class="math inline">\(Code\)</span>:</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e7</span>+<span class="number">10</span>,mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> n,p,ans,vis[N],pri[N],tot,phi[N],inv[N],pre[N],pw[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ksm</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">1</span>,bas = x;</span><br><span class="line">    <span class="keyword">while</span> (y)&#123;</span><br><span class="line">        <span class="keyword">if</span> (y&amp;<span class="number">1</span>) ans = ans*bas%mod;</span><br><span class="line">        bas = bas*bas%mod;</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">euler</span><span class="params">()</span></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">//注意一下</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">            vis[i] = i;</span><br><span class="line">            pri[++tot] = i;</span><br><span class="line">            phi[i] = i<span class="number">-1</span>;</span><br><span class="line">            pw[i] = <span class="built_in">ksm</span>(i,p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[i]&lt;pri[j] || i*pri[j]&gt;n) <span class="keyword">break</span>;</span><br><span class="line">            vis[i*pri[j]] = pri[j];</span><br><span class="line">            <span class="keyword">if</span> (i%pri[j]) phi[i*pri[j]] = phi[i]*(pri[j]<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span> phi[i*pri[j]] = phi[i]*pri[j];</span><br><span class="line">            pw[i*pri[j]] = pw[i]*pw[pri[j]]%mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">    <span class="built_in">euler</span>();</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) pre[i] = pre[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">    <span class="type">int</span> invs = <span class="built_in">ksm</span>(pre[n],mod<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        inv[i] = pre[i<span class="number">-1</span>]*invs%mod;</span><br><span class="line">        invs = invs*i%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        ans+=phi[i]*(pw[i]<span class="number">-1</span>)%mod*inv[i<span class="number">-1</span>]%mod;</span><br><span class="line">        ans%=mod;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="总结">总结</h2>
-<p>这道题巧妙的利用了欧拉函数的性质，将内层求和化简为等比数列求和，套上一个外层的线性筛解决。</p>
-<p>而且，这道题还高效的利用了时间，让我学会了在线性筛中求一些数的给定次幂，以及首次在题目中使用线性筛逆元算法，让我意识到一个<span
-class="math inline">\(\log\)</span>也代表着优化空间，特别是在数非常大的时候。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>对于这种两个求和套在一起的式子，我们一般要先固定一行，看是否能化简里面的式子。</p>
+<p>发现这道题是要对于一个给定的$i$，计算所有$\varphi(i^j)$，根据欧拉函数的定义式，可以发现每次乘上一个$i$，其所包含的质因数是不变的，只是结果多乘了一个$i$。</p>
+<p>于是有$\varphi(i^j) = \varphi(i)\cdot i^{j-1}$（这个可以当作结论记下来）。</p>
+<p>把$\varphi(i)$提出来，得到$\sum_{j=1}^p = \varphi(i)\cdot (1+i+i^2+ \cdots +i^{p-1})$，这个东西显然可以用等比数列简化：<br>$\sum_{j=1}^p = \varphi(i)\cdot \frac{i^p-1}{i-1}$。</p>
+<p>于是，我们就在$O(\log p)$的时间内求出了$\sum_{j=1}^p \varphi(i^j)$的值，现在只需要求出外层求和的结果就行了。</p>
+<p>显然，$\varphi(i)$可以用$O(n)$的时间线性筛出来，于是我们就解决了外层循环。</p>
+<p>但是，这样做的复杂度是$O(n\cdot \log p \log 10^9+7)$的，在这个数据范围下无法通过。</p>
+<p>时间瓶颈在哪里呢？发现，我们在求$\frac{i^p-1}{i-1}$时，求$i-1$的逆元花费了大量的时间，并且这里的$i$都是连续的，所以我们可以使用线性求逆元优化这个过程。（其实有通用的线性求逆元的方法）。</p>
+<p>还有，在实现时需要注意下$\varphi(1)$和$inv[1]$之类的细节，而且求$i^p$也要用线性筛当场处理，否则无法通过</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="$Code$:"></a>$Code$:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e7</span>+<span class="number">10</span>,mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> n,p,ans,vis[N],pri[N],tot,phi[N],inv[N],pre[N],pw[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">ksm</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">1</span>,bas = x;</span><br><span class="line">    <span class="keyword">while</span> (y)&#123;</span><br><span class="line">        <span class="keyword">if</span> (y&amp;<span class="number">1</span>) ans = ans*bas%mod;</span><br><span class="line">        bas = bas*bas%mod;</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">euler</span><span class="params">()</span></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">//注意一下</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">            vis[i] = i;</span><br><span class="line">            pri[++tot] = i;</span><br><span class="line">            phi[i] = i<span class="number">-1</span>;</span><br><span class="line">            pw[i] = <span class="built_in">ksm</span>(i,p);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[i]&lt;pri[j] || i*pri[j]&gt;n) <span class="keyword">break</span>;</span><br><span class="line">            vis[i*pri[j]] = pri[j];</span><br><span class="line">            <span class="keyword">if</span> (i%pri[j]) phi[i*pri[j]] = phi[i]*(pri[j]<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">else</span> phi[i*pri[j]] = phi[i]*pri[j];</span><br><span class="line">            pw[i*pri[j]] = pw[i]*pw[pri[j]]%mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">    <span class="built_in">euler</span>();</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) pre[i] = pre[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">    <span class="type">int</span> invs = <span class="built_in">ksm</span>(pre[n],mod<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        inv[i] = pre[i<span class="number">-1</span>]*invs%mod;</span><br><span class="line">        invs = invs*i%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        ans+=phi[i]*(pw[i]<span class="number">-1</span>)%mod*inv[i<span class="number">-1</span>]%mod;</span><br><span class="line">        ans%=mod;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题巧妙的利用了欧拉函数的性质，将内层求和化简为等比数列求和，套上一个外层的线性筛解决。</p>
+<p>而且，这道题还高效的利用了时间，让我学会了在线性筛中求一些数的给定次幂，以及首次在题目中使用线性筛逆元算法，让我意识到一个$\log$也代表着优化空间，特别是在数非常大的时候。</p>
 
     </div>
 
@@ -364,7 +348,7 @@ class="math inline">\(\log\)</span>也代表着优化空间，特别是在数非
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA-%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">数论 题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">1.3.</span> <span class="nav-text">\(Code\):</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA-%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">数论 题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题目大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.3.</span> <span class="nav-text">$Code$:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

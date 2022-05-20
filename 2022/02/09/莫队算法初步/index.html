@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="莫队的基本思想 简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。 一般的算法都是对单次查询过程进行优化，但莫队对询问进行了优化：">
+  <meta name="description" content="莫队的基本思想简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。 一般的算法都是对单次查询过程进行优化，但莫队对询问进行了优化：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="莫队算法初步">
 <meta property="og:url" content="http://example.com/2022/02/09/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="莫队的基本思想 简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。 一般的算法都是对单次查询过程进行优化，但莫队对询问进行了优化：">
+<meta property="og:description" content="莫队的基本思想简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。 一般的算法都是对单次查询过程进行优化，但莫队对询问进行了优化：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-09T07:49:45.000Z">
 <meta property="article:modified_time" content="2022-02-11T09:56:15.380Z">
@@ -78,7 +78,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -248,43 +252,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="莫队的基本思想">莫队的基本思想</h2>
-<p>简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。</p>
+        <h2 id="莫队的基本思想"><a href="#莫队的基本思想" class="headerlink" title="莫队的基本思想"></a>莫队的基本思想</h2><p>简单的莫队是针对这样一种题目：给定很多离线的询问，没有修改，而且数据范围根号算法能过。</p>
 <p>一般的算法都是对单次查询过程进行优化，但莫队对询问进行了优化：</p>
 <span id="more"></span>
-<p>把询问可能出现的区间分成<span class="math inline">\(\sqrt
-n\)</span>个块，再将询问排序，具体规则是先对左端点所在的块排序，如果左端点在同一块中，就对右端点升序排序。</p>
-<p>这样，我们把排序好的询问一个个计算，定义<span
-class="math inline">\(L\)</span>为当前左端点，<span
-class="math inline">\(R\)</span>为当前右端点，处理每个询问时把左端点和右端点都移动到当前询问的左、右端点处，移动时用<span
-class="math inline">\(O(1)\)</span>或接近的时间复杂度维护<span
-class="math inline">\(L\)</span>和<span
-class="math inline">\(R\)</span>之间的答案，移动好时，这个询问对应的答案就成了<span
-class="math inline">\(L\)</span>和<span
-class="math inline">\(R\)</span>之间的答案。</p>
-<p>但是莫队为什么快呢？因为对于每个块中的询问，左端点都是在这个块中活动<span
-class="math inline">\(q\)</span>次询问可能会卡成<span
-class="math inline">\(q \times \sqrt
-n\)</span>，假设每个询问都倍卡，左端点移动的复杂度最大就是<span
-class="math inline">\(O(q \times \sqrt
-n)\)</span>。再看右端点，如果每个块中右端点都从这个块的起点移动到了最后一个块的终点，右端点移动的复杂度最大就是<span
-class="math inline">\(O(n \times \sqrt n)\)</span>。如果<span
-class="math inline">\(L\)</span>和<span
-class="math inline">\(R\)</span>移动的代价为<span
-class="math inline">\(w\)</span>，总共的复杂度最大就是<span
-class="math inline">\(O(w \times (n+q) \times \sqrt n)\)</span>。</p>
-<h3 id="例题">例题</h3>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2709">P2709
-小B的询问</a></p>
-<p><a target="_blank" rel="noopener" href="http://zhengruioi.com/contest/966/problem/1992">ZROI
-奇数</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP3267">SP3267
-DQUERY</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF86D">CF86D Powerful
-array</a></p>
+<p>把询问可能出现的区间分成$\sqrt n$个块，再将询问排序，具体规则是先对左端点所在的块排序，如果左端点在同一块中，就对右端点升序排序。</p>
+<p>这样，我们把排序好的询问一个个计算，定义$L$为当前左端点，$R$为当前右端点，处理每个询问时把左端点和右端点都移动到当前询问的左、右端点处，移动时用$O(1)$或接近的时间复杂度维护$L$和$R$之间的答案，移动好时，这个询问对应的答案就成了$L$和$R$之间的答案。</p>
+<p>但是莫队为什么快呢？因为对于每个块中的询问，左端点都是在这个块中活动$q$次询问可能会卡成$q \times \sqrt n$，假设每个询问都倍卡，左端点移动的复杂度最大就是$O(q \times \sqrt n)$。再看右端点，如果每个块中右端点都从这个块的起点移动到了最后一个块的终点，右端点移动的复杂度最大就是$O(n \times \sqrt n)$。如果$L$和$R$移动的代价为$w$，总共的复杂度最大就是$O(w \times (n+q) \times \sqrt n)$。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2709">P2709 小B的询问</a></p>
+<p><a target="_blank" rel="noopener" href="http://zhengruioi.com/contest/966/problem/1992">ZROI 奇数</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP3267">SP3267 DQUERY</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF86D">CF86D Powerful array</a></p>
 <p>To be added.</p>
-<h2 id="带修莫队">带修莫队</h2>
-
+<h2 id="带修莫队"><a href="#带修莫队" class="headerlink" title="带修莫队"></a>带修莫队</h2>
     </div>
 
     
