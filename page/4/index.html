@@ -187,6 +187,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/03/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B5%85%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/03/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B5%85%E6%9E%90/" class="post-title-link" itemprop="url">背包问题浅析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-03 23:13:59" itemprop="dateCreated datePublished" datetime="2022-02-03T23:13:59+08:00">2022-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-15 22:10:40" itemprop="dateModified" datetime="2022-03-15T22:10:40+08:00">2022-03-15</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/02/03/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B5%85%E6%9E%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/03/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B5%85%E6%9E%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="最基础的背包——01背包"><a href="#最基础的背包——01背包" class="headerlink" title="最基础的背包——01背包"></a>最基础的背包——01背包</h2><p>问题：</p>
+<p>给定一个容量为$w$的背包，有$n$件物品，每件物品都有一个价值$v$和一个体积$c$，问背包能装下的物品的最大价值和</p>
+<p>思路：</p>
+<p>每件物品都有选或不选(0或1)两种状态，考虑用此作为$dp$的一个维度，对于特定容量的价值，是从之前的容量的价值递推出来的，故可以用此作为$dp$的第二个维度，于是就有了$dp$数组$f[i][j]$表示考虑了前$i$个物品，容量为$j$时的最大价值</p>
+<p>如何转移呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/03/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B5%85%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/24/Blog-is-open-now/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -771,14 +861,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
