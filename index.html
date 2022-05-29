@@ -212,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-29 21:59:02 / 修改时间：21:59:57" itemprop="dateCreated datePublished" datetime="2022-05-29T21:59:02+08:00">2022-05-29</time>
+              <time title="创建时间：2022-05-29 21:59:02 / 修改时间：22:02:09" itemprop="dateCreated datePublished" datetime="2022-05-29T21:59:02+08:00">2022-05-29</time>
             </span>
 
           
@@ -244,37 +244,14 @@
 <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>$\sum_{i=1}^n\sum_{j=1}^md(ij)$，其中$d(x)$表示$x$的约数个数。</p>
 <h2 id="引理1："><a href="#引理1：" class="headerlink" title="引理1："></a>引理1：</h2><p>$d(ij) = \sum_{p|i}\sum_{q|j}[\gcd(p,q) = 1]$</p>
 <h3 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h3><p>使用反证法。设有两个约数$i,j$，满足$\gcd(i,j) = d(d\neq 1)$。</p>
-<p>显然，$\gcd(\frac{i}{d},jd) = 1$，且$\frac{i}{d}\cdot jd = i\cdot j$。</p>
-<p>于是，$\gcd(i,j)\neq 1$的$i,j$没有贡献。</p>
-<p>这其实算性质吧，但是我感觉没见过不是很好往这个方向推。</p>
-<p>总之，要求的式子转化成了：</p>
-<p>$\sum_{i=1}^n\sum_{j=1}^m\sum_{p|i}\sum_{q|j}[\gcd(p,q) = 1]$</p>
-<p>这里的$p,q$不是很好处理，考虑把它们提出来：</p>
-<p>$\sum_{p=1}^n\sum_{q=1}^m[\gcd(p,q) = 1] \lfloor \frac{n}{p}\rfloor \lfloor \frac{m}{q}\rfloor$</p>
-<p>之后用反演结论：</p>
-<p>$\sum_{p=1}^n\sum_{q=1}^m\lfloor \frac{n}{p}\rfloor \lfloor \frac{m}{q} \rfloor\sum_{k|\gcd(p,q)}\mu(k)$</p>
-<p>枚举$\gcd$：</p>
-<p>$\sum_{k=1}^{\min(n,m)}\mu(k)\sum_{k|p,p\leq n}\sum_{k|q,q\leq m}\lfloor \frac{n}{p}\rfloor \lfloor \frac{m}{q}\rfloor$</p>
-<p>发现中间两个求和等价于</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> p=k;p&lt;=n;p+=k)</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> q=k;q&lt;=m;q+=k)</span><br></pre></td></tr></table></figure>
-<p>于是可以设$p’ = \frac{p}{k}$，$q’ = \frac{q}{k}$，将式子进一步化简：</p>
-<p>$\sum_{k=1}^{min(n,m)}\mu(k)\sum_{p’=1}^{\frac{n}{k}}\sum_{q’ = 1}^{\frac{m}{k}}\lfloor \frac{n}{p’k}\rfloor \lfloor \frac{m}{q’k}\rfloor$</p>
-<p>由于$p’$相对固定，所以可以各回各家：</p>
-<p>$\sum_{k=1}^{min(n,m)}\mu(k)\sum_{p’=1}^{\frac{n}{k}}\lfloor \frac{n}{p’k}\rfloor\sum_{q’=1}^{\frac{m}{k}}\lfloor \frac{m}{q’k}\rfloor$</p>
-<p>用三次整除分块！但是数据太多，过不了。</p>
-<p>既然有多组数据，就意味着要预处理出一些值才能快速处理每组数据。</p>
-<p>发现，后面两个求和的形式很相像，把它抽象出来：</p>
-<p>$\sum_{i=1}^{\frac{a}{b}}\lfloor \frac{a}{b\cdot c}\rfloor$</p>
-<h2 id="引理2："><a href="#引理2：" class="headerlink" title="引理2："></a>引理2：</h2><p>$\lfloor \frac{a}{b\cdot c}\rfloor = \lfloor \frac{\lfloor \frac{a}{c}\rfloor}{b}\rfloor$</p>
-<h3 id="证明：-1"><a href="#证明：-1" class="headerlink" title="证明："></a>证明：</h3><p>设$a = kc+r(r&lt;c)$，则$\lfloor \frac{kc+r}{b\cdot c}\rfloor \iff \lfloor \frac{k}{b}+\frac{r}{b\cdot c}\rfloor$，$\lfloor \frac{\lfloor \frac{a}{c}\rfloor}{b}\rfloor\ \iff \lfloor \frac{\lfloor k+\frac{r}{c}\rfloor}{b}\rfloor \iff \lfloor \frac{k}{b}\rfloor$。</p>
-<p>在题目中，所有的$b$都是正整数，所以$\frac{r}{b\cdot c}&lt; 1$，即左右两边相等。</p>
-<p>于是，我们转化为了下面的式子：</p>
-<p>$\sum_{i=1}^x\lfloor \frac{x}{i}\rfloor$</p>
-<p>这可以用整除分块$O(n\sqrt n)$求出。</p>
-<p>这样，每次询问就可以用整除分块求出$\frac{n}{k}$相等的部分，$O(\sqrt n)$求解。</p>
-<p>总时间复杂度为$O(n\sqrt n+T\sqrt n)$，可以通过本题。</p>
-<h2 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> t,n,m,vis[N],pri[N],tot,mu[N],sum[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre</span><span class="params">()</span></span>&#123;</span><br><span class="line">	mu[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> lim = <span class="number">5e4</span>+<span class="number">10</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>;i&lt;=lim;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (!vis[i])&#123;</span><br><span class="line">			vis[i] = i;</span><br><span class="line">			pri[++tot] = i;</span><br><span class="line">			mu[i] = <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (vis[i]&lt;pri[j] || i*pri[j]&gt;lim) <span class="keyword">break</span>;</span><br><span class="line">			vis[i*pri[j]] = pri[j];</span><br><span class="line">			<span class="keyword">if</span> (vis[i]!=pri[j]) mu[i*pri[j]] = -mu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=lim;i++) mu[i]+=mu[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=lim;i++)&#123;</span><br><span class="line">		<span class="type">int</span> r;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> l=<span class="number">1</span>;l&lt;=i;l = r+<span class="number">1</span>)&#123;</span><br><span class="line">			r = i/(i/l);</span><br><span class="line">			sum[i]+=(r-l+<span class="number">1</span>)*(i/l);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">pre</span>();</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span> (t--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="type">int</span> Min = <span class="built_in">min</span>(n,m),r,ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> l=<span class="number">1</span>;l&lt;=Min;l = r+<span class="number">1</span>)&#123;</span><br><span class="line">			r = <span class="built_in">min</span>(n/(n/l),m/(m/l));</span><br><span class="line">			ans+=(mu[r]-mu[l<span class="number">-1</span>])*sum[n/l]*sum[m/l];</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/29/%E7%BA%A6%E6%95%B0%E4%B8%AA%E6%95%B0%E5%92%8C-%E9%A2%98%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
