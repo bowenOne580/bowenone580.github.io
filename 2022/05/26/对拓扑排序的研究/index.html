@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="对拓扑排序的研究拓扑排序是什么？简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。">
+  <meta name="description" content="对拓扑排序的研究  拓扑排序是什么？ 简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对拓扑排序的研究">
 <meta property="og:url" content="http://example.com/2022/05/26/%E5%AF%B9%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="对拓扑排序的研究拓扑排序是什么？简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。">
+<meta property="og:description" content="对拓扑排序的研究  拓扑排序是什么？ 简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T11:14:19.000Z">
 <meta property="article:modified_time" content="2022-05-26T11:16:59.070Z">
@@ -247,14 +247,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="对拓扑排序的研究"><a href="#对拓扑排序的研究" class="headerlink" title="对拓扑排序的研究"></a>对拓扑排序的研究</h1><h2 id="拓扑排序是什么？"><a href="#拓扑排序是什么？" class="headerlink" title="拓扑排序是什么？"></a>拓扑排序是什么？</h2><p>简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。</p>
+        <h1 id="对拓扑排序的研究"><a class="markdownIt-Anchor" href="#对拓扑排序的研究"></a> 对拓扑排序的研究</h1>
+<h2 id="拓扑排序是什么"><a class="markdownIt-Anchor" href="#拓扑排序是什么"></a> 拓扑排序是什么？</h2>
+<p>简而言之，每次选择一个入度为 $ 0 $ 的点，遍历其所有出边，更新出边到达的点的入度，这样一直进行下去，直到所有点的入度都变成 $ 0 $ 。</p>
 <span id="more"></span>
-<h2 id="任何图都能拓扑排序吗？"><a href="#任何图都能拓扑排序吗？" class="headerlink" title="任何图都能拓扑排序吗？"></a>任何图都能拓扑排序吗？</h2><p>并不是。拓扑排序只能用在DAG（有向无环图）中，如果有环，那么必然有一些点的入度永远无法变成 $ 0 $ ，所以无法进行拓扑排序。</p>
-<h2 id="拓扑排序的时间复杂度是多少？"><a href="#拓扑排序的时间复杂度是多少？" class="headerlink" title="拓扑排序的时间复杂度是多少？"></a>拓扑排序的时间复杂度是多少？</h2><p>先要取出所有入度为 $ 0 $ 的点，花费 $ O(n) $ 的时间，之后要遍历所有边，花费 $ O(m) $ 的时间，所以总时间复杂度为 $ O(n+m) $ 。</p>
-<h2 id="拓扑排序能用来干什么？"><a href="#拓扑排序能用来干什么？" class="headerlink" title="拓扑排序能用来干什么？"></a>拓扑排序能用来干什么？</h2><h3 id="1-判断图中是否有环"><a href="#1-判断图中是否有环" class="headerlink" title="1. 判断图中是否有环"></a>1. 判断图中是否有环</h3><p>上面提到对存在环的图进行拓扑排序无法遍历到所有点，所以可以通过是否能够遍历到所有点来判断图中是否有环。</p>
-<h3 id="2-找出图中的最长路"><a href="#2-找出图中的最长路" class="headerlink" title="2. 找出图中的最长路"></a>2. 找出图中的最长路</h3><p>例题： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1807">P1807 最长路</a> 。</p>
+<h2 id="任何图都能拓扑排序吗"><a class="markdownIt-Anchor" href="#任何图都能拓扑排序吗"></a> 任何图都能拓扑排序吗？</h2>
+<p>并不是。拓扑排序只能用在DAG（有向无环图）中，如果有环，那么必然有一些点的入度永远无法变成 $ 0 $ ，所以无法进行拓扑排序。</p>
+<h2 id="拓扑排序的时间复杂度是多少"><a class="markdownIt-Anchor" href="#拓扑排序的时间复杂度是多少"></a> 拓扑排序的时间复杂度是多少？</h2>
+<p>先要取出所有入度为 $ 0 $ 的点，花费 $ O(n) $ 的时间，之后要遍历所有边，花费 $ O(m) $ 的时间，所以总时间复杂度为 $ O(n+m) $ 。</p>
+<h2 id="拓扑排序能用来干什么"><a class="markdownIt-Anchor" href="#拓扑排序能用来干什么"></a> 拓扑排序能用来干什么？</h2>
+<h3 id="1-判断图中是否有环"><a class="markdownIt-Anchor" href="#1-判断图中是否有环"></a> 1. 判断图中是否有环</h3>
+<p>上面提到对存在环的图进行拓扑排序无法遍历到所有点，所以可以通过是否能够遍历到所有点来判断图中是否有环。</p>
+<h3 id="2-找出图中的最长路"><a class="markdownIt-Anchor" href="#2-找出图中的最长路"></a> 2. 找出图中的最长路</h3>
+<p>例题： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1807">P1807 最长路</a> 。</p>
 <p>每次从入度为 $ 0 $ 的点更新出边所到的点的最长路，最后取其中的最大值即可。</p>
-<h3 id="3-约束条件"><a href="#3-约束条件" class="headerlink" title="3. 约束条件"></a>3. 约束条件</h3><p>例题： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1983">P1983 车站分级</a> 。</p>
+<h3 id="3-约束条件"><a class="markdownIt-Anchor" href="#3-约束条件"></a> 3. 约束条件</h3>
+<p>例题： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1983">P1983 车站分级</a> 。</p>
 <p>要约束不同车站间的层级大小关系，这个大小关系显然是个 DAG ，我们将所有入度为 $ 0 $ 的点的层级设为 $ 1 $ ，每次连边代表所到的点的层级至少比这个点大 $ 1 $ ，由于我们使用了拓扑序，可以保证当前点的层级是满足所有条件的最小的一个，最后取所有点的层级中最大的一个即可。</p>
 <p>练习： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1347">P1347 排序</a> 。</p>
 <p>综合判环和约束的题： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3243">P3243 菜肴制作</a> 。</p>
@@ -344,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">1.</span> <span class="nav-text">对拓扑排序的研究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">拓扑排序是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E4%BD%95%E5%9B%BE%E9%83%BD%E8%83%BD%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E5%90%97%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">任何图都能拓扑排序吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">拓扑排序的时间复杂度是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E8%83%BD%E7%94%A8%E6%9D%A5%E5%B9%B2%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">拓扑排序能用来干什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%A4%E6%96%AD%E5%9B%BE%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 判断图中是否有环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%BE%E5%87%BA%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E9%95%BF%E8%B7%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 找出图中的最长路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 约束条件</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">1.</span> <span class="nav-text"> 对拓扑排序的研究</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text"> 拓扑排序是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E4%BD%95%E5%9B%BE%E9%83%BD%E8%83%BD%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E5%90%97"><span class="nav-number">1.2.</span> <span class="nav-text"> 任何图都能拓扑排序吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%98%AF%E5%A4%9A%E5%B0%91"><span class="nav-number">1.3.</span> <span class="nav-text"> 拓扑排序的时间复杂度是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E8%83%BD%E7%94%A8%E6%9D%A5%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="nav-number">1.4.</span> <span class="nav-text"> 拓扑排序能用来干什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%A4%E6%96%AD%E5%9B%BE%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text"> 1. 判断图中是否有环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%BE%E5%87%BA%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E9%95%BF%E8%B7%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text"> 2. 找出图中的最长路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text"> 3. 约束条件</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -466,7 +474,7 @@
 
   
       
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
 
 
   
