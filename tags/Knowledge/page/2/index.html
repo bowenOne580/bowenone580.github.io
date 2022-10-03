@@ -205,6 +205,26 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2022-05-26T19:29:00+08:00"
+              content="2022-05-26">
+          05-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2022/05/26/%E5%8F%B2%E4%B8%8A%E7%AC%AC%E4%BA%8C%E7%AE%80%E6%B4%81%E7%9A%84%E9%A2%98%E9%9D%A2-%E9%A2%98%E8%A7%A3/" itemprop="url">
+            <span itemprop="name">史上第二简洁的题面 题解</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2022-05-26T19:25:04+08:00"
               content="2022-05-26">
           05-26
@@ -380,26 +400,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-05-26T19:14:19+08:00"
-              content="2022-05-26">
-          05-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/05/26/%E5%AF%B9%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E7%9A%84%E7%A0%94%E7%A9%B6/" itemprop="url">
-            <span itemprop="name">对拓扑排序的研究</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
     </div>
   </div>
   
@@ -476,14 +476,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -582,8 +582,58 @@
 
   
       
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
 
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
