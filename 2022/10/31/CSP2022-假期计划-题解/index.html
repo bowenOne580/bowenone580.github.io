@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="近期博客Latex渲染失败的说明问题所在由于某些众所周知的原因，负责cdn加速的jsdelivr被-Wall了，造成了在国内无法获取一个叫mathjax.min.js的东西，进而导致博客渲染失败。这也是本博客内一些托管于github的图片访问失败的原因。 如何解决找了一些博客，发现cdn服务提供商远不止jsdelivr一个，我们可以使用其他的诸如cdnjs的cdn提供商，而我对cdn所知甚少，就选">
+  <meta name="description" content="CSP2022 假期计划 题解题意给你一个 $n$ 个点 $m$ 条边的无向图，点有点权，求一个从 $1$ 出发回到 $1$ 的路径，使得该路径上存在 $4$ 个不同的点，相邻两点之间经过的点和首尾两个点到 $1$ 经过的点个数均不超过 $k$ 个，且这 $4$ 个点的点权和最大。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="近期博客Latex渲染失败的说明">
-<meta property="og:url" content="http://example.com/2022/06/05/%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E/index.html">
+<meta property="og:title" content="CSP2022 假期计划 题解">
+<meta property="og:url" content="http://example.com/2022/10/31/CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="近期博客Latex渲染失败的说明问题所在由于某些众所周知的原因，负责cdn加速的jsdelivr被-Wall了，造成了在国内无法获取一个叫mathjax.min.js的东西，进而导致博客渲染失败。这也是本博客内一些托管于github的图片访问失败的原因。 如何解决找了一些博客，发现cdn服务提供商远不止jsdelivr一个，我们可以使用其他的诸如cdnjs的cdn提供商，而我对cdn所知甚少，就选">
+<meta property="og:description" content="CSP2022 假期计划 题解题意给你一个 $n$ 个点 $m$ 条边的无向图，点有点权，求一个从 $1$ 出发回到 $1$ 的路径，使得该路径上存在 $4$ 个不同的点，相邻两点之间经过的点和首尾两个点到 $1$ 经过的点个数均不超过 $k$ 个，且这 $4$ 个点的点权和最大。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-05T15:58:32.000Z">
-<meta property="article:modified_time" content="2022-06-05T15:58:51.364Z">
+<meta property="article:published_time" content="2022-10-31T07:50:55.000Z">
+<meta property="article:modified_time" content="2022-10-31T07:52:07.993Z">
 <meta property="article:author" content="wbwone1">
-<meta property="article:tag" content="Life">
+<meta property="article:tag" content="Editorial">
+<meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/06/05/%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E/">
+<link rel="canonical" href="http://example.com/2022/10/31/CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>近期博客Latex渲染失败的说明 | wbwone1's Blog</title>
+  <title>CSP2022 假期计划 题解 | wbwone1's Blog</title>
   
 
 
@@ -189,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/05/%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/31/CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          近期博客Latex渲染失败的说明
+          CSP2022 假期计划 题解
         </h1>
 
         <div class="post-meta">
@@ -213,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-05 23:58:32 / 修改时间：23:58:51" itemprop="dateCreated datePublished" datetime="2022-06-05T23:58:32+08:00">2022-06-05</time>
+              <time title="创建时间：2022-10-31 15:50:55 / 修改时间：15:52:07" itemprop="dateCreated datePublished" datetime="2022-10-31T15:50:55+08:00">2022-10-31</time>
             </span>
 
           
@@ -225,8 +226,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2022/06/05/%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/06/05/%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/10/31/CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/10/31/CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -241,15 +242,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="近期博客Latex渲染失败的说明"><a href="#近期博客Latex渲染失败的说明" class="headerlink" title="近期博客Latex渲染失败的说明"></a>近期博客Latex渲染失败的说明</h1><h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>由于某些众所周知的原因，负责cdn加速的jsdelivr被-Wall了，造成了在国内无法获取一个叫mathjax.min.js的东西，进而导致博客渲染失败。这也是本博客内一些托管于github的图片访问失败的原因。</p>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>找了一些博客，发现cdn服务提供商远不止jsdelivr一个，我们可以使用其他的诸如cdnjs的cdn提供商，而我对cdn所知甚少，就选择了在config.yml文档中预留的katex的cdnjs服务，没想到这让$\LaTeX$的渲染成功了。</p>
-<h2 id="启示"><a href="#启示" class="headerlink" title="启示"></a>启示</h2><p>在渲染失败的问题出现的最初几天，我百思不得其解，换了至少$4$个渲染引擎，把能够在设置文档里面调的设置都调了，却无果而终。</p>
-<p>之后的几个月里，我从图床加载不了的问题中，隐隐约约感觉到是jsdelivr的问题，但是没有深究。</p>
-<p>在最近的几天，我忘记了回国，在国外访问了我的博客，却意外的发现$\LaTeX$全都安然无恙，也就是说，jsdelivr被<del>[强调]</del>了。</p>
-<p>今天，在闲暇之余搜了jsdelivr，果不其然的发现有一堆人讨论这个问题，最终从config.yml中找到了解决方案。</p>
-<p>问题的解决往往不是一瞬间的，又常常是一刹那的。</p>
-<p>无论身处何处，面对何事，都要保持一颗对问题乐于探索、敢于质疑、勇于突破的心。</p>
-<p>May humans win.</p>
+        <h1 id="CSP2022-假期计划-题解"><a href="#CSP2022-假期计划-题解" class="headerlink" title="CSP2022 假期计划 题解"></a>CSP2022 假期计划 题解</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你一个 $n$ 个点 $m$ 条边的无向图，点有点权，求一个从 $1$ 出发回到 $1$ 的路径，使得该路径上存在 $4$ 个<strong>不同</strong>的点，相邻两点之间经过的点和首尾两个点到 $1$ 经过的点个数均不超过 $k$ 个，且这 $4$ 个点的点权和最大。</p>
+<span id="more"></span>
+<h2 id="赛时思路"><a href="#赛时思路" class="headerlink" title="赛时思路"></a>赛时思路</h2><p>这里的 $n$ 较小，提示我们可以使用 $O(n^2)$ 左右的算法。</p>
+<p>还有一个很特殊的是：这里只需要经过 $4$ 个点，暂时不知道有什么用。</p>
+<p>发现点之间的距离 $\leq k$ 其实和 $k$ 只有一点关系，因为决定性因素是它们之间的最短路。</p>
+<p>反正这里的边都是 $1$，我们可以直接 BFS 算出两点间距离，时间复杂度为 $O(n^2)$。</p>
+<p>现在，如果在这些两点间距离不超过 $k$ 的点之间连边，就转化为 $k = 0$ 的问题了。</p>
+<p><del>没想到一开始以为送分的特殊性质是最难的。</del></p>
+<p>不过，这里的 $m$ 可能达到 $n^2$ 级别，这似乎也意味着时间复杂度跟它没啥关系。</p>
+<p>直接 dfs？不行，复杂度太高。<del>但是如果控制好时间，有可能拿到比预期高的分。</del></p>
+<h2 id="赛后补题"><a href="#赛后补题" class="headerlink" title="赛后补题"></a>赛后补题</h2><p>在网上看到一位大佬的题解，很有启发。</p>
+<p>在这里讲讲应该如何想到正解。</p>
+<p>观察这个路径，我们 dfs 超时的原因在于没办法利用到最后回到 $1$ 的性质，只能暴力特判。但如果你换一种角度看：</p>
+<p>$1-A-B-C-D-1\iff 1-A-B\ \ C-D-1$</p>
+<p>其实，这可以分解成两个相等的子问题，知道这个性质后，随便搞搞即可得到 $O(n^3)$ 算法。</p>
+<p>发现难点其实在不重复（否则随便 dp 一下就是 $O(n^2)$ 算法了），我们如果盯着 $A,D$ 看，是非常不好确定 $B,C$ 的，因为它们既要满足和前面的距离不超过 $k$ 的限制，也要满足它们之间距离不超过 $k$ 的限制，不好做。</p>
+<p>考虑先预处理出来对于每个 $B$ 或 $C$，可能的 $A$ 或 $D$ 有哪些，如果你前面已经预处理出来两点之间距离的话，这个也是 $O(n^2)$ 的。</p>
+<p>$B$ 和 $C$ 之间的距离限制在枚举时就可以 $O(1)$ 解决，现在的限制就是 $A$ 和 $D$ 不能相同，$C$ 和 $A$ 不能相同，$B$ 和 $D$ 不能相同。</p>
+<p>不要急着枚举，我们发现，现在的问题其实是一个最优化问题，而不是可行性问题，也就是说，我们不用保存所有可能，只用保存可能最优的结果即可。</p>
+<p>设 $val[i]$ 表示 $B$ 或 $C$ 为 $i$ 时，$A+B$ 或 $C+D$ 的最大价值，由于 $B$ 或 $C$ 是确定的，相当于我们只需要维护 $A$ 或 $D$ 的最大价值。</p>
+<p>如果不考虑限制，显然是两个最大的一加。</p>
+<p>考虑限制，最坏的情况大概：</p>
+<p>$A$ 和 $D$ 相同，换 $A$，可能和 $C$ 相同，再换，这下绝对不可能相同了。如果换 $D$，可能和 $B$ 相同，再换，OK。</p>
+<p>有人可能会问：欸，不对啊，万一两边都换一次，$A$ 和 $D$ 又相同了呢，这样不就无限换下去了？</p>
+<p>你可真是个大聪明，但是想一想，既然你两边都换了一次，说明现在 $A \neq B$，$C\neq D$，那再怎么样，也不可能两边同时换，所以还是只用维护最大值、次大值和次次大值。</p>
+<p>所以，我们最终只用维护满足限制的 $A$ 或 $D$ 的最大、次大和次次大价值，就解决了此题！</p>
+<p>代码就不放了，常数巨大，跑的飞慢，还是建议看其他大佬的代码。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回想一下解题的艰辛历程，其实最重要的还是从枚举 $A,D$ 转为枚举 $B,C$，这对能否解出几乎是决定性的，也是这道题区分度所在。</p>
+<p>为什么想到，究其原因，是因为这样转化能使限制减少：$B$ 和 $C$ 紧密连接，多了一个距离 $\leq k$ 的限制，而 $A$ 和 $D$ 毫无关系，算法优劣，高下立判。</p>
+<p>所以，在思考问题时，不要盯着一点不放<del>比如我</del>，也不要没有方向的思考<del>怎么又是我</del>，深究问题本质（比如最后一步转化的最优化问题提示只需存储可能的最优解），针对性的思考，才能称霸赛场，叱咤风云！</p>
+<p>确实是一道好题！</p>
 
     </div>
 
@@ -259,7 +282,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Life/" rel="tag"># Life</a>
+              <a href="/tags/Editorial/" rel="tag"># Editorial</a>
+              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
           </div>
 
         
@@ -268,13 +292,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/06/03/%E6%95%B0%E5%AD%97%E8%A1%A8%E6%A0%BC-%E9%A2%98%E8%A7%A3/" rel="prev" title="数字表格 题解">
-      <i class="fa fa-chevron-left"></i> 数字表格 题解
+    <a href="/2022/10/28/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E5%88%9D%E6%AD%A5/" rel="prev" title="矩阵乘法初步">
+      <i class="fa fa-chevron-left"></i> 矩阵乘法初步
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/06/20/%E5%AF%B9%E6%9D%9C%E6%95%99%E7%AD%9B%E7%9A%84%E7%A0%94%E7%A9%B6/" rel="next" title="对杜教筛的研究">
-      对杜教筛的研究 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -334,7 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%91%E6%9C%9F%E5%8D%9A%E5%AE%A2Latex%E6%B8%B2%E6%9F%93%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">近期博客Latex渲染失败的说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%89%80%E5%9C%A8"><span class="nav-number">1.1.</span> <span class="nav-text">问题所在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">启示</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSP2022-%E5%81%87%E6%9C%9F%E8%AE%A1%E5%88%92-%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">CSP2022 假期计划 题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%9B%E6%97%B6%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">赛时思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%9B%E5%90%8E%E8%A1%A5%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">赛后补题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
