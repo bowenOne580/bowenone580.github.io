@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="CDQ 分治概念CDQ 分治基于归并排序，在一些只有询问的题中，能简化代码，避免使用冗长的数据结构；在包含修改，但不要求强制在线的题中，通过加入一个全新的维度——时间轴，来简化代码，在和数据结构解法相同的理论复杂度下（常数较大，原因之后再说）解决问题，代码量却大大减少。 入门学习 CDQ 分治，首先要掌握归并排序。 模板：P1908 逆序对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDQ 分治">
+<meta property="og:url" content="http://example.com/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="CDQ 分治概念CDQ 分治基于归并排序，在一些只有询问的题中，能简化代码，避免使用冗长的数据结构；在包含修改，但不要求强制在线的题中，通过加入一个全新的维度——时间轴，来简化代码，在和数据结构解法相同的理论复杂度下（常数较大，原因之后再说）解决问题，代码量却大大减少。 入门学习 CDQ 分治，首先要掌握归并排序。 模板：P1908 逆序对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-04T11:45:58.000Z">
+<meta property="article:modified_time" content="2022-11-04T11:48:02.090Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="离线">
+<meta property="article:tag" content="分治">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CDQ 分治 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CDQ 分治
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-04 19:45:58 / 修改时间：19:48:02" itemprop="dateCreated datePublished" datetime="2022-11-04T19:45:58+08:00">2022-11-04</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CDQ-分治"><a href="#CDQ-分治" class="headerlink" title="CDQ 分治"></a>CDQ 分治</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>CDQ 分治基于归并排序，在一些只有询问的题中，能简化代码，避免使用冗长的数据结构；在包含修改，但不要求强制在线的题中，通过加入一个全新的维度——时间轴，来简化代码，在和数据结构解法相同的理论复杂度下（常数较大，原因之后再说）解决问题，代码量却大大减少。</p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>学习 CDQ 分治，首先要掌握归并排序。</p>
+<p>模板：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1908">P1908 逆序对</a></p>
+<span id="more"></span>
+<p>这道题用到了 CDQ 的核心思想：只计算左边的块对右边的块的贡献。</p>
+<p>我们进行归并排序的时候，总是先把序列分成两段，假设我们每次合并的时候，都算完了两个块内各自产生的逆序对数，那么它们合并起来，产生的逆序对，只用加上左块对右块的贡献即可。</p>
+<p>我们模拟一下归并排序的过程：</p>
+<p>维护两个指针，分别指向两个块的起点。</p>
+<p>选择两个指针中较小的一个，加入到排序后的数组中。</p>
+<p>重复此过程，直到其中一个指针到达了块的终点。</p>
+<p>产生逆序对是什么时候呢？显然是左块的指针比右块大。产生了多少呢？由于左块中比这个数大的都可以产生逆序对，所以从这个指针开始，到终点，都可以产生。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ms</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">ms</span>(l,mid);</span><br><span class="line">	<span class="built_in">ms</span>(mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="type">int</span> p1 = l,p2 = mid+<span class="number">1</span>,cnt = l<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (p1&lt;=mid &amp;&amp; p2&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[p1]&lt;=a[p2]) tmp[++cnt] = a[p1],p1++;</span><br><span class="line">		<span class="keyword">else</span> tmp[++cnt] = a[p2],p2++,ans+=mid-p1+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p1&lt;=mid) tmp[++cnt] = a[p1++];</span><br><span class="line">	<span class="keyword">while</span> (p2&lt;=r) tmp[++cnt] = a[p2++];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=l;i&lt;=r;i++) a[i] = tmp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3374">P3374 【模板】树状数组 1</a></p>
+<p>众所周知，离线算法比较擅长处理不带修的问题，但是这道题有单点修改，怎么办？</p>
+<p>我们引入一个新的维度——时间轴，来使这些询问有序。</p>
+<p>对于询问区间和的操作，我们可以将它分成两个前缀和相减。</p>
+<p>于是，我们只需要求出前缀和即可，考虑使用归并排序，使操作按照位置排序。</p>
+<p>由于操作原来是按时间轴排好的，所以我们只用计算左边的修改对右边的查询的贡献。</p>
+<p>也就是说，统计左边修改的前缀和，累加到右边的询问操作中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">cdq</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">cdq</span>(l,mid),<span class="built_in">cdq</span>(mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">0</span>,p = l,q = mid+<span class="number">1</span>,o = l<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (p&lt;=mid &amp;&amp; q&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[p]&lt;a[q])&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[p].ty == <span class="number">1</span>) sum+=a[p].val;</span><br><span class="line">			tmp[++o] = a[p++];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[q].ty == <span class="number">2</span>) ans[a[q].val]-=sum;</span><br><span class="line">			<span class="keyword">if</span> (a[q].ty == <span class="number">3</span>) ans[a[q].val]+=sum;</span><br><span class="line">			tmp[++o] = a[q++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p&lt;=mid) tmp[++o] = a[p++];</span><br><span class="line">	<span class="keyword">while</span> (q&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[q].ty == <span class="number">2</span>) ans[a[q].val]-=sum;</span><br><span class="line">		<span class="keyword">if</span> (a[q].ty == <span class="number">3</span>) ans[a[q].val]+=sum;</span><br><span class="line">		tmp[++o] = a[q++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=l;i&lt;=r;i++) a[i] = tmp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4169">P4169 [Violet]天使玩偶/SJY摆棋子</a></p>
+<p>询问的是最近的曼哈顿距离，就先把绝对值拆掉，之后分成 $4$ 类考虑。</p>
+<p>现在，假设我们要找 $x,y$ 都比询问的点小的，也就是找到 $x+y$ 最大的一个，这个可以用树状数组维护。</p>
+<p>发现还带修改，所以要再维护一个时间轴维度。</p>
+<p>于是，我们先按照时间轴排序询问，再以 $x$ 为关键字归并排序，顺便维护 $x+y$ 的最大值其中为了保证 $x,y$ 都小，需要把树状数组中的下标用 $y$ 表示，相当于变相的以 $y$ 为关键字排序。</p>
+<p>注意常数优化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">6e5</span>+<span class="number">10</span>,M = <span class="number">1e6</span>+<span class="number">10</span>,lim = <span class="number">1e6</span>+<span class="number">1</span>,inf = <span class="number">1e9</span>;</span><br><span class="line"><span class="type">int</span> n,m,tr[M],tot,tot2,ans[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">opt</span>&#123;</span><br><span class="line">	<span class="type">int</span> op,x,y,id;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt;(<span class="type">const</span> opt &amp;b)&#123;</span><br><span class="line">		<span class="keyword">return</span> x == b.x?op&lt;b.op:x&lt;b.x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; a[N],tmp[N],bak[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (;x&lt;=lim;x+=(x&amp;(-x))) tr[x] = <span class="built_in">max</span>(tr[x],v);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (;x;x-=(x&amp;(-x))) ret = <span class="built_in">max</span>(ret,tr[x]);</span><br><span class="line">	<span class="keyword">return</span> ret?ret:-inf;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">clr</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (;x&lt;=lim;x+=(x&amp;(-x))) tr[x] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cdq</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">cdq</span>(l,mid),<span class="built_in">cdq</span>(mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="type">int</span> p = l,q = mid+<span class="number">1</span>,o = l;</span><br><span class="line">	<span class="keyword">while</span> (p&lt;=mid &amp;&amp; q&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[p]&lt;a[q])&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[p].op == <span class="number">1</span>) <span class="built_in">update</span>(a[p].y,a[p].x+a[p].y);</span><br><span class="line">			tmp[o++] = a[p++];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[q].op == <span class="number">2</span>) ans[a[q].id] = <span class="built_in">min</span>(ans[a[q].id],a[q].x+a[q].y-<span class="built_in">query</span>(a[q].y));</span><br><span class="line">			tmp[o++] = a[q++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p&lt;=mid) tmp[o++] = a[p++];</span><br><span class="line">	<span class="keyword">while</span> (q&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[q].op == <span class="number">2</span>) ans[a[q].id] = <span class="built_in">min</span>(ans[a[q].id],a[q].x+a[q].y-<span class="built_in">query</span>(a[q].y));</span><br><span class="line">		tmp[o++] = a[q++];</span><br><span class="line">	&#125;</span><br><span class="line">	p = l,q = mid+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (p&lt;=mid &amp;&amp; q&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[p]&lt;a[q])&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[p].op == <span class="number">1</span>) <span class="built_in">clr</span>(a[p].y);</span><br><span class="line">			p++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> q++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=l;i&lt;=r;i++) a[i] = tmp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		tot++;</span><br><span class="line">		cin&gt;&gt;a[tot].x&gt;&gt;a[tot].y;</span><br><span class="line">		a[tot].y++;</span><br><span class="line">		a[tot].op = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		tot++;</span><br><span class="line">		cin&gt;&gt;a[tot].op&gt;&gt;a[tot].x&gt;&gt;a[tot].y;</span><br><span class="line">		<span class="keyword">if</span> (a[tot].op == <span class="number">2</span>) a[tot].id = ++tot2;</span><br><span class="line">		a[tot].y++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot2;i++) ans[i] = inf;</span><br><span class="line">	<span class="built_in">memcpy</span>(bak,a,<span class="built_in">sizeof</span>(a));</span><br><span class="line">	<span class="built_in">cdq</span>(<span class="number">1</span>,tot);</span><br><span class="line">	<span class="built_in">memcpy</span>(a,bak,<span class="built_in">sizeof</span>(bak));</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		a[i].x = (lim-a[i].x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cdq</span>(<span class="number">1</span>,tot);</span><br><span class="line">	<span class="built_in">memcpy</span>(a,bak,<span class="built_in">sizeof</span>(bak));</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		a[i].y = (lim-a[i].y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cdq</span>(<span class="number">1</span>,tot);</span><br><span class="line">	<span class="built_in">memcpy</span>(a,bak,<span class="built_in">sizeof</span>(bak));</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		a[i].x = (lim-a[i].x),a[i].y = (lim-a[i].y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cdq</span>(<span class="number">1</span>,tot);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot2;i++) cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2163">P2163 [SHOI2007]园丁的烦恼</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E7%A6%BB%E7%BA%BF/" rel="tag"># 离线</a>
+              <a href="/tags/%E5%88%86%E6%B2%BB/" rel="tag"># 分治</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/01/%E7%A7%91%E6%8A%80%E6%99%AE%E5%8F%8A-%E7%AC%AC%E4%B8%80%E8%BE%91/" rel="prev" title="科技普及 第一辑">
+      <i class="fa fa-chevron-left"></i> 科技普及 第一辑
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/" rel="next" title="数学期望入门">
+      数学期望入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CDQ-%E5%88%86%E6%B2%BB"><span class="nav-number">1.</span> <span class="nav-text">CDQ 分治</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-number">1.2.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">1.3.</span> <span class="nav-text">进阶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">正题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

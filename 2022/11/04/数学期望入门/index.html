@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="数学期望入门基本概念我们把一个随机试验的结果称为样本点，这些结果组成样本空间。 对于样本空间内的一个随机事件 $A$，定义 $P(A)$ 为 $A$ 发生的概率。 假设一个随机变量 $X$ 的取值有 $n$ 个，分别为 $x_1,x_2\cdots x_n$，那么定义随机变量 $X$ 的数学期望为 $E(X) &#x3D; \sum_{i&#x3D;1}^np_i\cdot x_i$，也就是出现的概率乘上取值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学期望入门">
+<meta property="og:url" content="http://example.com/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="数学期望入门基本概念我们把一个随机试验的结果称为样本点，这些结果组成样本空间。 对于样本空间内的一个随机事件 $A$，定义 $P(A)$ 为 $A$ 发生的概率。 假设一个随机变量 $X$ 的取值有 $n$ 个，分别为 $x_1,x_2\cdots x_n$，那么定义随机变量 $X$ 的数学期望为 $E(X) &#x3D; \sum_{i&#x3D;1}^np_i\cdot x_i$，也就是出现的概率乘上取值。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-04T11:47:01.000Z">
+<meta property="article:modified_time" content="2022-11-04T11:47:48.519Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="期望">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数学期望入门 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学期望入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-04 19:47:01 / 修改时间：19:47:48" itemprop="dateCreated datePublished" datetime="2022-11-04T19:47:01+08:00">2022-11-04</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/04/%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数学期望入门"><a href="#数学期望入门" class="headerlink" title="数学期望入门"></a>数学期望入门</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>我们把一个随机试验的结果称为<strong>样本点</strong>，这些结果组成<strong>样本空间</strong>。</p>
+<p>对于样本空间内的一个<strong>随机事件</strong> $A$，定义 $P(A)$ 为 $A$ 发生的概率。</p>
+<p>假设一个<strong>随机变量</strong> $X$ 的取值有 $n$ 个，分别为 $x_1,x_2\cdots x_n$，那么定义随机变量 $X$ 的<strong>数学期望</strong>为 $E(X) = \sum_{i=1}^np_i\cdot x_i$，也就是出现的概率乘上取值。</p>
+<span id="more"></span>
+<p><strong>下面很重要！</strong></p>
+<p>$E(aX+bY) = a\cdot E(X)+b\cdot E(Y)$</p>
+<p>证明：</p>
+<ol>
+<li>$E(X+Y) = \sum_{i=1}^np_ix_i+\sum_{i=1}^mq_iy_i = E(X)+E(Y)$</li>
+<li>$E(aX) = a\sum_{i=1}^np_ix_i = aE(x)$</li>
+</ol>
+<p>当然，可以加的前提是<strong>样本空间相同</strong>。比如你掷骰子，两个骰子面数不同，那么最终的期望显然不能简单的相加，因为在总样本空间内，相对于两个骰子分别的样本空间，概率的变化不是相同的。</p>
+<h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6154">P6154 游走</a></p>
+<p>先把期望写出来：</p>
+<p>$\sum p_ix_i$</p>
+<p>发现这里的 $p_i$ 都是一样的，提出来。</p>
+<p>$p\sum x_i$</p>
+<p>于是就变为求一个有向无环图的路径条数和路径长度和。</p>
+<p>进行拓扑排序，同时 dp。</p>
+<p>设 $f[i]$ 为 $i$ 点的路径数量，$g[i]$ 为 $i$ 点的路径长度和。</p>
+<p>每次转移时，$f[j]+=f[i]$，$g[j]+=g[i]+f[i]$。</p>
+<p>注意路径的起点和终点可能相同，需要把 $f[i]$ 的初值设为 $1$。</p>
+<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/218/">216. Rainbow的信号</a></p>
+<p>由于概率只和段本身有关系，所以可以先粗略的算一下每个段被选择的概率。</p>
+<p>如果段的长度为 $1$，那么被选择的概率为 $\frac{1}{n^2}$，由于$l&gt;r$ 时，可以交换，所以如果段的长度大于 $1$，那么被选择的概率为 $\frac{2}{n^2}$。</p>
+<p>看到这种只有位运算的，一般都是把每一位拆开算，这样可以少很多限制。</p>
+<p>再具体看第 $k$ 位的情况。</p>
+<p>假设某一位上值为 $1$，那么它对期望的贡献为 $\frac{1}{n^2}\cdot 2^k$。</p>
+<p>再考虑长度 $\geq 2$ 的段的贡献。</p>
+<p>枚举左端点，假设为 $i$。</p>
+<p>and 和，在下一个 $0$ 之前都是 $2^k$，即记 $i$ 处往后第一个 $0$ 的位置为 $j$，那么对答案的贡献就是 $\frac{2\cdot (j-i)}{n^2}\cdot 2^k$。</p>
+<p>or 和，在下一个 $1$ 之后都是 $2^k$，即记 $i$ 处往后第一个 $1$ 的位置为 $j$，那么对答案的贡献就是 $\frac{2\cdot (n-j+1)}{n^2}\cdot 2^k$。</p>
+<p>xor 和，遇到 $0$ 不变，遇到 $1$ 取反，即遇见第一个 $1$ 和第二个 $1$ 之间是 $1$，第三个 $1$ 和第四个 $1$ 之间是 $1$。</p>
+<p>显然，这三个所需的信息都可以预处理出来，于是就是 $O(n)$ 的，带上 $31$ 大常数。</p>
+<h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA10288">优惠券 Coupons</a></p>
+<p>这道题需要用到一个结论：概率为 $p$ 的事件期望 $\frac{1}{p}$ 次发生。</p>
+<p>假设现在有 $i$ 张牌，要得到新的牌，则概率为 $\frac{n-i}{n}$，根据上面的结论，这个事件期望在 $\frac{n}{n-i}$ 次后发生。</p>
+<p>我们设 $X$ 表示所有从 $0$ 到 $1$，从 $1$ 到 $2$，这样的事件的集合。</p>
+<p>则根据期望的线性相加，$E(X) = \sum_{i=0}^{n-1}\frac{n}{n-i}$</p>
+<p>把 $n$ 提出来，里面的就是 $E(X) = n\sum_{i=0}^{n-1}\frac{1}{n-i}$，就是调和级数。</p>
+<p>现在就可以算了。</p>
+<h2 id="例4"><a href="#例4" class="headerlink" title="例4"></a>例4</h2><p>高妙题。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1654">P1654 OSU!</a></p>
+<p>（话说 osu! 真的好难啊，我连2星的谱都打不过）</p>
+<p>看到这种每次增加的只和当前位有关的，一般都是 dp。</p>
+<p>依次考虑每一位，设 $ans[i]$ 表示前 $i$ 位的答案，显然只有当第 $i$ 位的操作成功时才会对 $ans[i]$ 产生贡献。</p>
+<p>假设我们已经求出了 $ans[i]$，现在要求 $ans[i+1]$。怎么求？</p>
+<p>显然，在第 $i$ 位时，长度从 $0$ 到 $i$ 都有可能，假设对于每个长度 $l$，它出现的概率为 $p_l$，且第 $i+1$ 位为 $1$ 的概率为 $P$，则可以写出 $ans$ 的转移方程：</p>
+<p>$ans[i+1] = ans[i]+P\cdot \sum_{l=0}^i p_l(3l^2+3l+1)$</p>
+<p>解释一下后面那一块：</p>
+<p>显然，能对答案产生贡献的只能是 $i+1$ 位为 $1$，也就是说后面的贡献产生的概率为 $P$，故要乘 $P$。</p>
+<p>而这一位是 $1$，对所有 $l$ 来说，从 $l^3$ 变成了 $l^3+3l^2+3l+1$，但是我们只算加上的贡献，这是因为，这两个东西实际上是互斥的，也就是说，你只能选择其中的一个，所以还需要把选择原来的贡献，即 $ans[i]$ 加上去。</p>
+<p>发现后面的期望不好求，而且里面还是一个多项式，考虑展开：</p>
+<p>$3\sum_{l=0}^i p_l\cdot l^2+3\sum_{l=0}^ip_l\cdot l+\sum_{l=0}^i p_l$</p>
+<p>设 $E(A_i) = \sum_{l=0}^i p_l$，$E(B_i) = \sum_{l=0}^i p_l\cdot l$，$E(C_i) = \sum_{l=0}^i p_l\cdot l^2$。</p>
+<p>先看第一个，显然，在第 $i$ 位，所有长度从 $0$ 到 $i$ 的序列构成了整个样本空间，于是 $E(A_i) = 1$。</p>
+<p>对于第二个，考虑第 $i$ 位的可能：</p>
+<ol>
+<li>为 $0$，则以 $i$ 结尾的全 $1$ 段的长度只能为 $0$，$E(B_i) = (1-P)\cdot (p_0\cdot 0) = 0$。</li>
+<li>为 $1$，则以 $i$ 结尾的全 $1$ 段的长度至少为 $1$，至多为 $i$，而这些长度对应发生的概率就等于 $i-1$ 时的 $0$ 到 $i-1$ 的长度发生的概率，所以可以通过 $E(B_{i-1})$ 转移，$E(B_i) = P\cdot (\sum_{i=0}^{i-1}(p_l\cdot (l+1))) = P\cdot (E(B_{i-1})+E(A_{i-1})) = P\cdot (E(B_{i-1})+1)$</li>
+</ol>
+<p>再看第三个，考虑第 $i$ 位的可能：</p>
+<ol>
+<li>为 $0$，则贡献为 $0$。</li>
+<li>为 $1$，则 $l$ 从 $1$ 到 $i$，发生概率对应 $E(C_{i-1})$，$E(C_i) = P\cdot (\sum_{l=0}^{i-1}(p_l\cdot (l^2+2l+1))) = P\cdot (E(C_{i-1})+2E(B_{i-1})+1)$</li>
+</ol>
+<p>于是就做完了。</p>
+<h2 id="例5"><a href="#例5" class="headerlink" title="例5"></a>例5</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4550">P4550 收集邮票</a></p>
+<p>如果期望次数为 $x$ 次，那么答案就是 $\frac{x^2+x}{2}$。</p>
+<p>根据期望的线性相加，需要求出次数的期望和次数平方的期望。</p>
+<p>设 $f[i]$ 表示已经有了 $i$ 张牌，期望再取多少次取到所有牌。</p>
+<p>这里先不说怎么求这个东西，谈一下为什么要这样设。</p>
+<p>有很多人（比如我）一开始会直接设 $f[i]$ 表示拿到 $i$ 张牌的期望次数，这固然是好求的，但是别忘了，我们后面还要求平方，而在求这个时，我们需要知道关于它的等式。</p>
+<p>假设我们设 $f[i]$ 表示拿到 $i$ 张牌的期望次数，显然，这个次数只能从已经有了 $i$ 张，拿了一个旧的，和只有 $i-1$ 张，拿了一个新的贡献出来。但是，直接这样贡献就出问题了，因为我们说概率都是对于同一样本空间而言的，期望的线性相加也建立在此之上，但是，你贡献的时候，前面一种情况的概率 $\frac{i}{n}$，是对于“已经有 $i$ 张牌，下一张牌可能的情况”这一样本空间而言，可是后面一种情况的概率 $\frac{n-i+1}{n}$，是对于“已经有 $i-1$ 张牌，下一张牌可能的情况”这另一个样本空间而言的，既然样本空间不是相同的，那么就不符合期望的线性相加前提，所以你得到的等式，实际上是不成立的。</p>
+<p>再来看一看设为还要多少次才能拿全的好处：</p>
+<ol>
+<li>拿到旧牌，概率为 $\frac{i}{n}$，对期望的贡献为 $\frac{i}{n}(f[i]+1)$。</li>
+<li>拿到新牌，概率为 $\frac{n-i}{n}$，对期望的贡献为 $\frac{n-i}{n}(f[i+1]+1)$。</li>
+</ol>
+<p>你会发现，这样一来，概率就对应着同一个样本空间了，所以期望也就是对的了。</p>
+<p>于是列出等式如下：</p>
+<p>$f[i] = \frac{i}{n}(f[i]+1)+\frac{n-i}{n}(f[i+1]+1)$</p>
+<p>化简：</p>
+<p>$f[i] = f[i+1]+\frac{n}{n-i}$</p>
+<p>你会发现，这和例3中依靠期望的性质给出的式子一样，所以这样做是对的。</p>
+<p>为什么只能倒推不能正推呢（如果你是像某篇题解一样利用高等数学正推的大佬，当我没说）？究其原因，还是因为如果拿到新牌，必然是从后面一项贡献过来，所以只能先把后面的期望算出来，再算这里的。设计状态的时候可以想一些极端的情况：比如 $i = n$ 是我们倒推的第一项，说明这东西的期望应该是个定值，如果拿到 $n$ 张牌了，显然期望再拿的次数为 $0$，于是就设计出 dp 的状态了。</p>
+<p>再说明一个简单一点的问题：为什么平方的期望不是期望的平方？</p>
+<p>你可能在算期望的平方时，直接把期望拿来平方一遍，但这样是不对的，因为期望本质上是概率乘上数值，而我们要求的期望的平方，只是在数值上面平方，而概率不变，所以这两者不等价。</p>
+<p>于是，设 $g[i]$ 表示拿到 $i$ 张牌，还要拿次数的平方的期望，可以列出等式如下：</p>
+<p>$g[i] = \frac{i}{n}(g[i]+2f[i]+1)+\frac{n-i}{n}(g[i+1]+2f[i+1]+1)$</p>
+<p>化简：</p>
+<p>$g[i] = \frac{i}{n-i}(2f[i]+1)+g[i+1]+2f[i+1]+1$</p>
+<p>倒推转移即可。</p>
+<h2 id="例6"><a href="#例6" class="headerlink" title="例6"></a>例6</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1850">P1850 [NOIP2016 提高组] 换教室</a></p>
+<p>这道题相对于前面几道来说，简单一点。</p>
+<p>首先预处理出两点间最短路。</p>
+<p>之后考虑 dp，设 $f[i][j][0/1]$ 表示前 $i$ 个时间段，用了 $j$ 次申请，这一次是否申请。</p>
+<p>转移的时候注意，如果是从 $1$ 转移过来，那么要计算两个期望，一个是成功申请的，一个是申请失败的，因为每次申请成功都是有概率的，如果这次申请了，也要把这次成功和失败的期望分别计算，这一点想清楚了，这道题也就不难了。</p>
+<h2 id="例7"><a href="#例7" class="headerlink" title="例7"></a>例7</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4316">P4316 绿豆蛙的归宿</a></p>
+<p>怎么越来越简单了啊，看来我的编排水平不太行啊。</p>
+<p>根据前面的经验，我们设 $f[i]$ 表示走到 $i$ 期望还要走多远才能走到终点，这样可以保证概率都是对于 $i$ 而言的。</p>
+<p>显然 $f[n] = 0$。</p>
+<p>$i$ 有 $\frac{1}{k}$ 的概率走到 $j$，贡献为 $\frac{1}{k}(f[j]+w)$。</p>
+<p>建反图跑 dp 即可。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E6%9C%9F%E6%9C%9B/" rel="tag"># 期望</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/04/CDQ-%E5%88%86%E6%B2%BB/" rel="prev" title="CDQ 分治">
+      <i class="fa fa-chevron-left"></i> CDQ 分治
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/04/%E7%A7%91%E6%8A%80%E6%99%AE%E5%8F%8A-%E7%AC%AC%E4%BA%8C%E8%BE%91/" rel="next" title="科技普及 第二辑">
+      科技普及 第二辑 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%9B%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">数学期望入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">1.2.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B2"><span class="nav-number">1.3.</span> <span class="nav-text">例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B3"><span class="nav-number">1.4.</span> <span class="nav-text">例3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B4"><span class="nav-number">1.5.</span> <span class="nav-text">例4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B5"><span class="nav-number">1.6.</span> <span class="nav-text">例5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B6"><span class="nav-number">1.7.</span> <span class="nav-text">例6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B7"><span class="nav-number">1.8.</span> <span class="nav-text">例7</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
