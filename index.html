@@ -275,6 +275,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/18/%E7%8A%B6%E5%8E%8BDP%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/18/%E7%8A%B6%E5%8E%8BDP%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">状压DP入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-18 10:00:53 / 修改时间：10:04:58" itemprop="dateCreated datePublished" datetime="2023-02-18T10:00:53+08:00">2023-02-18</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/18/%E7%8A%B6%E5%8E%8BDP%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/18/%E7%8A%B6%E5%8E%8BDP%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="状压-DP入门"><a href="#状压-DP入门" class="headerlink" title="状压 DP入门"></a>状压 DP入门</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>如果有一个数列，每个位置上只能放 $0,1$，且顺序不同对应的数列不同，这时候就需要精确的表示每个位置上究竟放了什么。但是，当 $n$ 比较小时（通常在 $20$ 以内），我们可以把每个位置都看成二进制位，于是一个数列就可以被一个二进制数唯一表示，如果数列的长度在 $32$ 以内，就可以直接用 int 存储。大家都知道位运算是很快的，在接近 $O(1)$ 的时间内就可以解决原来 $O(n)$ 的问题，对时间复杂度优化巨大，这就是状态压缩。</p>
+<p>需要注意的是，状态压缩由于需要表示所有 $2^n$ 种可能性，在开数组时所需空间也从 $O(n)$ 变成了 $O(2^n)$，不要开大了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/18/%E7%8A%B6%E5%8E%8BDP%E5%85%A5%E9%97%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/07/%E7%82%B9%E5%88%86%E6%B2%BB%E5%88%9D%E6%AD%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -947,86 +1028,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wbwone1">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wbwone1's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">二分图入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-11-22 22:09:37 / 修改时间：22:11:02" itemprop="dateCreated datePublished" datetime="2022-11-22T22:09:37+08:00">2022-11-22</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="二分图入门"><a href="#二分图入门" class="headerlink" title="二分图入门"></a>二分图入门</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>二分图和网络流是图论中非常重要的部分，很多问题都可以通过建模转化到这上面解决。二分图和网络流的关系是密不可分的，可以将二分图看成特殊构造的网络，故其也可用网络流的算法求解。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1098,14 +1099,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
