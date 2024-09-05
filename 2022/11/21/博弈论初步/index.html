@@ -28,7 +28,7 @@
 <meta property="og:description" content="博弈论初步枚举型E - Remove Pairs 博弈，首先要明白，何为最优。 最优，不是一种策略，而是在一种局面下，寻找是否有一次操作后，对手必败的局面，自己只要做出这个操作即可。如果没有，显然自己在这种局面下必败。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T15:34:53.000Z">
-<meta property="article:modified_time" content="2024-07-06T11:45:27.871Z">
+<meta property="article:modified_time" content="2024-09-05T02:43:09.019Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="博弈论">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-06 19:45:27" itemprop="dateModified" datetime="2024-07-06T19:45:27+08:00">2024-07-06</time>
+                <time title="修改时间：2024-09-05 10:43:09" itemprop="dateModified" datetime="2024-09-05T10:43:09+08:00">2024-09-05</time>
               </span>
 
           
@@ -270,6 +270,10 @@
 <p>还没完，我们现在只证明了如果异或和不为 $0$，自己就不会寄，总有能拿的，还要说明为什么异或和为 $0$ 就一定寄了。</p>
 <p>假设当前异或和为 $0$，且不是全 $0$ 的状态，那么我们不论怎么拿，也只相当于改变了一个 $x_i$，而这一变，异或和必然就不为 $0$ 了，对手于是拿到了异或和不为 $0$ 的局面，按照上面的一通操作下来，我们拿到的新局面异或和又是 $0$ 了。注意到每次必然要拿一些石子，且对手一定可以拿石子（异或和不为 $0$ 的性质），于是对手一定是最后一个可以拿石子的人，也就是说，我们必然最终无法拿到石子，会转移到异或和为 $0$ 的局面。</p>
 <p>模板题2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1247">P1247 取火柴游戏</a></p>
+<h3 id="变形1"><a href="#变形1" class="headerlink" title="变形1"></a>变形1</h3><p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc368/tasks/abc368_f">F - Dividing Game</a></p>
+<p>每次可以将 $x$ 变为它的一个非 $x$ 约数，想到分解质因数。</p>
+<p>之后，变成一个非 $x$ 约数，就相当于取走某些质因数，等价于取石子游戏。</p>
+<p>要注意从问题的特征思考博弈。</p>
 <h2 id="SG-函数"><a href="#SG-函数" class="headerlink" title="SG 函数"></a>SG 函数</h2><p>留坑。</p>
 <h2 id="Wythoff-博弈"><a href="#Wythoff-博弈" class="headerlink" title="Wythoff 博弈"></a>Wythoff 博弈</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2252">P2252 [SHOI2002]取石子游戏|【模板】威佐夫博弈</a></p>
 <p>有两堆石子，数量分别为 $x_1,x_2$，每次可以取其中一堆任意个，或在两堆中取相同个数的石子，问你先手是否有必胜策略。</p>
@@ -384,7 +388,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E8%AE%BA%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">博弈论初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">枚举型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">1.2.</span> <span class="nav-text">Nim 游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SG-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wythoff-%E5%8D%9A%E5%BC%88"><span class="nav-number">1.4.</span> <span class="nav-text">Wythoff 博弈</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E8%AE%BA%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">博弈论初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">枚举型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">1.2.</span> <span class="nav-text">Nim 游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BD%A21"><span class="nav-number">1.2.1.</span> <span class="nav-text">变形1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SG-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wythoff-%E5%8D%9A%E5%BC%88"><span class="nav-number">1.4.</span> <span class="nav-text">Wythoff 博弈</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
