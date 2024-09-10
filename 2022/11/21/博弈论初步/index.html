@@ -28,7 +28,7 @@
 <meta property="og:description" content="博弈论初步枚举型E - Remove Pairs 博弈，首先要明白，何为最优。 最优，不是一种策略，而是在一种局面下，寻找是否有一次操作后，对手必败的局面，自己只要做出这个操作即可。如果没有，显然自己在这种局面下必败。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T15:34:53.000Z">
-<meta property="article:modified_time" content="2024-09-08T13:29:03.263Z">
+<meta property="article:modified_time" content="2024-09-10T15:01:04.325Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="博弈论">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-09-08 21:29:03" itemprop="dateModified" datetime="2024-09-08T21:29:03+08:00">2024-09-08</time>
+                <time title="修改时间：2024-09-10 23:01:04" itemprop="dateModified" datetime="2024-09-10T23:01:04+08:00">2024-09-10</time>
               </span>
 
           
@@ -255,26 +255,33 @@
 <p>于是，寻找最优，就意味着枚举当前局面和下一可能局面。这道题就是如此。</p>
 <p>$0$ 表示移除卡牌，$1$ 表示牌还在场，每次枚举二进制数，表示当前局面，再枚举合法的消去对，找到下一局面。</p>
 <p>转移则需要技巧，我们令 $f[i]$ 表示在 $i$ 局面下，Aoki 能否取胜，则如果下一局面他不能取胜，那他在当前局面便必胜，因为下一次成了对手不能取胜。</p>
+<h2 id="博弈图"><a href="#博弈图" class="headerlink" title="博弈图"></a>博弈图</h2><p>我们把每个局面看成一个点，每做一次操作，会转移到另一个局面，就向它连一条边，把所有可能的转化都考虑到，就形成了一个图。</p>
+<p>所有没有出边的点，即最终状态，是必败局面。</p>
+<p>至少一条出边连接到必败局面，则当前局面必胜。</p>
+<p>所有出边都连接到必胜局面，则当前局面必败。</p>
 <h2 id="Nim-游戏"><a href="#Nim-游戏" class="headerlink" title="Nim 游戏"></a>Nim 游戏</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2197">P2197 【模板】nim 游戏</a></p>
-<p>最为简单的Nim游戏，貌似并不需要SG函数之类的知识。</p>
 <p>假设第 $i$ 堆有 $x_i$ 个石子，那么先手必败，当且仅当：</p>
 <p>$x_1 \oplus x_2 \oplus \cdots x_n = 0$</p>
 <p>证明很简单：</p>
-<p>（下面的状态，或局面，均指先手面临的）</p>
-<p>首先，在最终状态，即所有石子都被取完时，异或和为 $0$，这时候如果先手拿到，就寄了。</p>
-<p>为了让先手不寄，我们不能到达这个状态。</p>
-<p>假设现在异或和为 $k$，且 $k\neq 0$，则可以找到 $k$ 的二进制表示下为 $1$ 的最高位，那么我们必然能找到一个 $x_i$，使得它那一位也为 $1$（不然全都是 $0$，也异或不出来这个 $1$）。</p>
-<p>先把 $x_i$ 全部取光，现在这个 $x_i$ 的这一位就是 $0$ 了，也就是说现在的异或和中的这一位为 $0$ 了。</p>
-<p>假设现在异或和为 $k’$，我们的目标是：在刚刚取走的石子中放回一些，使得异或和为 $0$。</p>
-<p>答案很显然：放回 $k’$ 个即可，这时 $x_i = k’$，和原来的 $k’$ 一异或，就是 $0$ 了。</p>
-<p>还没完，我们现在只证明了如果异或和不为 $0$，自己就不会寄，总有能拿的，还要说明为什么异或和为 $0$ 就一定寄了。</p>
-<p>假设当前异或和为 $0$，且不是全 $0$ 的状态，那么我们不论怎么拿，也只相当于改变了一个 $x_i$，而这一变，异或和必然就不为 $0$ 了，对手于是拿到了异或和不为 $0$ 的局面，按照上面的一通操作下来，我们拿到的新局面异或和又是 $0$ 了。注意到每次必然要拿一些石子，且对手一定可以拿石子（异或和不为 $0$ 的性质），于是对手一定是最后一个可以拿石子的人，也就是说，我们必然最终无法拿到石子，会转移到异或和为 $0$ 的局面。</p>
+<p>首先，在最终局面，即所有石子都被取完时，异或和为 $0$，这个局面是必败局面。</p>
+<p>假设现在异或和为 $k$，且 $k\neq 0$，拿到当前局面的人希望将 $k$ 变为 $0$ 这样对手才能必败。</p>
+<p>考虑 $k$ 在二进制下最高不为 $0$ 的位，我们找到一个石子堆 $x_i$，使 $x_i$ 的这一位也不为 $0$，只需要将 $x_i$ 变为 $x_i\oplus k$ 即可，显然 $x_i \oplus k&lt;x_i$，所以一定能操作。</p>
+<p>我们现在只证明了如果异或和不为 $0$，自己一定能拿石子，还要说明为什么异或和为 $0$ 就必败。</p>
+<p>假设当前异或和为 $0$，且不是全 $0$ 的状态，那么我们不论怎么拿，必然改变了一个 $x_i$，这下异或和必然不为 $0$ 了。也就是说，对手一定拿到异或和不为 $0$ 的局面，我们一定拿到异或和为 $0$ 的局面，且石子最终会取完，所以我们一定拿到最终必败局面。</p>
+<p>推论：所有异或和相等的局面等价，即一堆石子的局面可以等价为有异或和个石子的局面。</p>
 <p>模板题2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1247">P1247 取火柴游戏</a></p>
 <h3 id="变形1"><a href="#变形1" class="headerlink" title="变形1"></a>变形1</h3><p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc368/tasks/abc368_f">F - Dividing Game</a></p>
 <p>每次可以将 $x$ 变为它的一个非 $x$ 约数，想到分解质因数。</p>
 <p>之后，变成一个非 $x$ 约数，就相当于取走某些质因数，等价于取石子游戏。</p>
 <p>要注意从问题的特征思考博弈。</p>
-<h2 id="SG-函数"><a href="#SG-函数" class="headerlink" title="SG 函数"></a>SG 函数</h2><p>留坑。</p>
+<h2 id="SG-函数"><a href="#SG-函数" class="headerlink" title="SG 函数"></a>SG 函数</h2><p>对于局面 $u$，定义一个 $SG$ 函数值 $f(u)$，设所有出边是 $v_1,v_2,\cdots,v_n$，则 $f(u) = \text{mex}(v_1,v_2,\cdots,v_n)$。</p>
+<p>最终局面的 $SG$ 函数值为 $0$，必败。</p>
+<p>一个局面如果连到了 $SG$ 函数值为 $0$ 的局面，那他的值一定不为 $0$，即必胜。</p>
+<p>如果全部都是不为 $0$ 的，那当前局面的 $SG$ 函数值为 $0$，即必败。</p>
+<p>既然必胜与必败只有非零和零的区别，那为什么要计算精确的 $SG$ 函数值呢？</p>
+<p>因为，在某些题目中，$SG$ 函数的值是有规律的。通过小规模打表，我们可以猜测一些结论，来帮助确定所有局面的 $SG$ 函数值。</p>
+<p>需要注意的是，目前还不清楚是否对所有游戏都一定存在规律，所以尝试一下即可。</p>
+<p>与此同时，一个游戏的 $SG$ 函数值还可以视为一堆石子，我们就可以处理组合游戏问题，转化为 Nim。</p>
 <h2 id="Wythoff-博弈"><a href="#Wythoff-博弈" class="headerlink" title="Wythoff 博弈"></a>Wythoff 博弈</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2252">P2252 [SHOI2002]取石子游戏|【模板】威佐夫博弈</a></p>
 <p>有两堆石子，数量分别为 $x_1,x_2$，每次可以取其中一堆任意个，或在两堆中取相同个数的石子，问你先手是否有必胜策略。</p>
 <p>先考虑必败局面：$(0,0)$。这时候必然无法可取，所以谁拿到这个局面，谁就寄了。</p>
@@ -388,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E8%AE%BA%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">博弈论初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">枚举型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">1.2.</span> <span class="nav-text">Nim 游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BD%A21"><span class="nav-number">1.2.1.</span> <span class="nav-text">变形1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SG-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wythoff-%E5%8D%9A%E5%BC%88"><span class="nav-number">1.4.</span> <span class="nav-text">Wythoff 博弈</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E8%AE%BA%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">博弈论初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">枚举型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">博弈图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nim-%E6%B8%B8%E6%88%8F"><span class="nav-number">1.3.</span> <span class="nav-text">Nim 游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BD%A21"><span class="nav-number">1.3.1.</span> <span class="nav-text">变形1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SG-%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">SG 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wythoff-%E5%8D%9A%E5%BC%88"><span class="nav-number">1.5.</span> <span class="nav-text">Wythoff 博弈</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
