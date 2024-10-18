@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="二分图入门前言二分图和网络流是图论中非常重要的部分，很多问题都可以通过建模转化到这上面解决。二分图和网络流的关系是密不可分的，可以将二分图看成特殊构造的网络，故其也可用网络流的算法求解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分图入门">
+<meta property="og:url" content="http://example.com/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="二分图入门前言二分图和网络流是图论中非常重要的部分，很多问题都可以通过建模转化到这上面解决。二分图和网络流的关系是密不可分的，可以将二分图看成特殊构造的网络，故其也可用网络流的算法求解。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/11/18/tiVPU7f2XoYp1R9.png">
+<meta property="article:published_time" content="2022-11-22T14:09:37.000Z">
+<meta property="article:modified_time" content="2022-11-22T14:11:02.000Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="图论">
+<meta property="article:tag" content="网络流">
+<meta property="article:tag" content="二分图">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/11/18/tiVPU7f2XoYp1R9.png">
+
+<link rel="canonical" href="http://example.com/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>二分图入门 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二分图入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-22 22:09:37 / 修改时间：22:11:02" itemprop="dateCreated datePublished" datetime="2022-11-22T22:09:37+08:00">2022-11-22</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/11/22/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="二分图入门"><a href="#二分图入门" class="headerlink" title="二分图入门"></a>二分图入门</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>二分图和网络流是图论中非常重要的部分，很多问题都可以通过建模转化到这上面解决。二分图和网络流的关系是密不可分的，可以将二分图看成特殊构造的网络，故其也可用网络流的算法求解。</p>
+<span id="more"></span>
+<h2 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>一张图，其中节点能被分成两部分，满足：</p>
+<ol>
+<li>在每部分<strong>内部</strong>，节点之间互相<strong>没有边相连</strong>。</li>
+<li>每个节点属于且仅属于一个部分。</li>
+</ol>
+<p>则称这张图为二分图。</p>
+<p>为了直观表示，一般将这两部分称为左部和右部，其中的点称为左部点和右部点。</p>
+<h3 id="判定"><a href="#判定" class="headerlink" title="判定"></a>判定</h3><p>一张图是二分图，当且仅当其中不存在奇环（即长度为奇数的环）。</p>
+<p>先证明必要性：</p>
+<p>假设这张图是二分图，并且图中存在奇环，考虑从起点开始走的过程。</p>
+<p>显然，由于二分图，每一部分内部必然没有边，于是每走一步，必然到达另一部分。</p>
+<p>我们可以进一步推出：走奇数步必然到达另一部分，走偶数步回到这一部分，与假设矛盾。</p>
+<p>之后证明充分性：</p>
+<p>假设图中全都是偶环，考虑构造二分图。</p>
+<p>使用深度优先搜索对图染色，如果找到未访问的点，就把它染上和当前点不同的颜色，如果找到访问过的点，跳过，最终一定可以构造出二分图。</p>
+<p>为什么呢？显然我们已经把图分成了两部分，那么只要证明每一部分内不会有边即可。</p>
+<p>假设有这样的边，则它连接的两个点应该是同色的，则可以断定这两个点一定处于一个环内（如果不是环，就直接染成不同色了啊），而且，这两个点被染成相同的颜色，则它们之间的路径长度一定为偶数（根据我们染色的规则），加上这个边，说明存在奇环，显然不可能是二分图。</p>
+<p>模板题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP3377">BUGLIFE - A Bug’s Life</a></p>
+<p>毒瘤 dp 题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA1627">团队分组 Team them up!</a>（细节挺多的）</p>
+<h3 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h3><p>二分图最重要的就是求最大匹配，没学过的可能不是很懂：什么是最大匹配？</p>
+<p>形象一点说，把左边的点看成男的，右边的点看成女的，边看成结婚，最大匹配相当于求最多有多少对夫妇，根据生活常识，显然一个左边的点只能匹配一个右边的点，反之亦然。</p>
+<p>学术一点的定义，就是选择一些边，满足任意两边没有公共端点，显然和上面的是等价的。</p>
+<p>常用的是匈牙利算法。</p>
+<p>匈牙利算法依次尝试给每个左部点寻找匹配（找右部点也一样），假设现在遍历到点 $i$。</p>
+<p>枚举 $i$ 的所有出边，如果有没有匹配的点，那么就选它了，反正一个点最多增加一个匹配，选了不亏。</p>
+<p>麻烦的是，有些点比较倒霉，所有出边到的点都有了匹配，我们怎么办？</p>
+<p>假设右部点 $j$ 已经有了匹配，那么我们只要让 $j$ 匹配的左部点找到另一个匹配，右部点不就空出来了，于是可以增加一组匹配。</p>
+<p>容易发现，左部点寻找匹配的过程和 $i$ 寻找匹配的过程一模一样，所以可以递归处理。</p>
+<p>如果找不到匹配，那么 $i$ 强行匹配，就不如不匹配了，因为对答案的贡献都是 $0$。</p>
+<p>放模板：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3386">P3386 【模板】二分图最大匹配</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5e2</span>+<span class="number">10</span>,M = <span class="number">5e4</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m,k,head[N],tot,tim,vis[N],mat[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">e</span>&#123;</span><br><span class="line">	<span class="type">int</span> next,to;</span><br><span class="line">&#125; edge[M];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	edge[++tot].to = y;</span><br><span class="line">	edge[tot].next = head[x];</span><br><span class="line">	head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=head[u];i;i = edge[i].next)&#123;</span><br><span class="line">		v = edge[i].to;</span><br><span class="line">		<span class="keyword">if</span> (vis[v]!=tim)&#123;</span><br><span class="line">			vis[v] = tim;</span><br><span class="line">			<span class="keyword">if</span> (!mat[v] || <span class="built_in">dfs</span>(mat[v]))&#123;</span><br><span class="line">				mat[v] = u;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		<span class="built_in">add</span>(x,y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		tim++;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">dfs</span>(i)) ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里说一下 $vis$ 数组的作用，如果一个点被 $vis$ 过，说明有人想要这个点，那么肯定不用考虑自己和这个点匹配的情况了，这能够带来一些时间上优化（虽然效果并不明显）。</p>
+<p>需要注意的是，匈牙利算法的<strong>理论时间复杂度</strong>为 $O(nm)$，这里的 $m$ 是整张图的边数，而 $n$ 则<strong>十分重要</strong>，它是左部点<strong>或</strong>右部点的点数，这意味着，当某一边的点<strong>极少</strong>时，枚举这一边的点可以带来<strong>极大的优化</strong>。</p>
+<p>还要说明，匈牙利算法的<strong>理论时间复杂度</strong>很差，但是<strong>实际表现</strong>甚至能达到 $O(n)$ 级别，这主要取决于图的形态，所以在图很随机时，可以试一下匈牙利算法，可能会有奇效（不然只能用网络流算最大匹配了）。</p>
+<h3 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h3><p>完备匹配：左右部节点数相同，都为 $n$ 个，并且最大匹配包含 $n$ 条匹配边，则称这个二分图具有完备匹配。</p>
+<p>多重匹配：左右部的每一个节点可以连 $k_i$ 条边，问你最大匹配的边数。</p>
+<p>解法有以下几种：</p>
+<ol>
+<li>拆点，一个点连 $k_i$ 条边等价于 $k_i$ 个点进行二分图最大匹配，最后连边的时候在两个节点拆出来的所有节点中连。</li>
+<li>当只有左边或右边是多重匹配的时候，把那一边 dfs $k_i$ 次，其实本质上和第一种是类似的，只不过不用连边啥的。</li>
+<li>网络流求解。</li>
+</ol>
+<h3 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/374/">372. 棋盘覆盖</a></p>
+<p>做法很简单，也很好理解，但是这是一种思路，也是第一道需要建立模型的题，所以还是建议自己先想一想。</p>
+<p>一般来说，建立二分图的模型，需要找到两个部分，满足各部分内部的点不能都选。</p>
+<p>这里，可以发现，如果按 $i+j$ 奇偶染色，正好能够符合，于是就做完了。</p>
+<p><img src="https://s2.loli.net/2022/11/18/tiVPU7f2XoYp1R9.png" alt="image-20221118183333165"></p>
+<p>练习：</p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/375/">373. 車的放置</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1640">P1640 [SCOI2010] 连续攻击游戏</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1139E">Maximize Mex</a></p>
+<h3 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/376/">374. 导弹防御塔</a></p>
+<p>看到这种可行性问题，就要想到二分。</p>
+<p>显然，如果当前时间可行，那么之后的所有时间都可行，于是，问题变成了时间 $mid$ 时，能否击退所有侵略者。</p>
+<p>发现，每个导弹只能打击一个侵略者，每个侵略者只能吃一个导弹（不然太浪费了啊），所以可以以导弹为左部点，侵略者为右部点，进行二分图匹配。</p>
+<p>具体的，就是枚举每一发导弹，看能打到哪些侵略者，能打到就连边。</p>
+<p>可能需要注意常数优化？</p>
+<h2 id="二分图进阶"><a href="#二分图进阶" class="headerlink" title="二分图进阶"></a>二分图进阶</h2><h3 id="最小点覆盖"><a href="#最小点覆盖" class="headerlink" title="最小点覆盖"></a>最小点覆盖</h3><p>求出一个最小的点集 $S$，使图中每条边都至少有一个点属于 $S$。</p>
+<p>König 定理：最小点覆盖包含的点数等于最大匹配包含的边数。</p>
+<p>转化模型一般看题目中是否有两个东西二选一，求选法之类的东西。</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>由于最大匹配中，任意两条边的两个端点都不一样，所以要使图中的每条边至少有一个点属于它，首先得让匹配边都满足这个条件，于是每条匹配边对最小点覆盖的贡献至少为 $1$，我们证明了答案的下界是最大匹配的边数。</p>
+<p>考虑构造出一个方案：</p>
+<p>假设原来我们从左部点出发，找右部点匹配，那么现在从左边的没有被匹配的点出发，再次进行增广过程，每次遍历所有出边，将这个出边到达的点做标记。显然，到达的点一定是右部点，并且有左部点和它匹配（否则可以继续增广），我们就访问和它匹配的左部点，继续标记，这个左部点再重复这一过程即可。</p>
+<p>最后，我们取左边未被标记的点，右边被标记的点，这个点集即为最小点覆盖。</p>
+<p>又因为，左边没有被标记的点，说明它是匹配点（不然要从它出发遍历，肯定标记了），必然有一个右部点和它匹配，而我们又没有取右边的点，所以这条匹配边中，只取了一个点；对于右边被标记的点，它必然有匹配边（否则我们可以让标记它的点和它匹配，构成新的增广路），而它必然访问和它匹配的左部点，也就是说，这条匹配边中，我们也只选择了一个点，所以答案就是最大匹配的边数。</p>
+<p>再来证明这样就覆盖了所有的非匹配边。</p>
+<ol>
+<li><p><del>非匹配边的左边是匹配点，右边也是匹配点。</del>你都说匹配点了，那肯定是匹配边啊！</p>
+</li>
+<li><p><del>非匹配边的左边是非匹配点，右边也是非匹配点。</del>你为啥不让它们俩匹配呢？</p>
+</li>
+<li><p>非匹配边的左边是非匹配点，右边是匹配点。</p>
+<p>既然左边是非匹配点，那么在标记的过程中必然会从它开始遍历，肯定会访问右边的匹配点，就标记了，于是这条边有一个端点在点集中，OK。</p>
+</li>
+<li><p>非匹配边的左边是匹配点，右边是非匹配点。</p>
+<p>考虑这个匹配点匹配的右边的匹配点的标记情况，如果被标记，则这个点也被标记，那么它一定会访问到非匹配点，这时左边的一个非匹配点就找到了匹配，产生增广路，不合法。</p>
+<p>所以这个点必然没有被标记，我们选的就是左边没有被标记的点，OK。</p>
+</li>
+</ol>
+<h3 id="最大独立集-最大团"><a href="#最大独立集-最大团" class="headerlink" title="最大独立集 最大团"></a>最大独立集 最大团</h3><p>最大独立集：一个点集，其中所有的点之间都没有边相连，构成的集合。</p>
+<p>最大团：一个点集，其中所有点之间都有边相连，构成的集合。</p>
+<p>容易发现，这两个概念完全相反，于是我们如果求出了最大独立集，就可以建反图，于是原来的最大独立集就成了最大团。</p>
+<p>$|最大独立集| = n-最大匹配$</p>
+<p>因为最大匹配的大小和最小点覆盖的大小一样，而这些点正好覆盖了所有的边，那么其他的点中没有两个点是有同一条边相连的，所以剩下的点恰好构成最大独立集。</p>
+<p>最大团可以建反图求解最大独立集。</p>
+<p><strong>值得注意的是，一般图中的最大团、最大独立集问题是 NPC 问题，你可以理解为只能写暴力，如果转化到了这类问题上，说明你一定漏掉了题目中的性质或信息</strong>。</p>
+<h3 id="最小路径点覆盖"><a href="#最小路径点覆盖" class="headerlink" title="最小路径点覆盖"></a>最小路径点覆盖</h3><p>最小路径点覆盖 = 最小的+用不相交的路径+把所有点覆盖 的路径数量。</p>
+<p>我们对原图中的每一个点 $i$，都建立一个新点 $i+n$，对于原图中的每一条边 $(x,y)$，都从 $x$ 向 $y+n$ 连边，则称这个新图为原图的拆点二分图。</p>
+<p>可以告诉你，$|最小路径点覆盖| = n-|拆点二分图最大匹配|$。</p>
+<h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><p>原图中，被路径经过的点，由于路径不交，只会被经过一次，所以入度和出度为 $1$，对于路径的结尾，它是没有出度的，对于路径的开头，它是没有入度的。</p>
+<p>考虑拆点二分图中的匹配，显然一个有出度的点，必然匹配它到达的点，而那些没有出度的，就不会匹配任何点，于是路径数等于非匹配点的数量。</p>
+<p>我们要使路径数最小，则非匹配点的数量最小，于是就是求最大匹配。</p>
+<h3 id="最小路径重复点覆盖"><a href="#最小路径重复点覆盖" class="headerlink" title="最小路径重复点覆盖"></a>最小路径重复点覆盖</h3><p>就是在上面的限制下可以相交。</p>
+<p>我们来看看两个路径相交的情况：</p>
+<p>假设一个路径是 $x\rightarrow y\rightarrow z$，另一个路径是 $p\rightarrow y\rightarrow q$，则我们可以连接 $p\rightarrow q$，这样就不会相交了，并且路径也是两条。我们对于所有能连通的点对，都连一条边，最后就是求最小路径覆盖了，不重复也不会影响答案。</p>
+<p>你有可能说，如果这两个路径只有一个点不同，那怎么办？</p>
+<p>假设这两个路径表示为 $x\rightarrow y$，$x\rightarrow z$，那么，我们其实可以直接走 $x\rightarrow y$ 和 $z$。</p>
+<p>于是，对原图求传递闭包，之后在新图中求最小路径覆盖即可。</p>
+<h3 id="例1-1"><a href="#例1-1" class="headerlink" title="例1"></a>例1</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA1194">Machine Schedule</a></p>
+<p>难点在于模型的构建。</p>
+<p>观察题目，容易发现，每个任务必须通过两个机器之一解决，也就是说，把任务看成边，则我们要求的就是最小点覆盖。</p>
+<p>$A,B$ 的 $n,m$ 种模式分别当左右部点，做一次二分图最大匹配即可。</p>
+<p>练习：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/379/">377. 泥泞的区域</a></p>
+<h3 id="例2-1"><a href="#例2-1" class="headerlink" title="例2"></a>例2</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6220">P6220 [COCI2019-2020#6] Skandi</a></p>
+<p>不要盯着 $1$ 看，因为最终决定是否成功的还是所有的 $0$，而且每个 $0$ 要么从上面，要么从左边，符合二选一条件，我们把向右的 $1$ 放到左边，向下的 $1$ 放到右边，一个既能从上面到达，又能从左边到达的 $0$，就相当于一条边，而最终的答案就是求最小的点集，使得所有边都能被覆盖。</p>
+<p>直接求二分图最小点覆盖即可。</p>
+<p>这道题特殊的地方在于输出方案，按上面证明里面构造的方法输出即可。</p>
+<h3 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3355">P3355 骑士共存问题</a></p>
+<p>我们拿出一个骑士，找到它放了之后不能放的位置，显然这两个位置中只能放一个。</p>
+<p>所以，把这种东西看成一条边，我们最后得到的骑士点集中，没有任何两个点之间是有边的，这就是最大独立集。</p>
+<p>可以应用黑白染色技巧，分出左部点和右部点，这样才能保证每个部分内部没有边相连。</p>
+<h3 id="例4"><a href="#例4" class="headerlink" title="例4"></a>例4</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA1184">Air Raid</a></p>
+<p>找一些不交的路径，使每个点都被经过，就是求最小路径点覆盖。</p>
+<p>套模板即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">255</span>,M = <span class="number">2e4</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> t,n,m,head[N],tot,vis[N],tim,mat[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">e</span>&#123;</span><br><span class="line">	<span class="type">int</span> next,to;</span><br><span class="line">&#125; edge[M];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	edge[++tot].to = y;</span><br><span class="line">	edge[tot].next = head[x];</span><br><span class="line">	head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=head[u];i;i = edge[i].next)&#123;</span><br><span class="line">		v = edge[i].to;</span><br><span class="line">		<span class="keyword">if</span> (vis[v]!=tim)&#123;</span><br><span class="line">			vis[v] = tim;</span><br><span class="line">			<span class="keyword">if</span> (!mat[v] || <span class="built_in">dfs</span>(mat[v]))&#123;</span><br><span class="line">				mat[v] = u;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">clr</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(head,<span class="number">0</span>,<span class="built_in">sizeof</span>(head));</span><br><span class="line">	<span class="built_in">memset</span>(mat,<span class="number">0</span>,<span class="built_in">sizeof</span>(mat));</span><br><span class="line">	tot = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span> (t--)&#123;</span><br><span class="line">		<span class="built_in">clr</span>();</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="type">int</span> x,y;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			<span class="built_in">add</span>(x,y+n);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			tim++;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">dfs</span>(i)) ans++;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;n-ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="例5"><a href="#例5" class="headerlink" title="例5"></a>例5</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/381/">379. 捉迷藏</a></p>
+<p>先说结论：答案就是原图的最小路径重复点覆盖。</p>
+<p>显然，我们如果找到了 $k$ 条路径，那么每条路径中最多选一个点，于是上限就是这个。</p>
+<p>现在，我们着手构造方案。</p>
+<p>显然，每增加一条路径，必然会覆盖至少一个从未被覆盖过的点。</p>
+<p>我们取这些新点中在路径最末端的点。</p>
+<p>假设现在还是有两个点，它们能够互相到达，假设是 $x\rightarrow y$，那么考虑新点为 $x$ 的这条路径，它其实是可以扩展到 $y$ 的（因为 $x$ 是最末端的点），所以不会出现这种情况。</p>
+<p>（注意，以上内容纯笔者口胡，如果您能 Hack，请礼貌的提出来，谢谢）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e2</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m,head[N],tot,a[N][N],vis[N],tim,mat[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">e</span>&#123;</span><br><span class="line">	<span class="type">int</span> next,to;</span><br><span class="line">&#125; edge[N*N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	edge[++tot].to = y;</span><br><span class="line">	edge[tot].next = head[x];</span><br><span class="line">	head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=head[u];i;i = edge[i].next)&#123;</span><br><span class="line">		v = edge[i].to;</span><br><span class="line">		<span class="keyword">if</span> (vis[v]!=tim)&#123;</span><br><span class="line">			vis[v] = tim;</span><br><span class="line">			<span class="keyword">if</span> (!mat[v] || <span class="built_in">dfs</span>(mat[v]))&#123;</span><br><span class="line">				mat[v] = u;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		a[x][y] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">				<span class="keyword">if</span> (a[j][i] &amp;&amp; a[i][k]) a[j][k] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i][j]) <span class="built_in">add</span>(i,j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		tim++;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">dfs</span>(i)) ans++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;n-ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag"># 网络流</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag"># 二分图</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/21/Pinely-Round-1-D-%E9%A2%98%E8%A7%A3/" rel="prev" title="Pinely Round 1 D 题解">
+      <i class="fa fa-chevron-left"></i> Pinely Round 1 D 题解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/27/%E9%80%80%E5%BD%B9/" rel="next" title="退役">
+      退役 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">二分图入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">二分图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D"><span class="nav-number">1.2.3.</span> <span class="nav-text">匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.4.</span> <span class="nav-text">一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">1.2.5.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B2"><span class="nav-number">1.2.6.</span> <span class="nav-text">例2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E8%BF%9B%E9%98%B6"><span class="nav-number">1.3.</span> <span class="nav-text">二分图进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">1.3.1.</span> <span class="nav-text">最小点覆盖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86-%E6%9C%80%E5%A4%A7%E5%9B%A2"><span class="nav-number">1.3.2.</span> <span class="nav-text">最大独立集 最大团</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">1.3.3.</span> <span class="nav-text">最小路径点覆盖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E9%87%8D%E5%A4%8D%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">1.3.4.</span> <span class="nav-text">最小路径重复点覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B1-1"><span class="nav-number">1.3.5.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B2-1"><span class="nav-number">1.3.6.</span> <span class="nav-text">例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B3"><span class="nav-number">1.3.7.</span> <span class="nav-text">例3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B4"><span class="nav-number">1.3.8.</span> <span class="nav-text">例4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B5"><span class="nav-number">1.3.9.</span> <span class="nav-text">例5</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">86</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="化学周练6B 题解T1A：葡萄糖中还有羟基，所以不能判断是谁被氧化了。 B：$NO_2$ 并没有全部转化，只是转化了一部分，所以现在 $NO_2$ 的量比原来多，颜色会比原来深。 C：和 $Mg$ 在 $CO_2$ 中燃烧差不多，就是还原性的问题。 D：如果水解是吸热过程，那加热后应该会吸收 $H^+$，使 pH 增大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="化学周练6B 题解">
+<meta property="og:url" content="http://example.com/2023/05/08/%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="化学周练6B 题解T1A：葡萄糖中还有羟基，所以不能判断是谁被氧化了。 B：$NO_2$ 并没有全部转化，只是转化了一部分，所以现在 $NO_2$ 的量比原来多，颜色会比原来深。 C：和 $Mg$ 在 $CO_2$ 中燃烧差不多，就是还原性的问题。 D：如果水解是吸热过程，那加热后应该会吸收 $H^+$，使 pH 增大。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-07T16:08:49.000Z">
+<meta property="article:modified_time" content="2023-05-07T16:10:27.000Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Test">
+<meta property="article:tag" content="周练">
+<meta property="article:tag" content="化学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/05/08/%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>化学周练6B 题解 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/08/%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          化学周练6B 题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-08 00:08:49 / 修改时间：00:10:27" itemprop="dateCreated datePublished" datetime="2023-05-08T00:08:49+08:00">2023-05-08</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/05/08/%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/08/%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="化学周练6B-题解"><a href="#化学周练6B-题解" class="headerlink" title="化学周练6B 题解"></a>化学周练6B 题解</h1><h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><p>A：葡萄糖中还有羟基，所以不能判断是谁被氧化了。</p>
+<p>B：$NO_2$ 并没有全部转化，只是转化了一部分，所以现在 $NO_2$ 的量比原来多，颜色会比原来深。</p>
+<p>C：和 $Mg$ 在 $CO_2$ 中燃烧差不多，就是还原性的问题。</p>
+<p>D：如果水解是吸热过程，那加热后应该会吸收 $H^+$，使 pH 增大。</p>
+<span id="more"></span>
+<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><p>A：含有碳碳双键，可以和溴加成，有醛基，可以被溴氧化成羧基，反应正确。</p>
+<p>$\color{red}B$：不知道是哪里的反应。</p>
+<p>C：水垢就是固体物质，应该当作沉淀处理，离子方程式里面不是电解质就一定写成电离形式，而是要看实际情况，比如侯氏制碱法。</p>
+<p>D：酚羟基和羧基的酸性很弱，不能生成酸性更强的硫酸。</p>
+<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><p>这道题看了好久。</p>
+<p>一般酯类物质分解成两个产物就是水解反应生成羧酸和醇，看到下面的两个氧化就应该想到是醇变成羧酸的过程。</p>
+<p>但是，上面为什么还要加 $H_2SO_4$ 呢？</p>
+<p>在课本 P78 写到，酯类的水解反应有两种形式，一种是在<strong>稀硫酸</strong>和加热的条件下发生的可逆反应，一种是和 $NaOH$ 发生的反应，其中羧酸的 $-OH$ 中的 $H$ 被 $Na$ 取代了，所以 B 应该是 $C_4H_9COONa$！</p>
+<p>现在加硫酸，就是强酸制弱酸的过程了，生成的 D 才是羧酸。</p>
+<p>D 和 F 是同分异构体，那就只能都是 $5$ 个碳。</p>
+<p>唯一要注意的是不能分成 $4+1$ 考虑，必须当成整体。</p>
+<p>之后再除去同种物质，就是 $16-4=12$ 种。</p>
+<h2 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h2><p>A：乙醇易挥发，不能检验。</p>
+<p>B：</p>
+<p>需要先知道酸性强弱，$CH_3COOH&gt;H_2CO_3&gt;C_6H_6OH&gt;H_2O&gt;CH_3CH_2OH$。</p>
+<p>醋酸加到碳酸钠里面，会生成碳酸，这一步没问题。</p>
+<p>但是，醋酸和碳酸都可以挥发，不知道是谁比苯酚强。</p>
+<p>所以，应该再加一个 $NaHCO_3$ 溶液试管吸收挥发的醋酸，生成更多的碳酸，一举两得。</p>
+<p>$\color{red}其实这个实验是书上的原实验，要多看书！$</p>
+<p>C：</p>
+<p>这个实验貌似做过，但是忘了，还是要多看实验视频！</p>
+<p>试管里就是正常的反应条件，饱和碳酸钠溶液作用有二：</p>
+<ol>
+<li>吸收乙酸，强酸制弱酸。</li>
+<li>吸收乙醇，乙醇在水溶液中溶解。</li>
+</ol>
+<p>$\color{red}就是不知道要不要加碎瓷片？$</p>
+<p>D：</p>
+<p>虽然说氨气在水中溶解度很大，但是这样溶太快了，压强变化大，会倒吸，所以要在前面加防倒吸装置。</p>
+<h2 id="T5"><a href="#T5" class="headerlink" title="T5"></a>T5</h2><p>D：</p>
+<p>苯和 $KMnO_4$ 好像不好直接反应，甲基竟然可以被直接氧化为 $COOH$？活久见。</p>
+<h2 id="T6"><a href="#T6" class="headerlink" title="T6"></a>T6</h2><p>D：$8$ 个酚羟基和一个酯基，一共 $9$ 个 $NaOH$。</p>
+<h2 id="T7"><a href="#T7" class="headerlink" title="T7"></a>T7</h2><p>A：</p>
+<p>亲水基，如 $-NH_2$ 很少，而疏水基很多，所以难溶。</p>
+<p>$\color{red}要补充相关知识$</p>
+<h2 id="T8"><a href="#T8" class="headerlink" title="T8"></a>T8</h2><p>D：</p>
+<p>乙基丙烯酸正己酯，注意这里的乙基是取代基，而丙烯才是主链，所以乙基应该连到丙烯的第二个碳上。</p>
+<p>$\color{red}这里的酸是啥意思？$</p>
+<h2 id="T9"><a href="#T9" class="headerlink" title="T9"></a>T9</h2><p>A 中的酚羟基和酯基都可以反应，显然最右边的碳连的是酯基，所以它会生成甲酸钠，左边则又会生成一个酚羟基，继续反应，消耗 $3mol$。</p>
+<p>B 中只有酚羟基和羧基可以反应，消耗 $2mol$。</p>
+<h2 id="T10"><a href="#T10" class="headerlink" title="T10"></a>T10</h2><p>B：好像只要结构不对称就有 $8$ 组。</p>
+<p>$\color{red}回头再看一下怎么判断H的环境$</p>
+<h2 id="T11"><a href="#T11" class="headerlink" title="T11"></a>T11</h2><p>首先，盐酸可以把苯胺转化为易溶于水的苯胺酸盐，进入到水相 I 中，再和 $NaOH$ 反应，貌似是 $\color{red}强碱制弱碱$，生成苯胺。</p>
+<p>苯甲酸微溶于水，到有机相 I 中，之后和 $Na_2CO_3$ 溶液反应，生成苯甲酸钠，到水相 II 中，再和盐酸反应，生成苯甲酸。</p>
+<p>苯胺是液体，苯甲酸是固体，所以 1 和 3 分离产物的方式不同，B 错误。</p>
+<p>甲苯则一直在有机相中，不和别的东西反应，在有机相 II 中被剔除，C 正确。</p>
+<h2 id="T12"><a href="#T12" class="headerlink" title="T12"></a>T12</h2><p>A：有 $12$ 种，$\color{red}至于图片之后再附$。</p>
+<h2 id="T13"><a href="#T13" class="headerlink" title="T13"></a>T13</h2><p>D 错的还是很明显的，没啥键能加聚。</p>
+<p>$\color{red}C不是很明白$。</p>
+<h2 id="T14"><a href="#T14" class="headerlink" title="T14"></a>T14</h2><p>$\color{red}机理题，不是很明白$。</p>
+<h2 id="T15"><a href="#T15" class="headerlink" title="T15"></a>T15</h2><p>A：决速步一般是化学能变化最大的步骤，可以看到 $I,IV$ 最大，所以是决速步。</p>
+<p>B：$\color{red}不是很明白答案的成键方式$，但是既然有这个快速平衡，而且 $C-O$ 键其实也容易断，所以可以暂且认为有 $-^{18}OH$。</p>
+<p>C：不会有，因为 $CH_3O^-$ 的 $O$ 在反应中都没啥变化，$^{18}O$ 变化的位置只是 $-O$ 和 $-OH$，所以不可能出现。</p>
+<p>D：很正确。</p>
+<h2 id="T16"><a href="#T16" class="headerlink" title="T16"></a>T16</h2><p>A：都有 $N,O$ 了，肯定不是烃啊。</p>
+<p>B：有氨基，可以和盐酸反应，有羧基，可以和 $NaOH$ 反应。</p>
+<p>C：其他的都不是醛基，不能加成，只有 $4mol$。</p>
+<p>D：$Cl$ 可以作为卤代烃的一部分水解，生成醇羟基，但是如果氧化成醛基，那这个碳上就有 $6$ 条键了，所以不行。</p>
+<h2 id="T17"><a href="#T17" class="headerlink" title="T17"></a>T17</h2><p>自己的推断方法：</p>
+<p>$4$ 后面的反应还是很明了的，$4\rightarrow 5$ 是加成，$5\rightarrow 6$ 是加成，$6\rightarrow 7$ 是水解。</p>
+<p>A：如果 N 和 Y 是同种物质，你干嘛费这么大劲再合成一堆东西呢？</p>
+<p>B：首先，环己二烯的说法不是很准确，因为有同分异构体，而且加成也可以有别的产物，比如只加成一个键（估计是反应条件决定？）</p>
+<p>C：$\color{red}不是很懂，也没怎么看懂答案$。</p>
+<p>D：第一步就是取代，有双键生成就是消去，双键最后消失就是加成。</p>
+<h2 id="T18"><a href="#T18" class="headerlink" title="T18"></a>T18</h2><p>A：显然是催化剂。</p>
+<p>B：有酰胺基，可以反应。</p>
+<p>C：$\color{red}不知道$。</p>
+<p>D：$\color{red}不知道$。</p>
+<h2 id="T19"><a href="#T19" class="headerlink" title="T19"></a>T19</h2><p>A：左边得到 $H$，要得电子，所以 a 是负极。</p>
+<p>B：得到 $-OH$ 的是催化电极。</p>
+<p>C：右边失去两个 $H$，左边得到两个 $H$，所以一换一，但是右边本身也要消耗，所以一共消耗 $2mol$。</p>
+<p>D：得电子。</p>
+<h2 id="T20"><a href="#T20" class="headerlink" title="T20"></a>T20</h2><p>看选项得知上面有 $+$ 的是酸，根据强酸制弱酸，选 A。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Test/" rel="tag"># Test</a>
+              <a href="/tags/%E5%91%A8%E7%BB%83/" rel="tag"># 周练</a>
+              <a href="/tags/%E5%8C%96%E5%AD%A6/" rel="tag"># 化学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/16/%E5%8D%9A%E5%AE%A2%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95/" rel="prev" title="博客临时目录">
+      <i class="fa fa-chevron-left"></i> 博客临时目录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/14/%E6%98%A5%E9%9B%A8/" rel="next" title="春雨">
+      春雨 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%96%E5%AD%A6%E5%91%A8%E7%BB%836B-%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">化学周练6B 题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1"><span class="nav-number">1.1.</span> <span class="nav-text">T1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">1.2.</span> <span class="nav-text">T2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">1.3.</span> <span class="nav-text">T3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T4"><span class="nav-number">1.4.</span> <span class="nav-text">T4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T5"><span class="nav-number">1.5.</span> <span class="nav-text">T5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T6"><span class="nav-number">1.6.</span> <span class="nav-text">T6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T7"><span class="nav-number">1.7.</span> <span class="nav-text">T7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T8"><span class="nav-number">1.8.</span> <span class="nav-text">T8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T9"><span class="nav-number">1.9.</span> <span class="nav-text">T9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T10"><span class="nav-number">1.10.</span> <span class="nav-text">T10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T11"><span class="nav-number">1.11.</span> <span class="nav-text">T11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T12"><span class="nav-number">1.12.</span> <span class="nav-text">T12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T13"><span class="nav-number">1.13.</span> <span class="nav-text">T13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T14"><span class="nav-number">1.14.</span> <span class="nav-text">T14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T15"><span class="nav-number">1.15.</span> <span class="nav-text">T15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T16"><span class="nav-number">1.16.</span> <span class="nav-text">T16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T17"><span class="nav-number">1.17.</span> <span class="nav-text">T17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T18"><span class="nav-number">1.18.</span> <span class="nav-text">T18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T19"><span class="nav-number">1.19.</span> <span class="nav-text">T19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T20"><span class="nav-number">1.20.</span> <span class="nav-text">T20</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">86</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

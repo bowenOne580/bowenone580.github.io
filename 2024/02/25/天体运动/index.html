@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="天体运动基本物理量万有引力：$F &#x3D; \frac{GMm}{R^2}$。 结合圆周运动公式，可以推出： $\frac{GM}{R^2} &#x3D; a &#x3D; \frac{v^2}{R} &#x3D; \omega^2R &#x3D; \frac{4\pi^2}{T^2}R$​ 我们有一个重要的发现：一个在轨道上运动的物体，它的运动状态只和 $R,M$​ 有关，和这个物体本身无关。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="天体运动">
+<meta property="og:url" content="http://example.com/2024/02/25/%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="天体运动基本物理量万有引力：$F &#x3D; \frac{GMm}{R^2}$。 结合圆周运动公式，可以推出： $\frac{GM}{R^2} &#x3D; a &#x3D; \frac{v^2}{R} &#x3D; \omega^2R &#x3D; \frac{4\pi^2}{T^2}R$​ 我们有一个重要的发现：一个在轨道上运动的物体，它的运动状态只和 $R,M$​ 有关，和这个物体本身无关。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/02/25/OHM4yh5I9EVgBsQ.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/25/xL18JuBkOCYbmor.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/25/k31Eo2QuvfgiTIR.png">
+<meta property="article:published_time" content="2024-02-25T11:52:35.000Z">
+<meta property="article:modified_time" content="2024-02-25T12:10:39.000Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="WHK">
+<meta property="article:tag" content="物理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/02/25/OHM4yh5I9EVgBsQ.png">
+
+<link rel="canonical" href="http://example.com/2024/02/25/%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>天体运动 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/25/%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          天体运动
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-02-25 19:52:35 / 修改时间：20:10:39" itemprop="dateCreated datePublished" datetime="2024-02-25T19:52:35+08:00">2024-02-25</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/02/25/%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/02/25/%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="天体运动"><a href="#天体运动" class="headerlink" title="天体运动"></a>天体运动</h1><h2 id="基本物理量"><a href="#基本物理量" class="headerlink" title="基本物理量"></a>基本物理量</h2><p>万有引力：$F = \frac{GMm}{R^2}$。</p>
+<p>结合圆周运动公式，可以推出：</p>
+<p>$\frac{GM}{R^2} = a = \frac{v^2}{R} = \omega^2R = \frac{4\pi^2}{T^2}R$​</p>
+<p>我们有一个重要的发现：一个在轨道上运动的物体，它的运动状态只和 $R,M$​ 有关，和这个物体本身无关。</p>
+<span id="more"></span>
+<p>建议不要把 $v,w,T$​​ 的表达式背下来，这样容易错。考场多写一步可以提高正确率。</p>
+<p><strong>一定要注意，这里的 $R$ 都是行星到天体中心的距离，不要和天体半径混淆。</strong></p>
+<p><strong>做题时，如果遇到 $R = kr$ 之类的式子，一定要先用 $R,r$ 表示，最后再把关系带入，这样不容易错。</strong></p>
+<h2 id="开普勒三定律"><a href="#开普勒三定律" class="headerlink" title="开普勒三定律"></a>开普勒三定律</h2><p>第一定律：行星绕太阳运动的轨道是<strong>椭圆</strong>，太阳在椭圆的一个<strong>焦点</strong>上。（做题时一般还是圆）</p>
+<p>第二定律：任何行星在<strong>相同时间内</strong>和太阳的连线扫过的<strong>面积</strong>相等。（面积相等的轨道，周期 $T$ 相同）</p>
+<p><strong>第三定律：所有行星轨道半长轴 $a$ 的三次方和周期 $T$ 的平方的比为定值。</strong></p>
+<p>做题时，最可能用到的是开普勒第三定律，它的数学形式为：$\frac{a^3}{T^2} = C$（$C$​ 只和中心天体有关）</p>
+<h2 id="重要公式"><a href="#重要公式" class="headerlink" title="重要公式"></a>重要公式</h2><h3 id="三个速度"><a href="#三个速度" class="headerlink" title="三个速度"></a>三个速度</h3><p>第一宇宙速度：卫星的最小发射速度，最大环绕速度，$v_1 = 7.9km/s$。</p>
+<p>第二宇宙速度：卫星挣脱地球引力，离开地球的最小速度，$v_2 = \sqrt{2}v_1 = 11.2km/s$。</p>
+<p>第三宇宙速度：卫星挣脱太阳引力，离开太阳系的最小速度，$v_3 = 16.7km/s$​。</p>
+<p>三个速度都是卫星发射升空时的速度。</p>
+<p>这里有一个神奇的关系：$v_2 = \sqrt{2}v_1$，我们会在”能量关系“部分推导。</p>
+<p><strong>一定要把三个速度的具体值记下来，考试时默认你会背的。</strong></p>
+<h3 id="黄金代换与天体密度"><a href="#黄金代换与天体密度" class="headerlink" title="黄金代换与天体密度"></a>黄金代换与天体密度</h3><p>黄金代换：$gR^2 = GM$。在不考虑地球自转时，将基本公式 $\frac{GM}{R^2} = a$ 中的 $a$ 用 $g$ 代替，$R$ 代入地球半径即可得出此式。</p>
+<h4 id="天体密度的计算"><a href="#天体密度的计算" class="headerlink" title="天体密度的计算"></a>天体密度的计算</h4><p>$\rho = \frac{M}{V} = \frac{M}{\frac{4}{3}\pi R^3}$</p>
+<p>主要任务就是求 $M,R$。</p>
+<ol>
+<li><p>利用地上</p>
+<p>如果<strong>知道了地面上的重力加速度 $g$，在知道 $R$ 和 $M$ 中的一个时</strong>，使用黄金代换，即可求得另一个。</p>
+</li>
+<li><p>利用天上</p>
+<p>首先，一个卫星的参数有 $v,\omega,T,r$，<strong>任意知道其中两个</strong>，就可以推出所有的量，假设我们已知其中两个量，求出了 $T,r$。</p>
+<p>之后，利用 $\frac{GM}{r^2} = \frac{4\pi^2}{T^2}r$，求得 $M = \frac{4\pi^2r^3}{GT^2}$。</p>
+<p>如果<strong>知道天体的半径</strong> $R$，即可求得 $\rho = \frac{3\pi^2r^3}{GT^2R^3}$。</p>
+<p>对于近地卫星来说，我们甚至不用知道 $R$，因为 $r = R$，直接求得 $\rho = \frac{3\pi^2}{GT^2}$​。</p>
+</li>
+</ol>
+<h4 id="重力加速度的计算"><a href="#重力加速度的计算" class="headerlink" title="重力加速度的计算"></a>重力加速度的计算</h4><p>$g$ 在整个天体章节中，只在黄金代换中出现，求重力加速度也是求 $M,R$，利用黄金代换，解出 $g$。</p>
+<p>一般来说，$M$ 和 $R$ 都会与卫星有关，拿卫星已知的运动量（$v,\omega,T$​）推一下即可。</p>
+<h2 id="能量关系"><a href="#能量关系" class="headerlink" title="能量关系"></a>能量关系</h2><p>对于一个质量为 $m$ 的行星，其运行在半径为 $R$ 的轨道上，我们定义其引力势能为 $E_p = -\frac{GMm}{R}$，零势能点为无穷远点。</p>
+<p>这里的负号很好理解，行星从无穷远点向地球靠近，万有引力做正功，势能减少，就变成负的了。</p>
+<p>要求动能，可以利用 $\frac{GM}{R^2} = \frac{v^2}{R}$，求得 $v^2 = \frac{GM}{R}$，则 $E_k = \frac{1}{2}mv^2 = \frac{GMm}{2R}$。</p>
+<p>那么，有一个美妙的关系：$E_p = -2E_k$。</p>
+<p>对于机械能：$E = -E_k = \frac{1}{2}E_p$。</p>
+<p>而且，$R$ 越大，$E_k$ 越小，$E_p$ 越大，$E$​ 越大。</p>
+<p>现在，我们再来看第一和第二宇宙速度。</p>
+<p>第一宇宙速度，是发射的最小速度，即此速度所需的向心力和万有引力相等 $\frac{GM}{R^2} = \frac{v^2}{R}$，得 $v_1 = \sqrt{\frac{GM}{R}}$。</p>
+<p>第二宇宙速度，是卫星离开地球的发射速度，即卫星到达最远处的零势能点，动能全部转化为势能，$\frac{1}{2}mv^2 = \frac{GMm}{R}$，得 $v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2}v_1$。</p>
+<h2 id="球上和球内"><a href="#球上和球内" class="headerlink" title="球上和球内"></a>球上和球内</h2><p>近地卫星：轨道半径和地球半径相同的卫星，但地球不提供支持力。</p>
+<p>赤道上物体：在地球表面的”卫星“。</p>
+<p>比较二者，发现 $R$ 相同，那么 $F$ 相同，所以 $v,\omega,T$ 都相同吗？</p>
+<p>并不是。<strong>在赤道上的物体，受地球自转的影响，万有引力的一部分要用来提供向心力，支持力就小于万有引力</strong>，满足：</p>
+<p>$\frac{GMm}{R^2}-mg = m\frac{4\pi^2}{T^2}R_{自转}$​</p>
+<p><strong>我们常说的重力，其实是万有引力的分力</strong>，也就是这里的 $mg$。</p>
+<p>不过，在地球两极，自转半径 $R_{自转} = 0$，是不存在向心力的，重力等于万有引力。</p>
+<p>由于左边多减了个 $mg$，所以赤道上的物体，$v$ 比近地卫星小。</p>
+<p>同步卫星：$T$ 和赤道上物体的 $T$ 相等。</p>
+<p>要注意的是，同步卫星可以一直停留在一点上方，也可以每 $24h$ 经过同一点。（是否绕赤道转动）</p>
+<p>地下的物体：$mg_地 = \frac{GMm}{R^3}r$。</p>
+<p><img src="https://s2.loli.net/2024/02/25/OHM4yh5I9EVgBsQ.png" alt="image.png"></p>
+<p>假设物体距离地心为 $r$。</p>
+<p>球壳对球内任意一点作用力都为 $0$，于是可以把 $r$ 以外的部分看成一个巨大的球壳。</p>
+<p>现在，问题转化为求一个半径为 $r$ 的”小地球“的万有引力。</p>
+<p>$\rho = \frac{M}{\frac{4}{3}\pi R^3}$</p>
+<p>$m = \rho \frac{4}{3}\pi r^3 = \frac{Mr^3}{R^3}$</p>
+<p>$g地 = \frac{Gm}{r^2} = \frac{GMr}{R^3}$</p>
+<h2 id="卫星变轨"><a href="#卫星变轨" class="headerlink" title="卫星变轨"></a>卫星变轨</h2><p>卫星变轨，最重要的就是对过程的分析。</p>
+<p><img src="https://s2.loli.net/2024/02/25/xL18JuBkOCYbmor.png" alt="QQ截图20240225183824.png"></p>
+<p>首先，要脱离现在的轨道，要么加速，要么减速，这里以加速为例，分析其效果。</p>
+<p>$v$ 增大，维持圆周运动所需的向心力 $F_需$ 增大，但万有引力不变，就无法抓住物体，做离心运动。</p>
+<p><img src="https://s2.loli.net/2024/02/25/k31Eo2QuvfgiTIR.png" alt="image.png"></p>
+<p>比如这里，在 $P$ 点从 $1$ 轨道变到 $2$ 轨道就是上述过程，于是在 $P$ 点时的速度 $v_2&gt;v_1$。</p>
+<p>一般来说，加速后，物体会到一个更大的轨道上，我们只需要看轨道的大小，就可以知道是加速还是减速。</p>
+<p>比如在 $Q$ 点从 $2$ 到 $3$ 的变轨，$3$ 的轨道比 $2$ 大，于是应该加速，$v_3&gt;v_2$。</p>
+<p>容易推知，减速就是其反过程。</p>
+<p>但是，这里有一个浅显的问题：如果 $v_2&gt;v_1$，$v_3&gt;v_2$，那么 $v_3&gt;v_1$。但是，圆周轨道应该 $R$ 大 $v$ 小才对啊！</p>
+<p>其实，这里的两个 $v_2$ 并不相等。</p>
+<p>$P$ 处是近地点，势能最小，动能最大，$Q$ 处是远地点，势能大了，动能就小了，于是 $v_P&gt;v_Q$。</p>
+<p>最后，对于 $P,Q$ 两点，受到的万有引力相等，所以加速度 $a$ 相等。但是，由于椭圆轨道不遵循 $F = m\frac{v^2}{R}$，所以速度 $v$​ 不相等。</p>
+<p>对于轨道的周期 $T$，我们可以用开普勒第三定律分析。</p>
+<p>$a_1&lt;a_2&lt;a_3$，所以 $T_1&lt;T_2&lt;T_3$​。</p>
+<h2 id="双星问题"><a href="#双星问题" class="headerlink" title="双星问题"></a>双星问题</h2><p>两个星球只受彼此间万有引力作用，可以看成都绕某一固定点运动，$\omega,T$ 相同。</p>
+<p>$\frac{r_1}{r_2} = \frac{m_2}{m_1}$</p>
+<p>$T = 2\pi\sqrt{\frac{L^3}{G(m_1+m_2)}},\omega = \sqrt{\frac{G(m_1+m_2)}{L^3}}$</p>
+<p> $\omega,T$ 的计算，可以类比成绕一个质量为 $m_1+m_2$ 的恒星，做半径为 $L$​ 的运动。</p>
+<h2 id="星球瓦解"><a href="#星球瓦解" class="headerlink" title="星球瓦解"></a>星球瓦解</h2><p>当星球自转越来越快时，星球对赤道上的物体的引力不足以提供向心力时，物体将会 “飘起来”，进一步导致星球瓦解，其临界条件是 $\frac{GMm}{R^2} = m\frac{4\pi^2}{T^2}R$。</p>
+<h2 id="物理学史"><a href="#物理学史" class="headerlink" title="物理学史"></a>物理学史</h2><p>$G$ 是由卡文迪什测出的。</p>
+<p>时间由早到晚：哥白尼（日心说），伽利略，开普勒。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/WHK/" rel="tag"># WHK</a>
+              <a href="/tags/%E7%89%A9%E7%90%86/" rel="tag"># 物理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/02/23/%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" rel="prev" title="想做的事">
+      <i class="fa fa-chevron-left"></i> 想做的事
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/09/%E8%BF%91%E4%BB%A3%E7%89%A9%E7%90%86/" rel="next" title="近代物理">
+      近代物理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A9%E4%BD%93%E8%BF%90%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">天体运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%89%A9%E7%90%86%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">基本物理量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%99%AE%E5%8B%92%E4%B8%89%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">开普勒三定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">重要公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%80%9F%E5%BA%A6"><span class="nav-number">1.3.1.</span> <span class="nav-text">三个速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%84%E9%87%91%E4%BB%A3%E6%8D%A2%E4%B8%8E%E5%A4%A9%E4%BD%93%E5%AF%86%E5%BA%A6"><span class="nav-number">1.3.2.</span> <span class="nav-text">黄金代换与天体密度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A9%E4%BD%93%E5%AF%86%E5%BA%A6%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">天体密度的计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%8A%9B%E5%8A%A0%E9%80%9F%E5%BA%A6%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">重力加速度的计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">能量关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%83%E4%B8%8A%E5%92%8C%E7%90%83%E5%86%85"><span class="nav-number">1.5.</span> <span class="nav-text">球上和球内</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E5%8F%98%E8%BD%A8"><span class="nav-number">1.6.</span> <span class="nav-text">卫星变轨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E6%98%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.</span> <span class="nav-text">双星问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%9F%E7%90%83%E7%93%A6%E8%A7%A3"><span class="nav-number">1.8.</span> <span class="nav-text">星球瓦解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%AD%A6%E5%8F%B2"><span class="nav-number">1.9.</span> <span class="nav-text">物理学史</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">86</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
