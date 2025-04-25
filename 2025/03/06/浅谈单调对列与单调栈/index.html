@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="浅谈单调对列与单调栈前言写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。 单调栈模板题P5788 【模板】单调栈 - 洛谷 题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。">
+  <meta name="description" content="浅谈单调队列与单调栈前言写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。 单调栈模板题P5788 【模板】单调栈 - 洛谷 题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈单调对列与单调栈">
+<meta property="og:title" content="浅谈单调队列与单调栈">
 <meta property="og:url" content="http://example.com/2025/03/06/%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="浅谈单调对列与单调栈前言写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。 单调栈模板题P5788 【模板】单调栈 - 洛谷 题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。">
+<meta property="og:description" content="浅谈单调队列与单调栈前言写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。 单调栈模板题P5788 【模板】单调栈 - 洛谷 题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-06T14:21:43.000Z">
-<meta property="article:modified_time" content="2025-03-09T14:45:19.075Z">
+<meta property="article:modified_time" content="2025-04-25T07:11:09.863Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="单调队列">
 <meta property="article:tag" content="单调栈">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>浅谈单调对列与单调栈 | wbwone1's Blog</title>
+  <title>浅谈单调队列与单调栈 | wbwone1's Blog</title>
   
 
 
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          浅谈单调对列与单调栈
+          浅谈单调队列与单调栈
         </h1>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-09 22:45:19" itemprop="dateModified" datetime="2025-03-09T22:45:19+08:00">2025-03-09</time>
+                <time title="修改时间：2025-04-25 15:11:09" itemprop="dateModified" datetime="2025-04-25T15:11:09+08:00">2025-04-25</time>
               </span>
 
           
@@ -248,7 +248,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="浅谈单调对列与单调栈"><a href="#浅谈单调对列与单调栈" class="headerlink" title="浅谈单调对列与单调栈"></a>浅谈单调对列与单调栈</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。</p>
+        <h1 id="浅谈单调队列与单调栈"><a href="#浅谈单调队列与单调栈" class="headerlink" title="浅谈单调队列与单调栈"></a>浅谈单调队列与单调栈</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。</p>
 <h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h3 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5788">P5788 【模板】单调栈 - 洛谷</a></p>
 <p>题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。</p>
 <span id="more"></span>
@@ -352,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">浅谈单调对列与单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1"><span class="nav-number">1.2.2.</span> <span class="nav-text">T1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">单调对列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">T1</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">浅谈单调队列与单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1"><span class="nav-number">1.2.2.</span> <span class="nav-text">T1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">单调对列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">T1</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
