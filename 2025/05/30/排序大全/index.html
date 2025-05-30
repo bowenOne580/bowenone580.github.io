@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="排序大全内排序在内存中进行的。 基于比较的：插入，交换，选择，归并。 不基于比较的：基数。 外排序可以存在外存中的，常见于数据量非常大，无法全部存到内存的情况。 归并：$k$ 路归并，对 $k$ 个排好序的区间进行合并，可以分块加载到内存中。 基数：桶可以很小。 MapReduce：可以了解一下。 稳定性在排序前后，所有值相同的元素之间的相对位置是否保持不变。 辅助元素在排序过程中，需要额外使用的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序大全">
+<meta property="og:url" content="http://example.com/2025/05/30/%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="排序大全内排序在内存中进行的。 基于比较的：插入，交换，选择，归并。 不基于比较的：基数。 外排序可以存在外存中的，常见于数据量非常大，无法全部存到内存的情况。 归并：$k$ 路归并，对 $k$ 个排好序的区间进行合并，可以分块加载到内存中。 基数：桶可以很小。 MapReduce：可以了解一下。 稳定性在排序前后，所有值相同的元素之间的相对位置是否保持不变。 辅助元素在排序过程中，需要额外使用的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-30T07:38:33.000Z">
+<meta property="article:modified_time" content="2025-05-30T07:38:36.464Z">
+<meta property="article:author" content="wbwone1">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/05/30/%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>排序大全 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/30/%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          排序大全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-05-30 15:38:33 / 修改时间：15:38:36" itemprop="dateCreated datePublished" datetime="2025-05-30T15:38:33+08:00">2025-05-30</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/05/30/%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/05/30/%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="排序大全"><a href="#排序大全" class="headerlink" title="排序大全"></a>排序大全</h1><h2 id="内排序"><a href="#内排序" class="headerlink" title="内排序"></a>内排序</h2><p>在内存中进行的。</p>
+<p>基于比较的：插入，交换，选择，归并。</p>
+<p>不基于比较的：基数。</p>
+<h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a>外排序</h2><p>可以存在外存中的，常见于数据量非常大，无法全部存到内存的情况。</p>
+<p>归并：$k$ 路归并，对 $k$ 个排好序的区间进行合并，可以分块加载到内存中。</p>
+<p>基数：桶可以很小。</p>
+<p>MapReduce：可以了解一下。</p>
+<h2 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h2><p>在排序前后，所有值相同的元素之间的相对位置是否保持不变。</p>
+<h2 id="辅助元素"><a href="#辅助元素" class="headerlink" title="辅助元素"></a>辅助元素</h2><p>在排序过程中，需要额外使用的空间。</p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>不稳定，因为有交换操作，在将当前元素和最小元素交换后，不知道交换到的位置。</p>
+<p>需要辅助元素为 $O(1)$，因为只用存储最小的一个元素。</p>
+<p>每次找出还没被排序的元素中最小的元素，和当前元素交换，也就是每次找出第 $i$ 小的元素。</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>稳定。</p>
+<p>需要辅助元素为 $O(1)$，因为只用到无序区中的一个元素和与它交换的元素。</p>
+<p>维护一个有序区和无序区，每次从无序区中选择一个元素，加入到有序区的恰当位置，这样不断扩大有序区。</p>
+<p>和打扑克时摸牌的排序比较像，未排序的数是一堆，排好序的是另一堆，每次从未排序的里面拿一个数出来，在排好序的堆中找到正确的位置，放进去。</p>
+<p>折半插入排序，利用排好序的堆的性质，进行二分搜索找到正确的位置。</p>
+<h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><p>$O(n)$ 找位置。</p>
+<h3 id="折半插入排序"><a href="#折半插入排序" class="headerlink" title="折半插入排序"></a>折半插入排序</h3><p>使用折半查找找位置，$O(\log n)$。</p>
+<p>但是，找到位置之后，还是要移动元素，所以时间复杂度均可能达到 $O(n^2)$。</p>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>稳定。</p>
+<p>需要辅助元素为 $O(1)$。</p>
+<p>每次检查相邻两个元素，如果不满足顺序，就交换，之后继续检查。</p>
+<p>视野中只有相邻元素。每轮都能得到一个最小（最大）元素。</p>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>不稳定。</p>
+<p>是插入排序的变体，需要辅助元素主要在插入排序中，也为 $O(1)$。</p>
+<p>选择一个间隔，之后将间隔相同的数放到一组，这样分成若干组，每次保证组内数是有序的。</p>
+<p>每次排序完成后，减小间隔，最终间隔变成 $1$。</p>
+<p>时间复杂度较低的原因是，在之前的排序中，数列已大致有序，所以需要交换的次数很少。</p>
+<p>惯例是第一次取间隔为 $\frac{n}{2}$，之后每次间隔减半。</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>不稳定。因为涉及到被分隔的两个区间之间的交换。</p>
+<p>需要辅助元素为 $O(1)$，就是两个指针。</p>
+<p>分治思想，每次选择一个基准值，对数组进行操作，使得小于该值的都在左边，大于该值的都在右边，这样一直分治下去。</p>
+<p>操作的过程和双指针比较类似，维护左指针，指向第一个 $&gt; base$ 的数，维护右指针，指向第一个 $&lt; base$ 的数，当两个指针都有数时，就进行交换，之后继续移动，直到找不到这样的数，或者两个指针碰到一起。</p>
+<p>这样，每次扫描，都会使一个指针至少移动一个单位，所以可以在 $O(n)$ 的时间复杂度内完成调整。</p>
+<p>每趟都可以找到至少一个数的正确位置，所以最终数组有序。</p>
+<p>随机分布时，性能最好，时间复杂度为 $O(n\log n)$，当序列完全正序或反序时，可能被卡到 $O(n^2)$。</p>
+<h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><p>稳定。</p>
+<p>需要辅助元素为 $O(n+k)$，其中 $k$ 为桶的大小，也就是基数域。</p>
+<p>将每个元素拆成 $k$ 个关键字，比较时按照关键字顺序比较，和字符串比较类似，如果不等，直接得到大小关系，如果相等，就再比较下一个关键字。</p>
+<p>这里只说从最小的关键字（最不重要的关键字）开始排序的方法。</p>
+<p>先对最小的关键字排序，这样数组中所有数都满足在最小关键字上递增。</p>
+<p>由于基数排序是稳定的，所以在对第二小的关键字排序时，如果第二关键字相同，不会改变最小的关键字的顺序，所以依然是有序的。依此类推，排到最后一个关键字，就可以做到完全有序了。</p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>不稳定。</p>
+<p>需要辅助空间为 $O(1)$，只有交换的时候需要。</p>
+<p>堆的调整：</p>
+<p>先放在最末端，如果不符合，就和父亲交换，这样进行下去。</p>
+<p>删除节点：</p>
+<p>将节点和最后一个节点交换，之后删除这个点，调整被交换的点。</p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>稳定。</p>
+<p>辅助元素 $O(n)$，需要开数组存储合并的结果，之后再覆盖到原数组中。</p>
+<p>经典 MergeSort，伟大，无需多言。</p>
+<p>时间复杂度为稳定的 $O(n\log n)$。</p>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><ol>
+<li><p>拉链法，对每个节点维护一个链表，直接放到尾端。</p>
+</li>
+<li><p>线性探察法，如果当前位置已经有数，就不断往后走，直到找到空位或者到达尾端。</p>
+<p>查找失败：走到空位置。</p>
+<p>例题：现有长度为11且初始为空的散列表HT，散列函数是 H(key) = key%7，采用线性探查（线性探测再散列）法解决冲突。将关键字序列87,40,30,6,11,22,98,20依次插入到HT后，HT查找失败的平均查找长度是多少。</p>
+<p>关键字的位置依次为 3 5 2 6 4 1 0 6，但最后一个产生了冲突，所以放到 7。</p>
+<p>因此，第一个为空的位置变成了 8，关键字的哈希函数值只可能在 $0$ 到 $6$ 之间，所以查找失败的长度就是这些数到 $8$ 的距离，加起来是 $42$，所以平均距离为 $6$。</p>
+<p>注意查找不是针对数据的，而是针对散列函数得到的值的。</p>
+</li>
+<li><p>二次探察法，每次探察当前地址加/减 $n^2$，这样加快探察速度，但缺点是无法探察到整个散列空间。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/06/%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88/" rel="prev" title="浅谈单调队列与单调栈">
+      <i class="fa fa-chevron-left"></i> 浅谈单调队列与单调栈
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%A4%A7%E5%85%A8"><span class="nav-number">1.</span> <span class="nav-text">排序大全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">内排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">外排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">稳定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%85%E5%8A%A9%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.</span> <span class="nav-text">辅助元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.6.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.6.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.6.2.</span> <span class="nav-text">折半插入排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">1.7.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-number">1.8.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-number">1.9.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">1.10.</span> <span class="nav-text">基数排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">1.11.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="nav-number">1.12.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.13.</span> <span class="nav-text">哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">1.13.1.</span> <span class="nav-text">解决冲突</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
