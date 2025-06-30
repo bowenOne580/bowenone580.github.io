@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="随机放送1：论二次函数区间整数解个数T1题面$x^2-(k-3)x-k+4 &#x3D; 0$ 的解均为整数，求出所有满足条件的实数 $k$。 解析解是整数，首先要有解，所以判别式要 $\geq 0$。">
+  <meta name="description" content="CH0x0 总结位运算位运算的一大特点就是不会产生进位，所以位与位之间是独立的，因此可以进行二进制拆分等操作。 站在位的视角处理。 快速幂本质上是将幂运算拆成乘法，如果 $x,y\leq 10^{18}$，无法直接得到乘方，可以再用一个 $\log $ 的复杂度把乘法拆成加法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="随机放送1：论二次函数区间整数解个数">
-<meta property="og:url" content="http://example.com/2023/07/11/%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0/index.html">
+<meta property="og:title" content="CH0x0 总结">
+<meta property="og:url" content="http://example.com/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
-<meta property="og:description" content="随机放送1：论二次函数区间整数解个数T1题面$x^2-(k-3)x-k+4 &#x3D; 0$ 的解均为整数，求出所有满足条件的实数 $k$。 解析解是整数，首先要有解，所以判别式要 $\geq 0$。">
+<meta property="og:description" content="CH0x0 总结位运算位运算的一大特点就是不会产生进位，所以位与位之间是独立的，因此可以进行二进制拆分等操作。 站在位的视角处理。 快速幂本质上是将幂运算拆成乘法，如果 $x,y\leq 10^{18}$，无法直接得到乘方，可以再用一个 $\log $ 的复杂度把乘法拆成加法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-10T16:02:46.000Z">
-<meta property="article:modified_time" content="2023-07-10T16:03:53.000Z">
+<meta property="article:published_time" content="2025-06-30T07:03:07.000Z">
+<meta property="article:modified_time" content="2025-06-30T07:03:54.485Z">
 <meta property="article:author" content="wbwone1">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="文化课">
-<meta property="article:tag" content="函数">
+<meta property="article:tag" content="Knowledge">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/07/11/%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0/">
+<link rel="canonical" href="http://example.com/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>随机放送1：论二次函数区间整数解个数 | wbwone1's Blog</title>
+  <title>CH0x0 总结 | wbwone1's Blog</title>
   
 
 
@@ -191,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/11/%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Avatar.jpg">
@@ -204,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          随机放送1：论二次函数区间整数解个数
+          CH0x0 总结
         </h1>
 
         <div class="post-meta">
@@ -215,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-11 00:02:46 / 修改时间：00:03:53" itemprop="dateCreated datePublished" datetime="2023-07-11T00:02:46+08:00">2023-07-11</time>
+              <time title="创建时间：2025-06-30 15:03:07 / 修改时间：15:03:54" itemprop="dateCreated datePublished" datetime="2025-06-30T15:03:07+08:00">2025-06-30</time>
             </span>
 
           
@@ -227,8 +225,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2023/07/11/%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/11/%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -243,48 +241,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="随机放送1：论二次函数区间整数解个数"><a href="#随机放送1：论二次函数区间整数解个数" class="headerlink" title="随机放送1：论二次函数区间整数解个数"></a>随机放送1：论二次函数区间整数解个数</h1><h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h2><h3 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h3><p>$x^2-(k-3)x-k+4 = 0$ 的解均为整数，求出所有满足条件的实数 $k$。</p>
-<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>解是整数，首先要有解，所以判别式要 $\geq 0$。</p>
+        <h1 id="CH0x0-总结"><a href="#CH0x0-总结" class="headerlink" title="CH0x0 总结"></a>CH0x0 总结</h1><h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>位运算的一大特点就是不会产生进位，所以位与位之间是独立的，因此可以进行二进制拆分等操作。</p>
+<p><strong>站在位的视角处理。</strong></p>
+<p>快速幂本质上是将幂运算拆成乘法，如果 $x,y\leq 10^{18}$，无法直接得到乘方，可以再用一个 $\log $ 的复杂度把乘法拆成加法。</p>
 <span id="more"></span>
-<p>$\Delta = k^2-2k-7\geq 0$</p>
-<p>$k\leq 1-2\sqrt 2$ 或 $k\geq 1+2\sqrt 2$。</p>
-<p>之后，不妨把解用求根公式表示：</p>
-<p>$x = \frac{k-3\pm \sqrt \Delta}{2}$</p>
-<p>也就是说，$\Delta$ 必须是一个完全平方数。</p>
-<p>$(k-1)^2-8 = A^2(A\geq 0)$</p>
-<p>这里就可以用到我做 Codeforces 时了解的技巧：</p>
-<p>$(k-1)^2-A^2 = 8$</p>
-<p>$(k-1+A)(k-1-A) = 8$</p>
-<p>又因为，$x = \frac{k-3\pm A}{2}$ 是整数，所以 $k\pm A$ 是奇数。</p>
-<p>于是，$k-1+A,k-1-A$ 都是整数，所以对 $8$ 分解，有四种情况：$1\times 8,(-1)\times(-8),2\times 4,(-2)\times (-4)$。</p>
-<p>分别求得 $k = 5.5,-3.5,4,-2$，其中只有 $k = 4,-2$ 满足 $k\pm A$ 是奇数。</p>
-<p>所以 $k = 4$ 或 $-2$。</p>
-<h2 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h2><h3 id="题面-1"><a href="#题面-1" class="headerlink" title="题面"></a>题面</h3><p>$x^2-(a+2)x+2-a&lt;0$ 有且只有一个整数 $x$，求正实数 $a$ 的取值范围。</p>
-<h3 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h3><p>这种有动二次函数，但是 $a$ 不变的，可以考虑分离成确定的二次函数和动一次函数，即参变分离。</p>
-<p>$x^2-2x+2&lt;ax+a$</p>
-<p>右边的一次函数过定点 $(-1,0)$，于是可以通过数形结合判断。</p>
-<p>最极限的情况是相切，算出切点横坐标为 $\sqrt 5-1$，而二次函数的对称轴是 $x = 1$，离的很近。于是考虑是否包含 $x = 1$ 或 $x = 2$。</p>
-<p>当直线过 $(1,1)$ 时，算出 $a = \frac{1}{2}$；当直线过 $(2,2)$ 时，算出 $a = \frac{2}{3}$。</p>
-<p>要注意，当直线过 $(1,1)$ 时，实际上在 $x = 1$ 时并不满足 $x^2-(a+2)x+2-a&lt;0$，所以不能取。</p>
-<p>$a\in (\frac{1}{2},\frac{2}{3}]$</p>
-<h2 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h2><h3 id="题面-2"><a href="#题面-2" class="headerlink" title="题面"></a>题面</h3><p>正数 $a,b$ 满足 $b-a&lt;2$，若 $(a^2-4)x^2+4bx-b^2&lt;0$ 的解集中整数解恰有 $4$ 个，求 $a$ 的取值范围。</p>
-<h3 id="解析-2"><a href="#解析-2" class="headerlink" title="解析"></a>解析</h3><p>虽然有两个变量，但是我们先不管它们之间的不等关系，当作已知量处理。</p>
-<p><del>不</del>容易发现，这个二次函数很有特点：</p>
-<p>$a^2x^2&lt;4x^2-4bx+b^2$</p>
-<p>$(ax)^2&lt;(2x-b)^2$</p>
-<p>$(ax+2x-b)(ax-2x+b)&lt;0$</p>
-<p>显然两根为 $\frac{b}{a+2},\frac{b}{2-a}$。</p>
-<p>当 $\frac{b}{a+2}&gt;\frac{b}{2-a}$ 时，解得 $a&gt;2$。</p>
-<p>再看原来的函数，如果 $a^2-4<0$ 的话，解就有无穷个了，所以 $a>2$。</p>
-<p>于是，解集为 $(\frac{b}{2-a},\frac{b}{a+2})$。</p>
-<p>再看不等关系，$b&lt;a+2$，所以 $0&lt;\frac{b}{a+2}&lt;1$。</p>
-<p>这样一来，整数解就只可能为 $0,-1,-2,-3$ 了。</p>
-<p>于是，转化为函数在 $(0,1)$ 和 $(-4,-3)$ 区间内分别有一个解。</p>
-<p>所以，$-4\leq \frac{b}{2-a}&lt;-3$。</p>
-<p>$3a-6&lt;b\leq 4a-8$</p>
-<p>$3a-6&lt;a+2$</p>
-<p>$a&lt;4$</p>
-<p>所以，$a\in (2,4)$。</p>
+<p>二进制还常用于状压，对于 $n&lt;31$ 的只有选与不选状态的点，可以用状压表示集合。</p>
+<p>遇到浮点数要小心，如果要求保留几位小数，就需要用 <code>setprecision</code>，而不是直接转换为 <code>int</code> 或其它的，因为会丢失精度。</p>
+<h2 id="递推与递归"><a href="#递推与递归" class="headerlink" title="递推与递归"></a>递推与递归</h2><p>递推是从边界条件出发，逐渐推导至原问题的过程。</p>
+<p>递归是从原问题开始，不断化归为子问题，最终到达边界条件的过程。</p>
+<p>递归中有两个要点：</p>
+<ol>
+<li>每次求解，仅问题规模和限制条件稍有不同，能通过同一个函数求解，自己调用自己。</li>
+<li>回溯时还原现场，为下一次调用做准备。</li>
+</ol>
+<p>枚举方式：</p>
+<p>多项式，最常见的枚举思路，复杂度 $O(n^k)$。</p>
+<p>指数型枚举方式，每次都有 $k$ 个选择，复杂度 $O(k^n)$。</p>
+<p>排列型枚举，复杂度 $O(n!)$。</p>
+<p>组合型枚举，相当于加了剪枝的指数型枚举，复杂度 $O(C_n^m)$。</p>
+<p>分治：对于规律相似的东西，不断缩小问题规模，通过求解子问题来求解最终问题。</p>
+<h2 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h2><p>通过预处理，降低操作和查询复杂度。</p>
+<p>前缀和可以 $O(1)$ 查询区间和。</p>
+<p>差分可以 $O(1)$ 对区间做整体修改。</p>
+<h2 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h2><p>问题一定要符合单调性，例如求最大值至少为多少，或者将求最大值的问题转化为是否存在一个不小于该值的段。</p>
+<p>经典例题：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1000/A">A-Best Cow Fences_0x04 基本算法-二分</a></p>
+<p>常见 Trick：平均值问题转化为减掉平均值的子段和 $\geq 0$。</p>
+<p>最大子段和可以用贪心做，每次加入当前点，如果加入后小于 $0$，就将当前子段和清零，取 $\max$ 即可得到最大子段和。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>经典算法离散化，有时候只在乎数与数之间的相对关系或数的对应关系，而不在乎具体的数值，此时可以用离散化，将值域很大的数映射到一个较小的空间。</p>
+<p>绝对值和最小：取中位数。仓库选址。</p>
+<p>应用：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1001/C">C-七夕祭_0x05 基本算法-排序</a></p>
+<p>可以用归并排序求逆序对，冒泡排序交换的次数即为逆序对个数。</p>
+<p>奇数码问题：两种局面互相可达等价于排成一列后逆序对个数相同。证明较复杂，可作为结论记住。</p>
+<h2 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h2><p>所谓的倍增思想，是基于所有整数都可以被划分为一些二进制数相加，所以在信息具有可加性或可重叠性时，能通过将区间拆成若干个 $2$ 的次幂的区间，拼接计算。这些 $2$ 的次幂的区间的信息可以通过其它的方法预处理得到，因此查询过程的复杂度较低。</p>
+<p>注意，倍增不是 ST 表，而是一种笼统的思想，其用途实际上是非常广泛的。</p>
+<p>倍增的著名应用：快速幂，LCA，ST 表。</p>
+<h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><p>给你一个长度为 $n$ 的正整数序列 $A$，有若干次询问，每次询问给定一个 $T$，需要求出满足 $\sum_{i = 1}^{k} A[i]\leq T$ 的最大的 $k$。</p>
+<p>显然 $A$ 的前缀和具有单调性，所以可以二分区间的末尾，达到 $O(\log n)$ 的复杂度。</p>
+<p>但是，通过倍增，我们可以让复杂度只和答案 $k$ 有关，为 $O(\log k)$。也就是说，尽管我们不知道答案，但是通过倍增算法，是可以让时间复杂度只和答案有关的。</p>
+<p>这在有些题中用处很大，比如 $k$ 比较小的情况，如果用传统的二分算法，可能需要很长的时间，但使用倍增，由于 $k$ 总是很小，所以时间复杂度更优。</p>
+<p>先预处理出前缀和 $S$，倍增过程如下：</p>
+<ol>
+<li><p>$r = 0,p = 1,sum = 0$</p>
+</li>
+<li><p>计算 $S[r+p]-S[r]$</p>
+<p>如果 $sum+S[r+p]-S[r]\leq T$，则 $sum = sum+S[r+p]-S[r],r = r+p,p*=2$。</p>
+<p>如果 $sum+S[r+p]-S[r]&gt; T$，则 $p/=2$。</p>
+</li>
+<li><p>当 $p = 0$ 时结束</p>
+</li>
+</ol>
+<p>结束时 $r$ 所在的位置即为答案。</p>
+<p>为何是正确的：只有在 $\leq T$ 的时候，才将当前段加入，所以 $sum\leq T$。</p>
+<p>复杂度为何是 $O(\log k)$：考虑 $p$ 增大的过程，一定是通过 $\lfloor \log k \rfloor$ 次操作，找到一个最大的终点 $2^m\leq k$，将这一部分全部加入；考虑 $p$ 减小的过程，一定是一直减小的，所以最多减小 $\lfloor \log k \rfloor$ 次。总时间复杂度 $O(\log k)$。</p>
+<h3 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h3><p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1002/A">A-Genius ACM_0x06 基本算法-倍增</a></p>
+<p>由于要遍历整个数组，所以一直二分右端点，如果每次扩展的较少，复杂度可能达到 $O(n^2\log^2 n)$。</p>
+<p>但是，用倍增的方法，可以使复杂度变为 $O(k\log^2 k)$，其中 $k$ 为每个段的长度，由于 $\sum k\leq n$，所以总时间复杂度为 $O(n\log ^2n)$。</p>
+<p>加上类似归并排序的优化，可以将时间复杂度进一步降低到 $O(n\log n)$。</p>
+<p>从这道题，我们可以发现，倍增和二分的一个重要的区别，在于倍增是基于区间长度的，而不是序列总长度。</p>
+<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><p>题目的类型很多，且变化多样，是一种指导思想，而不能归类为具体的算法。</p>
+<p>一般，证明贪心正确性的方法有以下几种：</p>
+<ol>
+<li><p>微扰（交换邻项）</p>
+<p>对贪心得到的结果做交换，一定不会使答案更差。</p>
+<p>典型例题：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1003/D">D-国王的游戏_0x07 基本算法-贪心</a></p>
+</li>
+<li><p>范围扩散</p>
+<p>局部最优策略不会影响全局最优解。</p>
+<p>典型例题：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1003/B">B-Stall Reservations_0x07 基本算法-贪心</a></p>
+</li>
+<li><p>决策包容性</p>
+<p>做出最优决策之后，能够达到的状态空间，和其它决策的相同，也就是不会丢失可能的最优解。</p>
+<p>典型例题：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/1003/C">C-Radar Installation_0x07 基本算法-贪心</a></p>
+</li>
+</ol>
 
     </div>
 
@@ -294,9 +323,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
-              <a href="/tags/%E6%96%87%E5%8C%96%E8%AF%BE/" rel="tag"># 文化课</a>
-              <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"># 函数</a>
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
           </div>
 
         
@@ -305,13 +332,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/07/09/%E5%AF%BC%E6%95%B0%E5%A4%8D%E4%B9%A0/" rel="prev" title="导数复习">
-      <i class="fa fa-chevron-left"></i> 导数复习
+    <a href="/2025/06/27/%E8%9A%AF%E8%9A%93-%E9%A2%98%E8%A7%A3/" rel="prev" title="蚯蚓 题解">
+      <i class="fa fa-chevron-left"></i> 蚯蚓 题解
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/08/08/%E7%95%AA%E5%89%A7%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/" rel="next" title="番剧相关汇总">
-      番剧相关汇总 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -371,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%94%BE%E9%80%811%EF%BC%9A%E8%AE%BA%E4%BA%8C%E6%AC%A1%E5%87%BD%E6%95%B0%E5%8C%BA%E9%97%B4%E6%95%B4%E6%95%B0%E8%A7%A3%E4%B8%AA%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">随机放送1：论二次函数区间整数解个数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1"><span class="nav-number">1.1.</span> <span class="nav-text">T1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T2"><span class="nav-number">1.2.</span> <span class="nav-text">T2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T3"><span class="nav-number">1.3.</span> <span class="nav-text">T3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E9%9D%A2-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">题面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CH0x0-%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">CH0x0 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E4%B8%8E%E9%80%92%E5%BD%92"><span class="nav-number">1.2.</span> <span class="nav-text">递推与递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86"><span class="nav-number">1.3.</span> <span class="nav-text">前缀和与差分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86"><span class="nav-number">1.4.</span> <span class="nav-text">二分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E"><span class="nav-number">1.6.</span> <span class="nav-text">倍增</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5"><span class="nav-number">1.6.1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E4%BE%8B%E9%A2%98"><span class="nav-number">1.6.2.</span> <span class="nav-text">经典例题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-number">1.7.</span> <span class="nav-text">贪心</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
