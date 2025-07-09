@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Sorry, this article is in progress and is not considered finished. Please wait for further completion.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZR 21noip day2 补题（private）">
+<meta property="og:url" content="http://example.com/2025/07/10/ZR-21noip-day2-%E8%A1%A5%E9%A2%98%EF%BC%88private%EF%BC%89/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="Sorry, this article is in progress and is not considered finished. Please wait for further completion.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-09T16:00:56.000Z">
+<meta property="article:modified_time" content="2025-07-09T16:02:27.112Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="离线">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="二分">
+<meta property="article:tag" content="Contest">
+<meta property="article:tag" content="搜索">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/07/10/ZR-21noip-day2-%E8%A1%A5%E9%A2%98%EF%BC%88private%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ZR 21noip day2 补题（private） | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/10/ZR-21noip-day2-%E8%A1%A5%E9%A2%98%EF%BC%88private%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZR 21noip day2 补题（private）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-07-10 00:00:56 / 修改时间：00:02:27" itemprop="dateCreated datePublished" datetime="2025-07-10T00:00:56+08:00">2025-07-10</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/07/10/ZR-21noip-day2-%E8%A1%A5%E9%A2%98%EF%BC%88private%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/10/ZR-21noip-day2-%E8%A1%A5%E9%A2%98%EF%BC%88private%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="73845fb541d7d580567adde847e0a4c6fe16f3c2045d2432335a65547e895879">939594eb1010a3d52f7d7fa78c58907541ada60e8ff5bb3d1efc450dbe9c2edf4474432b188caff469dabd6646c279a988c6587f3dce0842bf421b4fc4530435f80f815ad1fafa5f5939f54a011f0d28094261355cadd8032b0b5305ce12da332010b3a3959b1202a0c33cf00a9437b8c2f0ba1469ba957e82ad230b7fd0fb7c0f6f0b7d9301e414b863d4f3d290e94c018034aeb4863ad3964ccf5e6c21d55e872c1586afc5a1a848d8ed29d8501b4801f4138adb45d0d68e969aa1d2cd9d75a663530dace1082fc7c6324edc2cb437e8ef17747a56df3bf5e5a7568ffd571a7223fbd6b77f32c8c235741f8e1aaea91444c6722e1651f7c063dce9d40cc2daf17c4be007667f9687d73c6adca36d4942f942555c1fba9f547cd847e291af46593b25746a50cd0ff0371ffc3cf0988838e6355fee54ccc144aa21d57f66d45ce85a8e8782c9ac3c5078e3c8a0c77441330979f5a79ccd03bd40464aa6fc0b050a31ecb6e7f496562f79a7d6b8d4e921e993517d0963b86db0c1154ec696d9044356bd5968e0f7d472483068859f262c544007520a23a12557657199a00683979201fff86d1d9bdc06a27f540ec9213203d2c652a73d450faec29376536cd255d3a2e19b03aa949f0b655bc33f4531f627d76acb3c11cff1e23049a4e75b06ce3c6d817c6858739c5d84cd46c8d4db496c85562f4a5f91f823dc8291b5624ab92cd11103dabc7375a96b2fef83767cbe0d3cbd0b0fa9ec39da2b6a567e6106424acf2cf5326eae00d12c65870242d3051174471c913aa50dd320a95a9fcece2d076bd4a5030a09024ed276975210cd26c34b516f6fa8057448a1a7cfc961d7309141e789157d183bc617d5556bff1de024fec2e8df1d76867a5f4400b9171b8d4a8f302e55aa6b3492451fa65371eebf16b14fc69f30d6bb644dcfb15294a40cbaac1aa5916b2bfae859a041ef4e0cf19303e32fb608c5deb2dde1937ba38b3ab6f2d0e377e79e70eec29a1a49fea7199389a36c7d2bd971159ea25e59b1181b97f1f5f4f51570e1c1df8b45e9e861a4c3d1693a107ced88b9751cd87b34e9d9cb51cdf5e1f60bdc3b7406e6ad01bcac388a02dd28594acf5c260c5302b1f4b3d21420cfe9ae76ac7c9e36e71c82fdcbe27fc2f48325ee0721e935373ecfae522d9b558d096e7d2c86d6b5fbecac14db2a961a1a0edc2c5468e5e011db1d758bc29e3257b23f9ed8197d7dce465b75d6ede0a37dc101e8ed00b0e7adeeaa9ce799dc83e07bb5afa6a0e86822fe9cfb214885b985e0a21a4a44926512da48b0d2c2ff479187b4003e0943c31fd40672e6ac527d4ffdcbcb9bd33c3be6b0d45bcf669d13acaa059acc23a4ce6fd06009d294d7a15c17cf71b60d0856d6b3e4c584da926458f64a127d499714340ac8155fff06e71215259ac3e7d8ad26146fcafbe087eb3cc5c19864e59425d36d66c7add61445e278acc94420f59ce7b24dd8e632502d5d1f395407d763bbaa9d01d11eaae2ca0969d9f57d449e4651983f41dcf46dcdbae31856c30e9596aa02138fd8a786ac1bbd57a3b007f1950876adec2087cf459cf99cfac6956b63ec86beaa43138fc761ef68925f8af7d4489c1972843a3e9202cf68e282597fb377b8904f95753dd186420d8e419cc719db083c4d5363bcd57ab0ce1c7b48f47d735c2ef575dbc0adea6c3c944fb1509de5b86337c94f1ba8a4472dbbb1299444e74989b6f04f192f21df96de1cf9330262b8eefda26f2bcb81f8ea6eb2233860faa67738a8f68890357139ad9573a62c27333a18e828e410b780d1f14eaaa37a0d1c35cb35f3a4603a9de65dc515d6e4b3d7d2debb04aca720d0d15b41b0c1ae93babdb8eb917abf8f01ea804d9e7e0d4c87f7ced2eaa1475bfd1598acdf19c89b62f2984294ec80eec2633a2052160d1d53c3f29f1d09d270c3be8afe42fcc3330bdc2419ffcfc94589350d416ed059ac3017e61b86438a010ff72e2f856d74cb04edb5a0baccf2f45294eca16f7d7fe9a9e86586c5d3388308d7b3bb836df32448e707621a6854af019b1067532631900cae01add4058081046180b5c4a303321d67dabf1d6b1d8e700af925c57b890ca32f65bab1d12f00a6f6b8cc4e21b2e40f4cb2b052273351a4c434fc83ea5c2fda79e5f67fc56a1ce78dd1163d5dae532d31b4e6bd929436a8eb20095d7b5cc24a41660a8e6ecbadec1b41cea216f1a7e9f19a518bd655b9157ec38362d5e36af7e100012ab53d555ecce98fe57b04251a5d4b88f517a80a69eae22e338f517d20f6c1e81790d152ed274f7b9811b1ca42d9ec6959d4df74e7022e85621eee601110cf8bc83cb20f7501c8300f0e1e8fa4ef47805b8f0a443eae3fb6377d23317ed1ef372557a137645bda604a93dca5c866180931d15e8be411e0adeed8f91d116bad4cb33a6b2a1731ea9ee549afea8550f9df8f2773c48f651f2fc700d7547d0579becb0bc71234e8bdd16bebf15647331f9bdcd89c841b531caa87a78fd0d6e215485d52ad330387070dc4ef77d1087b02f0c76d37c4352b1ea08e23fa6e23420441a00f676b859d6ead3f94f7a86a653ee10cf9fb2dfe9c92586158df5cc08120e58ccd206376a5b7c17b5cfecdc1ed35659bc76d9757dc5bc688ac9f06cfaae816601c0ee2f503af60293719cd138560b94a6ec55d82ceb40f670cd94e9232e20ecb469b90d800233a4e529f523367805fb658f5181d4d00926e6ac27536e56f30b8a562b989e2ba848f59395804c16d3176b6af9accb9485873e9c1955c03ed6e4c0b9609d4757505fb42c2acb1bc384212688289c4314a9dd236e74f171fb1545ea5f34eb160127f440fcaebebb9e9588cb2ec353923ca8226d59ba84cf309c37d8c4b4f14050390072a65580f4704287980bc38646110a865cf757270ea1429e9f7f8fb5e6d1f77eac8cbd021407641ec0c20bf94cf45e1eea82371d0bba1ba1d0f1e86fe767ddf8f0ec346c1406db5bda968091c42bcfb2e293f47be367e88bd79b35cd01f0c9b25642366fd5ee170e95d58393fe6d2c7b58eb63419e2a6cc808f038e6d13c3b5ac7aa402cae1d80a018a6610161521fcf836c0f9207ff61a7c9af8d81c82cddba4ffa596bc5c04a19b30b3f238e456d5ded3e52c331c2c92d0d617b14914c1e96703803e6f1e29128c144ee059d2fb94867c6f02f90996710b9ee542d751f323a665ef9168cb247f70481829deae1abd824cfb3edc53fa73d5b6a9aca86c6d25ef26e9f0c161749500390222423e83f4e3812f75a2744d223df10c885f480c52bb3fbaf3dd660321b457ede5aadd5a6d91ae92bf9d5dda37709d37341caf7ad92c13a802c01277378c004e60ac1bf7ac40dafc381f34eb82a53bf7f1c6f72246233874f7ae4b72e96402e0864fdeefdd6bc7b4a84d779f3cb46055b0d2d2d6dadc250fba8d14ffab9983120a4f252ac716e4ad10dde6aa6f79a69d15ce88ed44ce245986ec6da78f1098422a24c8b583fb2751c8ed43409c85921ea2ca77941e1f00001878c69c9a8c35a15a406c013cf32edcbd4d3e625c9f85a9d79638014a503482040b8eef399ec39b212ae20f8e2876f00ffae378262d862fc52bf710171bdcf4f2aef2bd4ff60c082d6abd87abb97dc7642f0e30897d53f6e292548415d2a9114d692f91eae88cf0ded40ba41cb563da8c4e119057091776f0fd46033f86a688702fd8e00f44ba4fc284374540d5fb3b6583c137df69b625ba594a82f2c6018f893336ee29c15c942fdb7da3b33daa1f2d250131b2fb66db966789a846a8a5c74790ea186fbb6444da7b1c41e0da88092067d27ea35820f05336e0404799df1d8fcfa9680699b2e11bd8bc749a86466e16176d18a81bcec9aaa9b0fed4af0b8a48936e421445ffa80992c8c5b0ea41a5d1b427f643</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Enter Your Password Here</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%A6%BB%E7%BA%BF/" rel="tag"># 离线</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+              <a href="/tags/%E4%BA%8C%E5%88%86/" rel="tag"># 二分</a>
+              <a href="/tags/Contest/" rel="tag"># Contest</a>
+              <a href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag"># 搜索</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/30/CH0x0-%E6%80%BB%E7%BB%93/" rel="prev" title="CH0x0 总结">
+      <i class="fa fa-chevron-left"></i> CH0x0 总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">120</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
