@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="CH0x5 总结DP 概念DP 分为三步：阶段、状态、决策。 阶段，指计算时的顺序性，总是用上一个阶段的结果推导下一个阶段的结果，这样的转移顺序具有无后效性的特点。 状态，指一个阶段中，每个能够转移到的点。 决策，指转移状态的选取，即一个点被哪些点转移，或者一个点能够转移到哪些点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CH0x5 总结">
+<meta property="og:url" content="http://example.com/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="CH0x5 总结DP 概念DP 分为三步：阶段、状态、决策。 阶段，指计算时的顺序性，总是用上一个阶段的结果推导下一个阶段的结果，这样的转移顺序具有无后效性的特点。 状态，指一个阶段中，每个能够转移到的点。 决策，指转移状态的选取，即一个点被哪些点转移，或者一个点能够转移到哪些点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-14T14:00:18.000Z">
+<meta property="article:modified_time" content="2025-07-14T14:01:20.999Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CH0x5 总结 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CH0x5 总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-07-14 22:00:18 / 修改时间：22:01:20" itemprop="dateCreated datePublished" datetime="2025-07-14T22:00:18+08:00">2025-07-14</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CH0x5-总结"><a href="#CH0x5-总结" class="headerlink" title="CH0x5 总结"></a>CH0x5 总结</h1><h2 id="DP-概念"><a href="#DP-概念" class="headerlink" title="DP 概念"></a>DP 概念</h2><p>DP 分为三步：阶段、状态、决策。</p>
+<p>阶段，指计算时的顺序性，总是用上一个阶段的结果推导下一个阶段的结果，这样的转移顺序具有<strong>无后效性</strong>的特点。</p>
+<p>状态，指一个阶段中，每个能够转移到的点。</p>
+<p>决策，指转移状态的选取，即一个点被哪些点转移，或者一个点能够转移到哪些点。</p>
+<span id="more"></span>
+<p>如果将 DP 的过程看作一张图，那么这张图一定是有向无环图，其中每个节点是一个状态，决策是一个状态到另一个状态的有向边。</p>
+<p>动态规划的基础是递推，它能够正确求解问题的关键，在于之前求出每一个状态的值，都是最优的，不会再被之后的状态更新，这叫做<strong>最优子结构性质</strong>。</p>
+<p>DP 的时间复杂度和状态总数有很大的关系，因此，要寻找状态表示所需维度最小的 DP。</p>
+<h2 id="线性-DP"><a href="#线性-DP" class="headerlink" title="线性 DP"></a>线性 DP</h2><p>指阶段划分是线性的 DP，即从 $i-1$ 推到 $i$。</p>
+<p>基本问题：LIS（$O(n\log n)$），LCS（$O(n^2)$），数字三角形（$O(n^2)$）。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP15637">SP15637 GNYR04H - Mr Youngs Picture Permutations - 洛谷</a>：寻找最简状态表示。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10954">P10954 LCIS - 洛谷</a>：决策集合具有单调性时，边加入边维护。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2893">P2893 [USACO08FEB] Making the Grade G - 洛谷</a>：推结论。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/SP703">SP703 SERVICE - Mobile Service - 洛谷</a>：看似有三个维度，实际上上一次移动后，必然有点在终点处，所以只有两个维度。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1006">P1006 [NOIP 2008 提高组] 传纸条 - 洛谷</a>：注意不能跑两遍 DP，这样有可能不是最优解。要维护四个坐标，但实际上固定移动步数后，就只用维护两个坐标了。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10971">P10971 Cookies - 洛谷</a>：先贪心，之后朴素的做法是维护分配的饼干总数和最后一个人拿的数量，但实际上我们只关心相对关系，所以可以默认最后一个人拿 $1$ 块，之后再整体 $+1$，即可遍历到所有状态。</p>
+<p>可以发现，线性 DP 主要难点在于确定一个状态的多个维度。有时候多个维度可以被一个维度表示，有时决策时决策集合是只加不减的，这些都可以优化时间复杂度。</p>
+<h2 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h2><p><a target="_blank" rel="noopener" href="https://bowenone580.github.io/2022/02/03/背包问题浅析/">背包问题浅析 | wbwone1’s Blog</a></p>
+<h2 id="区间-DP"><a href="#区间-DP" class="headerlink" title="区间 DP"></a>区间 DP</h2><p>区间 DP，不止是区间上的问题，还可以是很多满足相邻性质的问题。它们的特点是，每次合并时两个状态一定是相邻的，比如序列上的相邻，或者让一个区间被一个数代表，每次合并两个相邻的数。</p>
+<p>阶段就是区间的长度，一般先处理出 $1$ 的值，之后从 $2$ 开始，依次增加长度。枚举区间的左右端点，分别从较小的区间转移过来。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1775">P1775 石子合并（弱化版） - 洛谷</a>：模板题。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4342">P4342 [IOI 1998] Polygon - 洛谷</a>：断环为链，之后每次删除一条边，相当于合并两个相邻的点。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10956">P10956 金字塔 - 洛谷</a>：枚举子树的区间，由于每个子树所代表的都是区间，且一个根节点下的子树的区间是相邻的，所以使用区间 DP。</p>
+<h2 id="树形-DP"><a href="#树形-DP" class="headerlink" title="树形 DP"></a>树形 DP</h2><p>一般以子树为状态，枚举一个点的所有儿子，从儿子的子树将信息转移到父节点，注意这里的转移只能访问儿子，而不能访问更深的节点，否则复杂度就不对了。树形 DP 要满足能从儿子的状态推到父亲的状态。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1352">P1352 没有上司的舞会 - 洛谷</a>：将每个点是否选作为两种状态。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2014">P2014 [CTSC1997] 选课 - 洛谷</a>：树上背包，这里是分组背包。树上背包的时间复杂度是 $O(n^2)$。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10974">P10974 Accumulation Degree - 洛谷</a>：换根 DP，重点在从全局信息和子树信息，推出除子树外的其它信息。</p>
+<h2 id="树状数组优化-DP"><a href="#树状数组优化-DP" class="headerlink" title="树状数组优化 DP"></a>树状数组优化 DP</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P12930">P12930 [USACO4.3] 逢低吸纳 Buy Low, Buy Lower 加强版 - 洛谷</a></p>
+<p>最长下降子序列，求本质不同的方案数。设 $f_i$ 表示以 $i$ 结尾的序列长度，每次转移时实际上是找大于 $a_i$ 的所有数的 $f$ 的最大值。</p>
+<p>还要维护方案数，朴素的维护方式是，求所有大于 $a_i$ 的数中和最大值相等的位置的方案之和。考虑到只需要维护最大值相关的那些数，所以可以在维护树状数组的时候顺便合并。</p>
+<p>这也启示我们，树状数组可以向线段树一样维护多个信息，只要两个节点可以正确合并。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/224006691">Code</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/14/%E6%B5%85%E8%B0%88%E5%8F%8D%E6%82%94%E8%B4%AA%E5%BF%83/" rel="prev" title="浅谈反悔贪心">
+      <i class="fa fa-chevron-left"></i> 浅谈反悔贪心
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CH0x5-%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">CH0x5 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DP-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">DP 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7-DP"><span class="nav-number">1.2.</span> <span class="nav-text">线性 DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-number">1.3.</span> <span class="nav-text">背包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4-DP"><span class="nav-number">1.4.</span> <span class="nav-text">区间 DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E5%BD%A2-DP"><span class="nav-number">1.5.</span> <span class="nav-text">树形 DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E4%BC%98%E5%8C%96-DP"><span class="nav-number">1.6.</span> <span class="nav-text">树状数组优化 DP</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
