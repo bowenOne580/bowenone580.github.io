@@ -28,7 +28,7 @@
 <meta property="og:description" content="浅谈单调队列与单调栈前言写绿题有点崩，发现自己单调栈学了个皮毛，啥都不懂，遂拾笔再写一篇浅谈。 单调栈模板题P5788 【模板】单调栈 - 洛谷 题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-06T14:21:43.000Z">
-<meta property="article:modified_time" content="2025-04-25T07:11:09.863Z">
+<meta property="article:modified_time" content="2025-07-14T12:33:35.372Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="单调队列">
 <meta property="article:tag" content="单调栈">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-04-25 15:11:09" itemprop="dateModified" datetime="2025-04-25T15:11:09+08:00">2025-04-25</time>
+                <time title="修改时间：2025-07-14 20:33:35" itemprop="dateModified" datetime="2025-07-14T20:33:35+08:00">2025-07-14</time>
               </span>
 
           
@@ -252,24 +252,33 @@
 <h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h3 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5788">P5788 【模板】单调栈 - 洛谷</a></p>
 <p>题目很简单，但我们要搞懂单调栈除了单调之外，到底干了啥。</p>
 <span id="more"></span>
-<p>从题目的要求中，可以看出，通过维护一个单调减的栈，可以求出第 $i$ 个数后面第一个大于它的位置 $j$。</p>
-<p>继续分析，可以推断 $i,j$ 之间都是小于等于 $i$ 这个数的，因此肯定也小于 $j$。</p>
-<p>如果从下标 $1$ 开始推，那么到下标 $i$，栈里面剩下一些值，那些栈里两个相邻值之间的值，都不见了，因为都小于这两个值，于是我们维护了 $1-i$ 这一段序列的后缀 $\max$。</p>
+<p>在这道题中，通过维护一个单调减的栈，可以求出第 $i$ 个数后面第一个大于它的位置 $j$。</p>
+<p>栈在此时存储的是一堆单调递减的值，一个值加入到栈里面的时候，就弹出了那些比它小的数，它们的第一个大于它的位置就是加入栈的数。</p>
+<p>继续分析，可以推断 $i,j$ 之间数都 $\leq a_i$ 这个数的，因此肯定也 $\leq a_j$。</p>
+<p>如果从下标 $1$ 开始推，那么到下标 $i$，栈里面剩下一些值，每两个相邻值之间的值都小于这两个值，于是 $1-i$ 这一段序列的后缀 $\max$ 就是栈中的数。</p>
 <h3 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6510">P6510 奶牛排队 - 洛谷</a></p>
-<p>固定右端点，左端点需要满足两个条件：</p>
+<p>固定右端点（右端点必须是后缀最大值），左端点需要满足两个条件：</p>
 <ol>
 <li>是某一个后缀最小值（相同的也弹）。</li>
-<li>大于比该元素大的后缀最大值。</li>
+<li>要使右端点是后缀最大值，位置要大于第二个后缀最大值（否则区间最大就不是右端点了）。</li>
 </ol>
-<p>维护两个单调栈。</p>
-<h2 id="单调对列"><a href="#单调对列" class="headerlink" title="单调对列"></a>单调对列</h2><h3 id="模板题-1"><a href="#模板题-1" class="headerlink" title="模板题"></a>模板题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1886">P1886 滑动窗口 /【模板】单调队列 - 洛谷</a></p>
-<p>只看队尾操作，就是一个单调栈。</p>
-<p>不过队首会有非法元素，且也单调，所以还要弹队首，但条件比较简单。</p>
-<p>感觉本质上还是个单调栈。</p>
+<p>维护两个单调栈，分别保存后缀最小值和后缀最大值。</p>
+<h2 id="单调对列"><a href="#单调对列" class="headerlink" title="单调对列"></a>单调对列</h2><p>只看队尾操作，就是一个单调栈。</p>
+<p>不过队首会有非法元素（比如距离限制，或者其它条件），且也单调（一个不合法的前面全都不合法），所以还要弹队首。</p>
+<p>单调队列本质上还是单调栈，只不过还允许从队首排除一些不可能值。</p>
+<h3 id="模板题-1"><a href="#模板题-1" class="headerlink" title="模板题"></a>模板题</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1886">P1886 滑动窗口 /【模板】单调队列 - 洛谷</a></p>
 <h3 id="T1-1"><a href="#T1-1" class="headerlink" title="T1"></a>T1</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2698">P2698 [USACO12MAR] Flowerpot S - 洛谷</a></p>
 <p>给你一堆二维坐标点，求在 $y$ 轴上极差 $\geq D$ 的一些点，在 $x$ 轴上延伸区间的最小长度。</p>
 <p>看到极差，容易想到分别求最大值和最小值。固定右端点，那能够成为左端点的显然只有后缀 $\max$ 和后缀 $\min$，这个可以用单调栈维护。</p>
 <p>但与此同时，我们还希望最小化长度，也就是说二者要离当前位置越近越好，但是越远就越容易符合条件。综合起来，就是从远往近找，直到找到刚好符合条件的。也就是说在符合条件的情况下，不断弹出离的较远的栈底元素，直到刚好符合。既要弹出栈顶，也要弹出栈底，这其实就是单调队列。</p>
+<h3 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3522">P3522 [POI 2011] TEM-Temperature - 洛谷</a></p>
+<p>对每个右端点点，找满足条件区间的最小左端点。</p>
+<p>在移动右端点的过程中，左端点只会递增（因为一旦出现非法位置，前面的就不可能再选了），具有单调性。</p>
+<p>用队列维护可行区间，考虑什么时候会变得非法。</p>
+<p>如果 $r[i]&lt;l[i-1]$，那么就要清空队列。</p>
+<p>如果 $l[i]&gt;r[i-1]$，那么就直接加入。</p>
+<p>否则看队列里面最大的 $l$ 是否比 $r[i]$ 大。如果大于，就说明当前温度范围取不到那个点的值，非法。否则，前面取到的最高温度一定 $\leq l$，这可以用贪心证明，那么加入当前点也合法。</p>
+<p>维护单调递减的 $l$，同时从队首删除比 $r[i]$ 大的所有 $l$。</p>
 
     </div>
 
@@ -355,7 +364,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">浅谈单调队列与单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1"><span class="nav-number">1.2.2.</span> <span class="nav-text">T1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">单调对列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">T1</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%8E%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">浅谈单调队列与单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1"><span class="nav-number">1.2.2.</span> <span class="nav-text">T1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E5%AF%B9%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">单调对列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A2%98-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T1-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">T1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T2"><span class="nav-number">1.3.3.</span> <span class="nav-text">T2</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -371,14 +380,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">120</span>
+          <span class="site-state-item-count">121</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
