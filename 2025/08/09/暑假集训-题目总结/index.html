@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="暑假集训 题目总结前言只记录通过数 $\leq 900$ 的。 Last Update：2025.8.9 （不知道这些题是不是公开的，先不加密）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暑假集训 题目总结">
+<meta property="og:url" content="http://example.com/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="暑假集训 题目总结前言只记录通过数 $\leq 900$ 的。 Last Update：2025.8.9 （不知道这些题是不是公开的，先不加密）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-09T11:41:23.000Z">
+<meta property="article:modified_time" content="2025-08-09T11:44:24.093Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Editorial">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>暑假集训 题目总结 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          暑假集训 题目总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-09 19:41:23 / 修改时间：19:44:24" itemprop="dateCreated datePublished" datetime="2025-08-09T19:41:23+08:00">2025-08-09</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="暑假集训-题目总结"><a href="#暑假集训-题目总结" class="headerlink" title="暑假集训 题目总结"></a>暑假集训 题目总结</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>只记录通过数 $\leq 900$ 的。</p>
+<p>Last Update：2025.8.9</p>
+<p>（不知道这些题是不是公开的，先不加密）</p>
+<span id="more"></span>
+<h2 id="NC"><a href="#NC" class="headerlink" title="NC"></a>NC</h2><h3 id="Contest-3"><a href="#Contest-3" class="headerlink" title="Contest 3"></a>Contest 3</h3><h4 id="B"><a href="#B" class="headerlink" title="B"></a>B</h4><p><strong>Tag：构造</strong></p>
+<p>容易想到构造方式，关键在于减少操作数，场上做的慢主要原因在于一开始没想清楚，之后不断修补，导致程序结构不清晰。</p>
+<p>$64$ 次很容易想到按位处理。其中 $a$ 只能左移，$b$ 只能右移。</p>
+<p>考虑 $a,b$ 的最高位已经和 $c$ 的最高位对齐的情况，此时只需要不断右移 $b$，如果 $a,c$ 的当前位不同，就异或，最多 $62$ 次，此时 $b$ 再右移一位就变成 $0$，再和 $a$ 异或即可使 $a = b = c$，次数为 $2\cdot msb+2$ （其中 $msb$ 表示最高位）。</p>
+<p>考虑如何让 $a,b$ 的最高位和 $c$ 对齐。</p>
+<p>先使用一次异或，让 $a,b$ 的最高位相同。</p>
+<p>Case1：最高位小于 $c$</p>
+<p>先不左移 $a$，只右移 $b$，让 $a$ 现有的那些位变正确。之后，每次左移 $a$，最多再异或一次 $b$，对每一位都最多操作 $2$ 次，但最高位肯定已经是正确的，所以次数 $-1$，由于一开始用了一次异或，所以最多 $64$ 次。</p>
+<p>Case2：最高位大于 $c$</p>
+<p>只右移 $b$，让 $a$ 中需要和 $c$ 对齐的位都正确，最多 $2\cdot msb_c$ 次。</p>
+<p>加上最后一次异或和一开始使 $a,b$ 的 $msb$ 相同的一次异或，最多 $1+62+1 = 64$ 次。</p>
+<h4 id="H"><a href="#H" class="headerlink" title="H"></a>H</h4><p><strong>Tag：数据结构 树剖 倍增</strong></p>
+<p>想一下一个点什么时候能满足条件：必须走完从根到它的整条路径，且之前的点的贡献，使得它已经走了一定距离，现在继续走若干距离可达。</p>
+<p>也就是说，我们要维护根到某个点的路径上的最远可达位置。</p>
+<p>假设我们已经求出了这个位置，那么一个点对这个位置的贡献，就是朝着它继续移动若干距离，最初这个位置就是根，每次维护即可。</p>
+<p>考虑为什么是对的，因为某些点如果对它贡献为负（会朝着别的子树走一段距离，之后还要走回头路），那么可以先删除向别的子树的连边，这样就总能只选那些有贡献的点。</p>
+<p>用倍增或树剖维护均可。</p>
+<h3 id="Contest-4"><a href="#Contest-4" class="headerlink" title="Contest 4"></a>Contest 4</h3><h4 id="B-1"><a href="#B-1" class="headerlink" title="B"></a>B</h4><p><strong>Tag：模拟</strong></p>
+<p>容易想到用洪水覆盖完成检查可达性，由于每一列可以上下移动，所以不好在搜索的过程中更新完，可以搜索之后用 DP 完成没有后效性的更新。</p>
+<p>场上做这道题花了较长时间，主要还是一开始更新方式没想清楚，总有点没更新到，导致后面一改再改。</p>
+<h4 id="D"><a href="#D" class="headerlink" title="D"></a>D</h4><p><strong>Tag：构造</strong></p>
+<p>难道我构造其实还可以？</p>
+<p>场上 1h 想出来的构造方式，数很大，有两种方式，一种是递归的构造，分奇偶，但不好处理，后面想到了进行二进制拆分。</p>
+<p>具体来说就是在对角线上塞一堆行列式为 $2$ 的 $3\times 3$ 矩阵，发现还有很多空间没有利用，都是 $0$，考虑填一些影响不是很大的数。</p>
+<p>我想的是最后对第一行做展开，某些位置填 $1$，使得正好贡献 $2^k$，考虑删掉一列之后，在它之后的都会往左靠一列，这样容易让那些 $2$ 的矩阵都变成 $1$，构造方式详见代码。注意展开时的正负。</p>
+<h4 id="E"><a href="#E" class="headerlink" title="E"></a>E</h4><p><strong>Tag：树剖 DP</strong></p>
+<p>重要的观察：</p>
+<p>当路径长度 $\geq 24$ 时，只需要看其中不为 $1$ 的数的和是否超过 $24$，若超过则不行。</p>
+<p>否则，总可以通过加一些 $1$ 变成 $24$。</p>
+<p>将所有的 $1$ 看成 $0$，问题转化为路径权值和，直接树剖即可。</p>
+<p>路径长度 $&lt;24$，考虑暴力，但不能过于暴力。</p>
+<p>设 $f[i]$ 表示能否取到 $i$。</p>
+<p>$f[i]\rightarrow f’[i+val[now]]$</p>
+<p>$f[i]\rightarrow f’[i\cdot val[now]]$</p>
+<p>由于只需要记录能否取到，可以用<code>bitset</code>优化。</p>
+<p>更进一步的，将路径拆成到根的距离，维护每个点到根节点的和，修改相当于区间加，每次也只用单点查询，可以直接上树状数组差分。</p>
+<h4 id="G"><a href="#G" class="headerlink" title="G"></a>G</h4><p><strong>Tag：概率</strong></p>
+<p>其实主要是观察一个性质，很多概率题都是组合问题，求的是满足条件的方案数，再除以总方案数就是概率了，直接求概率的 DP 题比较少。</p>
+<p>考虑选出一个子序列，使得其中所有位置都可以填 $?$ 的方案数。</p>
+<p>充要条件是最后一个 $1$ 和第一个 $-1$ 交换后，序列非法（存在一个位置前缀和 $&lt;0$）。</p>
+<p>首先，如果交换之后合法，就说明存在多种选择，因此充分。</p>
+<p>这样，最后一个 $1$ 和第一个 $-1$ 的内容就可以被唯一确定。</p>
+<p>依此类推，第二个 $-1$ 如果和倒数第二个 $1$ 交换，那么会在更前面贡献一个 $-1$，序列一定也非法，所以剩下的都换不了了。</p>
+<p>先计算所有 $($ 为 $?$ 的贡献，再加上正确传输所有 $($ 的贡献。</p>
+<h3 id="Contest-5"><a href="#Contest-5" class="headerlink" title="Contest 5"></a>Contest 5</h3><h4 id="H-1"><a href="#H-1" class="headerlink" title="H"></a>H</h4><p><strong>Tag：二分 DP</strong></p>
+<p>求最小的生产力，容易想到二分答案。</p>
+<p>这道题阶段比较明确，用线性 DP 解决。</p>
+<p>第一个维度显然是回合，第二个维度是当前正在研发的科技，由于生产力可以任意分配，所以不用立刻确定方案，可以留一些备用，分配到需要的地方，第三个维度就是剩下的还没使用的生产力。</p>
+<p>转移不是很难，做一些小优化即可通过。</p>
+<h4 id="J"><a href="#J" class="headerlink" title="J"></a>J</h4><p><strong>Tag：二分 曼哈顿距离 切比雪夫距离</strong></p>
+<p>问最短时间，容易想到二分转化为判断可行性。</p>
+<p>假设当前二分到的时间是 $t$，那么先染色 $t$ 秒，找到所有还没有被染色的块。</p>
+<p>题目中说，一个黑单元格可以染上下左右四个点，那么某个点能被覆盖的时间，就是它到中心的曼哈顿距离。</p>
+<p>设这些没有被染色的点的坐标为 $(x_1,y_1),(x_2,y_2)\cdots$，则我们需要找到某个坐标，使得它到所有点的曼哈顿距离的最大值最小。</p>
+<p>在坐标系上，问题就变成了找一个边长最小的斜 $45°$ 正方形，把这些点都圈进去。</p>
+<p>但是，这个其实并不好解决，因为坐标天然不适合斜的任务。不过，我们有一个神奇的工具：切比雪夫距离。</p>
+<p>将一个点 $(x,y)$ 转化为 $(x+y,x-y)$，那么切比雪夫距离就是新坐标系下每一维坐标绝对值的最大值：</p>
+<p>$\max(|x_1-x_2|,|y_1-y_2|\cdots)$</p>
+<p>这个新坐标系，其实就是原来的坐标系旋转 $45°$ 得到的，所以现在我们的正方形和坐标轴平行了。</p>
+<p>这样，求正方形的边长就容易了，只用找横纵坐标的 $\max$ 和 $\min$，在最值相减中取较大的一个即为边长，中心也就是中点。</p>
+<p>再将中点转化为正常坐标系：$(\frac{x+y}{2},\frac{x-y}{2})$。</p>
+<p>但是，这个点可能不是整点，不过答案肯定离这个点不远，左右各偏移 $1$ 格，都计算一遍，取最小的即可。</p>
+<h4 id="K"><a href="#K" class="headerlink" title="K"></a>K</h4><p><strong>Tag：SOSDP</strong></p>
+<p>场上没反应过来。。详见下面例7。</p>
+<p><a target="_blank" rel="noopener" href="https://bowenone580.github.io/2022/11/05/子集枚举-DP/">子集枚举 DP | wbwone1’s Blog</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Editorial/" rel="tag"># Editorial</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/14/CH0x5-%E6%80%BB%E7%BB%93/" rel="prev" title="CH0x5 总结">
+      <i class="fa fa-chevron-left"></i> CH0x5 总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">暑假集训 题目总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NC"><span class="nav-number">1.2.</span> <span class="nav-text">NC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Contest-3"><span class="nav-number">1.2.1.</span> <span class="nav-text">Contest 3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#H"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">H</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contest-4"><span class="nav-number">1.2.2.</span> <span class="nav-text">Contest 4</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">E</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#G"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">G</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contest-5"><span class="nav-number">1.2.3.</span> <span class="nav-text">Contest 5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#H-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">H</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#J"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">J</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">K</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
