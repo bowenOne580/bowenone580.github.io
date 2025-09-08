@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="最短路初步最短路松弛操作，指 dis[v] &#x3D; min(dis[v],dis[u]+w[u][v])。 Dijkstra适用于没有负权边的图。 算法的核心思想是，每次找到当前距离最近的未扩展过的点，进行扩展，由于每次找的点最短路肯定确定了，所以是正确的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最短路初步">
+<meta property="og:url" content="http://example.com/2025/09/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="最短路初步最短路松弛操作，指 dis[v] &#x3D; min(dis[v],dis[u]+w[u][v])。 Dijkstra适用于没有负权边的图。 算法的核心思想是，每次找到当前距离最近的未扩展过的点，进行扩展，由于每次找的点最短路肯定确定了，所以是正确的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-08T15:45:31.000Z">
+<meta property="article:modified_time" content="2025-09-08T15:46:08.985Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="最短路">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/09/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>最短路初步 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          最短路初步
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-09-08 23:45:31 / 修改时间：23:46:08" itemprop="dateCreated datePublished" datetime="2025-09-08T23:45:31+08:00">2025-09-08</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/09/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/09/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="最短路初步"><a href="#最短路初步" class="headerlink" title="最短路初步"></a>最短路初步</h1><h2 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h2><p>松弛操作，指 <code>dis[v] = min(dis[v],dis[u]+w[u][v])</code>。</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>适用于没有负权边的图。</p>
+<p>算法的核心思想是，每次找到当前距离最近的未扩展过的点，进行扩展，由于每次找的点最短路肯定确定了，所以是正确的。</p>
+<span id="more"></span>
+<p>朴素实现，每次枚举 $n$ 个点，找最小的，扩展，时间复杂度 $O(n^2+m)$。</p>
+<p>优先队列优化，每次松弛之后将被松弛的点加入优先队列中，每轮扩展取队首即可，时间复杂度 $O(m\log m)$。</p>
+<p>因此，在稀疏图上，利用优先队列优化更快，在稠密图上，也可以考虑朴素实现。</p>
+<h3 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h3><p>适用于所有图。</p>
+<p>思想是不断进行松弛操作，直到无法松弛，此时便确定了所有点的最短路。</p>
+<p>每轮操作，遍历所有边，进行松弛操作，由于每一轮都至少能使最短路的长度 $+1$，所以最多进行 $n$ 轮，时间复杂度 $O(nm)$。</p>
+<p>这个算法还有一个作用：判断负环。如果存在负环，那么松弛操作会无限进行下去，如果松弛 $n$ 轮之后，还存在能够松弛的点，就说明存在负环。</p>
+<h3 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h3><p>适用于所有图。</p>
+<p>基于队列优化的 Bellman-Ford，发现每次其实不需要遍历所有边去松弛，有些边的端点如果在上一轮中最短路根本没有变，那么松弛也没有意义，因此 SPFA 用一个队列存储所有上一轮被松弛的点，在这一轮只扩展这些点。</p>
+<p>在随机图上表现良好，但是仍然可以被卡成 $O(nm)$。</p>
+<p>一般使用 SPFA，要么是 Bellman-Ford 也可通过，且图带有负权，要么是题目的条件保证了每个点的松弛次数不会很多。<del>要么是数据太水了</del></p>
+<h3 id="Floyd"><a href="#Floyd" class="headerlink" title="Floyd"></a>Floyd</h3><p>适用于所有图，求解任意两点之间最短路。</p>
+<p>思想核心是 DP，设 $f[i][j]$ 为 $i,j$ 之间最短路，不断加入可以经过的点，对 $f$ 数组进行更新，更新 $n$ 次之后，即可求出任意两点之间的最短路。</p>
+<p>代码很简单，就是三个 <code>for</code> 循环，时间复杂度为 $O(n^3)$。</p>
+<p>单源最短路算法，对 $n$ 个源点都做一遍，也可以求出任意两点之间最短路，时间复杂度需要乘一个 $n$。</p>
+<h3 id="Johnson"><a href="#Johnson" class="headerlink" title="Johnson"></a>Johnson</h3><p>适用于所有图，求解任意两点之间最短路。</p>
+<p>单源最短路跑 $n$ 次就可以求出任意两点之间最短路，其中跑的比较快的 Dijkstra 算法，进行 $n$ 次，时间复杂度为 $O(nm\log m)$，在某些图上快过 Floyd。</p>
+<p>但是，图中可能有负权，Johnson 算法最重要的一步就是将负权图转化为正权图。</p>
+<p>建一个虚拟源点，向每个点连边权为 $0$ 的边，之后跑 SPFA，求出到每个点的最短路。</p>
+<p>将每个点的 <code>dis</code>，看作它的势能，建立一个新图，其中每条边的边权，是原图中边权加上 <code>起点势能-终点势能</code>。</p>
+<p>这样能让图中所有边的边权变成非负，之后再进行 $n$ 次 Dijkstra，求出任意两点之间最短路，最后再把势能的影响减掉（加上 <code>终点势能-起点势能</code>）即可。</p>
+<p>时间复杂度 $O(nm\log m)$。</p>
+<h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><p><a target="_blank" rel="noopener" href="https://qoj.ac/contest/2513/problem/14313">Teleporter - Problem - QOJ.ac</a></p>
+<p>图中有免费边，常见的处理方法是建立分层图，对于每个点，拆成 $n+1$ 个点，分别代表经过 $0,1,\cdots,n$ 条免费边的最短路，在上面跑最短路算法可以求解。但是，该算法时间复杂度过高，为 $O(n^2\log n^2)$，无法通过。</p>
+<p>注意到还有很多没有利用的性质，比如这个图是一颗树，而且点数和免费边数都不是很多。</p>
+<p>考虑一轮加入一条免费边，在上一轮的基础上，松弛所有免费边，再到原来的图上跑最短路，即可保证只经过 $\leq k$ 条免费边。</p>
+<p>如果用 Dijkstra 跑的话，会发现带了一个 $\log$，仍然无法通过。</p>
+<p>如果采用 SPFA，且不使用优先队列优化，即可通过。</p>
+<p>这是因为跑最短路的那个图是一颗树，将 $1$ 看作根，对于一个点来说，它最多被父亲和子树中的点各松弛一次，它可以改变祖先的最短路，但是如果它改变了，那么祖先必然不会走回头路，它也不会被松弛，它可以改变子树中某些点的最短路，但那些被它改变过的点也不会再松弛它了。所以我们先向下松弛，再向上松弛，就能保证答案的正确性，这是树形 DP 的解法。SPFA 正确的原因在于每个点最多被松弛两次，所以时间复杂度是线性的。</p>
+<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF2109D">CF2109D D/D/D - 洛谷</a></p>
+<p>由于路径可以不是简单路径，所以可以走到之后再继续走，只要最后能走到终点即可。</p>
+<p>假设我们找到了一条长度为 $s$ 的从 $1$ 到 $k$ 的路径，而且步数还没用完，那么可以选择一条边，来回走若干次，增加 $2n$ 步。所以只要步数比 $s$ 大，且和 $s$ 奇偶性相同即可。</p>
+<p>因此，想到对于每个点，找最短的长度为奇数和偶数的路径，由于每条边的长度都是 $1$，所以可以通过 bfs 解决。</p>
+<p>现在，我们要用 $a_i$ 组合出一个最大的奇数和最大的偶数。</p>
+<p>先把全部都加起来，之后找一个最小的奇数，减掉即可。</p>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/2109/submission/337515628">Code</a></p>
+<h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF2122D">CF2122D Traffic Lights - 洛谷</a></p>
+<p>这道题的性质挺难想的。</p>
+<p>最开始肯定是往最短路上面想，但是每条边的边权在时间不同的时候会变化，而且贪心也不一定正确，因为还要最小化等待时间，这意味着可以走回头路。走不通。</p>
+<p>之后，感觉这类动态问题，可以通过设计状态来 DP，设 $f[i][j]$ 表示在第 $i$ 秒时到达 $j$ 所需的最短等待时间，从上一层转移：</p>
+<p>$f[i][j] = \min(f[i][j],f[i-1][j]+1)$</p>
+<p>$f[i][v] = \min(f[i][v],f[i-1][j])$</p>
+<p>（第一个代表等待，第二个代表走某条边）</p>
+<p>唯一的问题是，到达 $n$ 的时间可能很长，粗略估计，让路径上每个点都取最坏情况，等待 $deg[u]-1$ 轮，这样加起来是 $O(m)$ 级别的，总时间复杂度为 $O(nm)$。</p>
+<p>实际上，这个时间是 $O(n)$ 级别的，证明需要用到最短路的一个神奇性质。</p>
+<p>从 $1$ 开始跑最短路，将距离为 $x$ 的点放到一个集合 $S_x$ 中，这样把 $n$ 个点分成 $S_0,S_1\cdots$ 个集合。</p>
+<p>对于一个点 $u$，设距离为 $x$，它一定只能走到 $S_{x-1},S_x,S_{x+1}$ 中的点：</p>
+<p>如果走到 $S_k$，其中 $k&lt;x-1$，那么从 $1$ 经过这个点到 $u$，路径长度 $&lt;x$，矛盾。</p>
+<p>如果走到 $S_k$，其中 $k&gt;x+1$，那么从 $1$ 经过 $u$ 到这个点，路径长度 $x+1&lt;k$，矛盾。</p>
+<p>因此，有不等式：$deg(u)\leq |S_{x-1}|+|S_x|+|S_{x+1}|$。</p>
+<p>取 $1$ 到 $n$ 的最短路，等待时间最大为 $\sum_{i=0}^k (deg(u_i)-1)$。</p>
+<p>由于每个 $u_i$ 所属的集合各不相同，所以可以放缩：$\sum_{i=0}^k (deg(u_i)-1)\leq 3\sum |S_i|-dis = 3n-dis$。</p>
+<p>等待之外，走完整条路径需要 $dis$ 时间，所以总时间最大为 $3n$。</p>
+<p>直接 DP 即可。</p>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/2122/submission/337487531">Code</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag"># 最短路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/08/09/%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/" rel="prev" title="暑假集训 题目总结">
+      <i class="fa fa-chevron-left"></i> 暑假集训 题目总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">最短路初步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra"><span class="nav-number">1.1.1.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Ford"><span class="nav-number">1.1.2.</span> <span class="nav-text">Bellman-Ford</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPFA"><span class="nav-number">1.1.3.</span> <span class="nav-text">SPFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floyd"><span class="nav-number">1.1.4.</span> <span class="nav-text">Floyd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Johnson"><span class="nav-number">1.1.5.</span> <span class="nav-text">Johnson</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B1"><span class="nav-number">1.2.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B2"><span class="nav-number">1.3.</span> <span class="nav-text">例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B3"><span class="nav-number">1.4.</span> <span class="nav-text">例3</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
