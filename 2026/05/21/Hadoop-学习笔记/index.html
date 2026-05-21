@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":260,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Hadoop 学习笔记为什么需要大数据大数据技术，是针对海量规模的数据进行存储和计算。只有数据达到一定量级，大数据才能发挥它的作用，否则可能会起到反作用。 如果采用传统的单机存储，单机计算的方式，有如下几个问题：  存储和计算所需的开销很大，要想在单机完成，需要非常高的配置，贵。 计算时，需要从存储数据的单机获取数据，此时需要通过网络传输，数据量级如果很大，传输的时间会非常长。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop 学习笔记">
+<meta property="og:url" content="http://example.com/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="wbwone1&#39;s Blog">
+<meta property="og:description" content="Hadoop 学习笔记为什么需要大数据大数据技术，是针对海量规模的数据进行存储和计算。只有数据达到一定量级，大数据才能发挥它的作用，否则可能会起到反作用。 如果采用传统的单机存储，单机计算的方式，有如下几个问题：  存储和计算所需的开销很大，要想在单机完成，需要非常高的配置，贵。 计算时，需要从存储数据的单机获取数据，此时需要通过网络传输，数据量级如果很大，传输的时间会非常长。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520163044711.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260427185120115.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520103148392.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520103505071.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520104312657.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520105400530.png">
+<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520110223344.png">
+<meta property="article:published_time" content="2026-05-21T14:13:56.000Z">
+<meta property="article:modified_time" content="2026-05-21T14:15:30.179Z">
+<meta property="article:author" content="wbwone1">
+<meta property="article:tag" content="Knowledge">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wbwone1.cn/PicGo/image-20260520163044711.png">
+
+<link rel="canonical" href="http://example.com/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hadoop 学习笔记 | wbwone1's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">wbwone1's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.jpg">
+      <meta itemprop="name" content="wbwone1">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wbwone1's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hadoop 学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-05-21 22:13:56 / 修改时间：22:15:30" itemprop="dateCreated datePublished" datetime="2026-05-21T22:13:56+08:00">2026-05-21</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Hadoop-学习笔记"><a href="#Hadoop-学习笔记" class="headerlink" title="Hadoop 学习笔记"></a>Hadoop 学习笔记</h1><h2 id="为什么需要大数据"><a href="#为什么需要大数据" class="headerlink" title="为什么需要大数据"></a>为什么需要大数据</h2><p>大数据技术，是针对<strong>海量规模</strong>的数据进行存储和计算。只有数据达到一定量级，大数据才能发挥它的作用，否则可能会起到反作用。</p>
+<p>如果采用传统的单机存储，单机计算的方式，有如下几个问题：</p>
+<ol>
+<li>存储和计算所需的开销很大，要想在单机完成，需要非常高的配置，贵。</li>
+<li>计算时，需要从存储数据的单机获取数据，此时需要通过网络传输，数据量级如果很大，传输的时间会非常长。</li>
+</ol>
+<span id="more"></span>
+<p>为了解决这两个主要问题，大数据技术给出了如下解决方案：</p>
+<ol>
+<li>将数据和计算分块，单机只参与一小部分的存储和计算，最终汇总得到结果。</li>
+<li>传输计算，而不是传输数据。计算一般只需要传输某个程序即可完成，开销相对小很多，可以在单机上利用本地数据计算完成之后，再将处理的结果上传给主节点进行汇总，由于上传的只是一个结果，所以相应的花费也较少。</li>
+</ol>
+<p>常见应用场景：</p>
+<ol>
+<li>离线处理，一般指数据不会增长，数据量保持不变，计算任务针对这些数据进行处理，常采用<strong>批处理</strong>的方式。</li>
+<li>实时处理，一般指数据实时产生，源源不断的到来，计算任务需要针对这些数据给出实时的反馈，常采用<strong>流处理</strong>的方式。</li>
+</ol>
+<p>基本架构：</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520163044711.png" alt="image-20260520163044711"></p>
+<p>最下面一层 ETL 是接受并存储数据的，例如将结构化数据存储到 SQL 里面，将流式数据存储到 HDFS 中。</p>
+<p>最上面一层数据分析是编写计算任务的，我们希望对数据进行分析，就通过上面的顶层模块，编写计算任务，它会将我们的任务转化为下面的模块能处理的形式，在下面的模块处理完成之后，再将计算结果返回给顶层模块，我们就可以看到计算任务的输出了。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>hadoop 是一个分布式计算与存储框架，能够对大数据进行并行处理。</p>
+<p>由三个组件组成，MapReduce 负责数据计算，Yarn 负责资源管理和任务调度，HDFS 负责数据存储。</p>
+<p>核心优势</p>
+<ol>
+<li><p>高可靠性<br>Hadoop底层维护多个数据副本（默认3份），所以即使Hadoop某个计算元素或存储出现故障，也不会导致数据的丢失。</p>
+</li>
+<li><p>高扩展性<br>Hadoop是在可用的计算机集簇间分配数据并完成计算任务的，这些集簇可以方便地扩展到数以干计的节点。</p>
+</li>
+<li>高效性<br>在MapReduce的思想下，Hadoop是并行工作的，以加快任务处理速度。Hadoop能够在节点之间动态地移动数据，并保证各个节点的动态平衡，因此处理速度非常快。</li>
+<li>高容错性<br>Hadoop能够自动保存数据的多个副本，并且能够自动将失败的任务重新分配。如果一个节点宕机，Hadoop会自动将该节点上的任务转移到其他节点运行。</li>
+</ol>
+<h2 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h2><p>主从结构：一个 namenode，多个 datanode。namenode 存储的是元数据（即底下 datanode 存储的信息），datanode 存储的是真实数据。</p>
+<p>将文件分为大小相同的若干块，存储在多个节点上。每个块都有多份复制，用于备份数据。</p>
+<p>低成本：由于容错性很高，所以不要求高可靠的存储设备，一般的民用设备也可以存储。</p>
+<p>写缓慢：文件写入，需要先经过分块，再进行复制，最后存储到多个节点上，整个流程十分复杂，冗余机制多，响应速度也慢。不适合实时的大规模写操作。</p>
+<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>分为两个过程，Map 和 Reduce，可以理解为拆分和组装。</p>
+<p>Map 包含 Split（对原始数据做拆分），Map（创建键值对），Shuffle（将键相同的数据归类）。</p>
+<p>Reduce 就是将归好类的数据进行汇总，将计算结果分布式存储起来。</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260427185120115.png" alt="image-20260427185120115"></p>
+<h2 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h2><p>MapReduce 原来是身兼两职的，在任务负荷过高时很容易导致主节点瘫痪，因此产生了将计算与调度分离的想法，负责计算的是 MapReduce，负责调度的就是 Yarn。</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520103148392.png" alt="image-20260520103148392"></p>
+<p><img src="https://wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png" alt="在这里插入图片描述"></p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520103505071.png" alt="image-20260520103505071"></p>
+<p>在 YARN 中，主节点是 ResourceManager，从节点是 NodeManager。主节点收到客户端请求之后，将任务分配给从节点，之后从节点根据任务大小，向主节点申请<strong>资源</strong>（CPU，Mem），主节点将资源分配给从节点。</p>
+<p>在每个从节点内部，都有存储资源的 Container 和管理任务的 App Master，任务的进度只会向 App Master 汇报，而不像 MapReduce 中全部向主节点汇报，这样就减轻了很多主节点的负担。</p>
+<p>同时，我们还有一个 Standby ResouceManager，用于容灾处理，当主节点挂掉时可以直接顶上。</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520104312657.png" alt="image-20260520104312657"></p>
+<p>这样做还有一个好处，AppMaster 为计算的处理提供了很大的自由，不一定非要用 MapReduce 来计算，也可以用 Spark、Flink 等。</p>
+<h3 id="资源调度方式"><a href="#资源调度方式" class="headerlink" title="资源调度方式"></a>资源调度方式</h3><ol>
+<li><p>FIFO</p>
+<p>最简单的先进先出，总是执行先来的任务，无法处理耗时短的紧急任务。</p>
+</li>
+<li><p>容量调度器</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520105400530.png" alt="image-20260520105400530"></p>
+<p>先按固定比例将资源分为两个部分，每个部分内部采用 FIFO，紧急任务可以全部进入资源分配较少的队列，耗时长的大任务可以全部进入资源分配较多的队列。</p>
+<p>但在现实中，可能白天客户请求较多，都是紧急的小人物，晚上做维护，都是耗时长的大任务，这样就会导致某个队列完全空闲，资源利用率低。</p>
+<p>因此，容量调度器还有弹性分配机制，每个队列还有一个最大容量，它实际占用的容量可以在预设容量和最大容量之间跳动。</p>
+</li>
+<li><p>公平调度器</p>
+<p><img src="https://wbwone1.cn/PicGo/image-20260520110223344.png" alt="image-20260520110223344"></p>
+<p>以上图为例：</p>
+<p>当作业 1 提交至队列 1 时，全部资源空闲，都分配给作业 1</p>
+<p>当作业 2 提交至队列 2 时，资源全部被作业 1 占据，公平调度器让作业 1 让出一半资源，分配给作业 2</p>
+<p>当作业 3 提交至队列 2 时，队列 2 的资源全部被作业 2 占据，队列内部的公平调度器让作业 2 让出一半资源，分配给作业 3</p>
+<p>公平不一定是 $\frac{1}{2}$，也可以是其它自己定义的值，公平主要体现在将资源让给其它作业，不独占。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Knowledge/" rel="tag"># Knowledge</a>
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+              <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/21/Spark/" rel="prev" title="Spark">
+      <i class="fa fa-chevron-left"></i> Spark
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/05/21/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/" rel="next" title="提问的智慧">
+      提问的智慧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">Hadoop 学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%A4%A7%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要大数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS"><span class="nav-number">1.3.</span> <span class="nav-text">HDFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce"><span class="nav-number">1.4.</span> <span class="nav-text">MapReduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Yarn"><span class="nav-number">1.5.</span> <span class="nav-text">Yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F"><span class="nav-number">1.5.1.</span> <span class="nav-text">资源调度方式</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wbwone1"
+      src="/images/Avatar.jpg">
+  <p class="site-author-name" itemprop="name">wbwone1</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bowenOne580" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bowenOne580" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.luogu.com.cn/user/269681" title="Luogu → https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;user&#x2F;269681" rel="noopener" target="_blank"><i class="fab fa-luogu fa-fw"></i>Luogu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wbwone1</span>
+</div>
+  <div class="powered-by">Powered By <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.staticfile.net/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd5fixdUXbfPzNRu7oAwXtWwE-gzGzoHsz',
+      appKey     : 'K9tQ601x8ALzpHltUvlUpf7E',
+      placeholder: "Whatever is fine",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
