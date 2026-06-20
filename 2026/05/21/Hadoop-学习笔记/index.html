@@ -27,22 +27,22 @@
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
 <meta property="og:description" content="Hadoop 学习笔记为什么需要大数据大数据技术，是针对海量规模的数据进行存储和计算。只有数据达到一定量级，大数据才能发挥它的作用，否则可能会起到反作用。 如果采用传统的单机存储，单机计算的方式，有如下几个问题：  存储和计算所需的开销很大，要想在单机完成，需要非常高的配置，贵。 计算时，需要从存储数据的单机获取数据，此时需要通过网络传输，数据量级如果很大，传输的时间会非常长。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520163044711.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260427185120115.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520103148392.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520103505071.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520104312657.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520105400530.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520110223344.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520163044711.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260427185120115.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520103148392.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520103505071.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520104312657.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520105400530.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520110223344.png">
 <meta property="article:published_time" content="2026-05-21T14:13:56.000Z">
-<meta property="article:modified_time" content="2026-05-21T14:15:30.179Z">
+<meta property="article:modified_time" content="2026-06-20T11:59:51.890Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="大数据">
 <meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wbwone1.cn/PicGo/image-20260520163044711.png">
+<meta name="twitter:image" content="https://image.wbwone1.cn/PicGo/image-20260520163044711.png">
 
 <link rel="canonical" href="http://example.com/2026/05/21/Hadoop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
@@ -222,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-05-21 22:13:56 / 修改时间：22:15:30" itemprop="dateCreated datePublished" datetime="2026-05-21T22:13:56+08:00">2026-05-21</time>
+              <time title="创建时间：2026-05-21 22:13:56" itemprop="dateCreated datePublished" datetime="2026-05-21T22:13:56+08:00">2026-05-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-20 19:59:51" itemprop="dateModified" datetime="2026-06-20T19:59:51+08:00">2026-06-20</time>
+              </span>
 
           
   
@@ -270,7 +276,7 @@
 <li>实时处理，一般指数据实时产生，源源不断的到来，计算任务需要针对这些数据给出实时的反馈，常采用<strong>流处理</strong>的方式。</li>
 </ol>
 <p>基本架构：</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520163044711.png" alt="image-20260520163044711"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520163044711.png" alt="image-20260520163044711"></p>
 <p>最下面一层 ETL 是接受并存储数据的，例如将结构化数据存储到 SQL 里面，将流式数据存储到 HDFS 中。</p>
 <p>最上面一层数据分析是编写计算任务的，我们希望对数据进行分析，就通过上面的顶层模块，编写计算任务，它会将我们的任务转化为下面的模块能处理的形式，在下面的模块处理完成之后，再将计算结果返回给顶层模块，我们就可以看到计算任务的输出了。</p>
 <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>hadoop 是一个分布式计算与存储框架，能够对大数据进行并行处理。</p>
@@ -291,28 +297,28 @@
 <h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>分为两个过程，Map 和 Reduce，可以理解为拆分和组装。</p>
 <p>Map 包含 Split（对原始数据做拆分），Map（创建键值对），Shuffle（将键相同的数据归类）。</p>
 <p>Reduce 就是将归好类的数据进行汇总，将计算结果分布式存储起来。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260427185120115.png" alt="image-20260427185120115"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260427185120115.png" alt="image-20260427185120115"></p>
 <h2 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h2><p>MapReduce 原来是身兼两职的，在任务负荷过高时很容易导致主节点瘫痪，因此产生了将计算与调度分离的想法，负责计算的是 MapReduce，负责调度的就是 Yarn。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520103148392.png" alt="image-20260520103148392"></p>
-<p><img src="https://wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png" alt="在这里插入图片描述"></p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520103505071.png" alt="image-20260520103505071"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520103148392.png" alt="image-20260520103148392"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/fcbd0bff41634c1c9ed1b749a1db355a.png" alt="在这里插入图片描述"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520103505071.png" alt="image-20260520103505071"></p>
 <p>在 YARN 中，主节点是 ResourceManager，从节点是 NodeManager。主节点收到客户端请求之后，将任务分配给从节点，之后从节点根据任务大小，向主节点申请<strong>资源</strong>（CPU，Mem），主节点将资源分配给从节点。</p>
 <p>在每个从节点内部，都有存储资源的 Container 和管理任务的 App Master，任务的进度只会向 App Master 汇报，而不像 MapReduce 中全部向主节点汇报，这样就减轻了很多主节点的负担。</p>
 <p>同时，我们还有一个 Standby ResouceManager，用于容灾处理，当主节点挂掉时可以直接顶上。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520104312657.png" alt="image-20260520104312657"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520104312657.png" alt="image-20260520104312657"></p>
 <p>这样做还有一个好处，AppMaster 为计算的处理提供了很大的自由，不一定非要用 MapReduce 来计算，也可以用 Spark、Flink 等。</p>
 <h3 id="资源调度方式"><a href="#资源调度方式" class="headerlink" title="资源调度方式"></a>资源调度方式</h3><ol>
 <li><p>FIFO</p>
 <p>最简单的先进先出，总是执行先来的任务，无法处理耗时短的紧急任务。</p>
 </li>
 <li><p>容量调度器</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520105400530.png" alt="image-20260520105400530"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520105400530.png" alt="image-20260520105400530"></p>
 <p>先按固定比例将资源分为两个部分，每个部分内部采用 FIFO，紧急任务可以全部进入资源分配较少的队列，耗时长的大任务可以全部进入资源分配较多的队列。</p>
 <p>但在现实中，可能白天客户请求较多，都是紧急的小人物，晚上做维护，都是耗时长的大任务，这样就会导致某个队列完全空闲，资源利用率低。</p>
 <p>因此，容量调度器还有弹性分配机制，每个队列还有一个最大容量，它实际占用的容量可以在预设容量和最大容量之间跳动。</p>
 </li>
 <li><p>公平调度器</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520110223344.png" alt="image-20260520110223344"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520110223344.png" alt="image-20260520110223344"></p>
 <p>以上图为例：</p>
 <p>当作业 1 提交至队列 1 时，全部资源空闲，都分配给作业 1</p>
 <p>当作业 2 提交至队列 2 时，资源全部被作业 1 占据，公平调度器让作业 1 让出一半资源，分配给作业 2</p>

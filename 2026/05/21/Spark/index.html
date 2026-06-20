@@ -27,21 +27,21 @@
 <meta property="og:site_name" content="wbwone1&#39;s Blog">
 <meta property="og:description" content="Spark要求Spark 学习要求 理解 RDD 编程模型与内存计算原理，掌握 Core API、Spark SQL 和 Structured Streaming，熟悉在 YARN 上的调度与调优。 可用资料A Beginner’s Guide to Apache Spark: Introduction and Key Concepts | by Bibhusha Ojha | Medium Wh">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520111122195.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520112254874.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520112658202.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520112905915.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520113101047.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520160952933.png">
-<meta property="og:image" content="https://wbwone1.cn/PicGo/image-20260520161149307.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520111122195.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520112254874.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520112658202.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520112905915.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520113101047.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520160952933.png">
+<meta property="og:image" content="https://image.wbwone1.cn/PicGo/image-20260520161149307.png">
 <meta property="article:published_time" content="2026-05-21T14:11:09.000Z">
-<meta property="article:modified_time" content="2026-05-21T14:29:14.810Z">
+<meta property="article:modified_time" content="2026-06-20T11:59:51.887Z">
 <meta property="article:author" content="wbwone1">
 <meta property="article:tag" content="Knowledge">
 <meta property="article:tag" content="大数据">
 <meta property="article:tag" content="Spark">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wbwone1.cn/PicGo/image-20260520111122195.png">
+<meta name="twitter:image" content="https://image.wbwone1.cn/PicGo/image-20260520111122195.png">
 
 <link rel="canonical" href="http://example.com/2026/05/21/Spark/">
 
@@ -221,10 +221,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-05-21 22:11:09 / 修改时间：22:29:14" itemprop="dateCreated datePublished" datetime="2026-05-21T22:11:09+08:00">2026-05-21</time>
+              <time title="创建时间：2026-05-21 22:11:09" itemprop="dateCreated datePublished" datetime="2026-05-21T22:11:09+08:00">2026-05-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-20 19:59:51" itemprop="dateModified" datetime="2026-06-20T19:59:51+08:00">2026-06-20</time>
+              </span>
 
           
   
@@ -261,20 +267,20 @@
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2339750">Spark入门指南：从基础概念到实践应用全解析-腾讯云开发者社区-腾讯云</a></p>
 <p><a target="_blank" rel="noopener" href="https://magicpenta.github.io/docs/spark/Spark Streaming 入门指南">Spark Streaming 入门指南 | Panda Home</a></p>
 <p><a target="_blank" rel="noopener" href="https://spark-reference-doc-cn.readthedocs.io/zh-cn/latest/">Spark 2.2.x 中文官方参考文档 — Spark 2.2.x 中文文档 2.2.1 文档</a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><img src="https://wbwone1.cn/PicGo/image-20260520111122195.png" alt="image-20260520111122195"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><img src="https://image.wbwone1.cn/PicGo/image-20260520111122195.png" alt="image-20260520111122195"></p>
 <p>Spark Core 是用于取代 MapReduce 的功能的，做批处理计算，将数据放到内存中，所以很快（MapReduce 是每次都从硬盘读取的）。</p>
 <p>在上面有许多框架，支持其它形式的计算，相当于一个接口，最终还是将计算任务交给 Spark Core 进行处理。</p>
 <p>但我们平时编写计算任务，可以直接和顶层的模块打交道，这样能让体验更接近与传统的单机上进行计算的体验。</p>
-<h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p><img src="https://wbwone1.cn/PicGo/image-20260520112254874.png" alt="image-20260520112254874"></p>
+<h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p><img src="https://image.wbwone1.cn/PicGo/image-20260520112254874.png" alt="image-20260520112254874"></p>
 <p>RDD（弹性分布式数据集） 是 Spark 中进行计算的基本模块，所有 RDD 都是只读的，这也就意味着一切对 RDD 的操作实际上都是在副本上进行的，最后返回这个副本，这也是代码中需要定义 4 个 RDD 的原因。</p>
 <p>弹性体现在，如果某个 RDD 中的某个部分计算出错或结果丢失，不需要再从 HDFS 开始重新计算一遍，只需要从上一层 RDD 进行一层计算即可恢复，所需的计算量大大减少。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520112658202.png" alt="image-20260520112658202"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520112658202.png" alt="image-20260520112658202"></p>
 <p>RDD 操作可以分为转换的动作，RDD 采用懒计算策略，只有在真正执行动作时才会开始计算，否则只会记录转换信息，保证能完成计算。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520112905915.png" alt="image-20260520112905915"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520112905915.png" alt="image-20260520112905915"></p>
 <p>容易发现，宽依赖恢复所需的计算量比窄依赖大很多，所以要尽量少的在代码中造成宽依赖。</p>
 <p>会造成宽依赖的算子：</p>
 <p>重分区（repartition）类算子，如： repartition 和 coalesce；ByKey 类算子(除了计数类的，如 countByKey) 如：groupByKey 和 reduceByKey；以及Join类算子，如：cogroup 和 join</p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="https://wbwone1.cn/PicGo/image-20260520113101047.png" alt="image-20260520113101047"></p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="https://image.wbwone1.cn/PicGo/image-20260520113101047.png" alt="image-20260520113101047"></p>
 <h2 id="作业解析"><a href="#作业解析" class="headerlink" title="作业解析"></a>作业解析</h2><ol>
 <li><p>生成逻辑任务调度计划</p>
 <p>解析每个 RDD 中存储的数据的类型，如 String、<String,val> 等。</p>
@@ -282,9 +288,9 @@
 <li><p>生成物理任务调度计划</p>
 <p>根据每次转换的函数，判断是宽依赖还是窄依赖，之后将 RDD 组成的 DAG 画出来。</p>
 <p>再划分阶段，每出现一次宽依赖，就划分一个阶段，这样能保证每个阶段内部，所有节点都是一对一的关系，形成若干条链，这样就可以将每个链视作一个任务，划分 Task，分配给分布式集群计算了。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520160952933.png" alt="image-20260520160952933"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520160952933.png" alt="image-20260520160952933"></p>
 <p>另一个示例，一般来说，Stage 数量越多，性能就相对越差。所以在编写程序时要尽量避免宽依赖。</p>
-<p><img src="https://wbwone1.cn/PicGo/image-20260520161149307.png" alt="image-20260520161149307"></p>
+<p><img src="https://image.wbwone1.cn/PicGo/image-20260520161149307.png" alt="image-20260520161149307"></p>
 </li>
 </ol>
 
